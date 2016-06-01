@@ -1,0 +1,49 @@
+{
+  "name": "ibird",
+  "version": "0.1.0",
+  "description": "A complete admin dashboard solution",
+  "main": "index.js",
+  "scripts": {
+    "start": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yinfxs/ibird.git"
+  },
+  "keywords": [
+    "admin",
+    "dashboard",
+    "react",
+    "Node",
+    "NodeJS",
+    "mongdb",
+    "redis",
+    "admin-lte",
+    "adminlte",
+    "后台管理",
+    "仪表盘",
+    "后台",
+    "通用",
+    "框架",
+    "后台框架"
+  ],
+  "author": "yinfxs",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/yinfxs/ibird/issues"
+  },
+  "homepage": "https://github.com/yinfxs/ibird#readme",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.13.4",
+    "file-stream-rotator": "0.0.6",
+    "ioredis": "^2.0.0",
+    "moment": "^2.13.0",
+    "mongoose": "^4.4.19",
+    "morgan": "^1.7.0",
+    "node-uuid": "^1.4.7",
+    "underscore": "^1.8.3",
+    "winston": "^2.2.0"
+  }
+}
