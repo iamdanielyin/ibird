@@ -5,5 +5,5 @@ build
 logs
 *.log
 log
-*test.js
+#*test.js
 

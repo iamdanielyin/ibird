@@ -1,5 +1,5 @@
 {
-  "name": "ibird",
+  "name": "ibird-server",
   "version": "0.1.0",
   "description": "A complete admin dashboard solution",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yinfxs/ibird.git"
+    "url": "git+https://github.com/yinfxs/ibird-server.git"
   },
   "keywords": [
     "admin",
@@ -30,9 +30,9 @@
   "author": "yinfxs",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/yinfxs/ibird/issues"
+    "url": "https://github.com/yinfxs/ibird-server/issues"
   },
-  "homepage": "https://github.com/yinfxs/ibird#readme",
+  "homepage": "https://github.com/yinfxs/ibird-server#readme",
   "dependencies": {
     "body-parser": "^1.15.1",
     "cookie-parser": "^1.4.3",
