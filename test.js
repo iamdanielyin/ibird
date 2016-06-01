@@ -10,6 +10,7 @@ moment.locale('zh-cn');
 
 server.init({
     "name": "ibird",
+    "publicFullPath": "/home/yinfx/WebstormProjects/ibird/public",
     "config": {
         "mongodb": "mongodb://master:!QAZ2wsx@ds034279.mlab.com:34279/ibird-test",
         "redis": ""
