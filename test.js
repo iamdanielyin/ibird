@@ -5,13 +5,14 @@
 
 const server = require('./index.js');
 const moment = require('moment');
+const path = require('path');
 const uuid = require('node-uuid');
 moment.locale('zh-cn');
 
 server.init({
     "name": "ibird",
     "route": "/admin",
-    "publicFullPath": "/home/yinfx/WebstormProjects/ibird/public",
+    "publicRoot": '/home/yinfx/WebstormProjects/ibird-server/public',
     "config": {
         "mongodb": "mongodb://master:!QAZ2wsx@ds034279.mlab.com:34279/ibird-test",
         "redis": ""
