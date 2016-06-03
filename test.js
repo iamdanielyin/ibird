@@ -10,6 +10,7 @@ moment.locale('zh-cn');
 
 server.init({
     "name": "ibird",
+    "route": "/admin",
     "publicFullPath": "/home/yinfx/WebstormProjects/ibird/public",
     "config": {
         "mongodb": "mongodb://master:!QAZ2wsx@ds034279.mlab.com:34279/ibird-test",
@@ -23,6 +24,41 @@ server.init({
     "modules": {
         "system": {
             "label": "系统模块",
+            "icon": "bars",
+            "menu": [
+                {
+                    "code": "users-class",
+                    "label": "系统用户",
+                    "icon": "users",
+                    "items": [
+                        {
+                            "code": "user",
+                            "label": "用户管理",
+                            "icon": "user",
+                            "model": "Usermdl"
+                        },
+                        {
+                            "code": "onlinetool",
+                            "label": "在线工具",
+                            "icon": "internet-explorer",
+                            "url": "http://jsonviewer.stack.hu/"
+                        }
+                    ]
+                },
+                {
+                    "code": "sys-settings",
+                    "label": "系统设置",
+                    "icon": "cog",
+                    "items": [
+                        {
+                            "code": "params",
+                            "label": "参数管理",
+                            "icon": "list",
+                            "model": "Paramsmgnt"
+                        }
+                    ]
+                }
+            ],
             "schemas": {
                 "Usermdl": {
                     "obj": {
@@ -160,10 +196,24 @@ server.init({
                         return schema;
                     }
                 }
+            },
+            "routes": {
+                '/haha1': function (req, res) {
+                    return res.end('hello.../system/haha1...');
+                },
+                '/haha2': function (req, res) {
+                    return res.end('hello.../system/haha2...');
+                },
+                '/hehe1': {
+                    "post": function (req, res) {
+                        return res.end('...post./system/hehe1...');
+                    }
+                }
             }
         },
         "custom": {
             "label": "自定义模块",
+            "icon": "bars",
             "schemas": {
                 "usermdl": {
                     "obj": {
