@@ -7,6 +7,7 @@ const server = require('./index.js');
 const moment = require('moment');
 const path = require('path');
 const uuid = require('node-uuid');
+const auth = require('./lib/ibird-auth');
 moment.locale('zh-cn');
 
 server.init({
@@ -15,7 +16,13 @@ server.init({
     "publicRoot": '/home/yinfx/WebstormProjects/ibird-server/public',
     "config": {
         "mongodb": "mongodb://master:!QAZ2wsx@ds034279.mlab.com:34279/ibird-test",
-        "redis": ""
+        "redis": "",
+        "auth": {
+            "expires_in": {
+                "access_token": 7 * 24 * 60 * 60,//access_token过期时间，单位秒，0表示永久不过起
+                "refresh_token": 0//refresh_token过期时间，单位秒，0表示永久不过起
+            }
+        }
     },
     "admins": [
         "13538828221@qq.com",
@@ -61,7 +68,8 @@ server.init({
                 }
             ],
             "schemas": {
-                "Usermdl": {
+                "user": {
+                    "label": "系统用户",
                     "obj": {
                         code: {
                             type: String,
@@ -73,179 +81,74 @@ server.init({
                                 return uuid.v1();
                             }
                         },
-                        name: {
-                            type: String,
-                            label: "名称",
-                            required: "名称({PATH})不能为空"
-                        },
                         password: {
                             type: String,
-                            required: true
-                        },
-                        remark: {
-                            type: String,
-                            title: "备注({PATH})不能为空"
-                        },
-                        ts: {
-                            type: String,
-                            label: "时间戳",
-                            default: function () {
-                                let ts = moment().format('x');
-                                return ts;
-                            }
-                        },
-                        dr: {
-                            type: Boolean,
-                            label: "删除标记",
-                            default: false
-                        }
-                    },
-                    "options": {},
-                    "customSchema": function (schema) {
-                        return schema;
-                    }
-                },
-                "Commdl": {
-                    "obj": {
-                        text: {
-                            type: String,
-                            label: "文本框",
-                            required: "文本框({PATH})不能为空"
-                        },
-                        password: {
-                            type: String,
-                            required: true,
+                            required: "密码({PATH})不能为空",
                             label: "密码框",
                             inputType: 'password'
                         },
-                        date: {
+                        remark: {
                             type: String,
-                            label: "日期",
-                            inputType: 'date',
-                            default: function () {
-                                let date = moment().format('ll');
-                                return date;
-                            }
-                        },
-                        time: {
-                            type: String,
-                            label: "时间",
-                            inputType: 'time',
-                            default: function () {
-                                let time = moment().format('HH:mm:ss.SSS');
-                                return time;
-                            }
-                        },
-                        datetime: {
-                            type: String,
-                            label: "日期时间",
-                            inputType: 'datetime',
-                            default: function () {
-                                let datetime = moment().format('llll');
-                                // let time = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
-                                return datetime;
-                            }
+                            label: "备注"
                         },
                         ts: {
                             type: String,
                             label: "时间戳",
                             default: function () {
-                                let ts = moment().format('x');
-                                return ts;
+                                return moment().format('x');
                             }
                         },
-                        booleanRadios: {
+                        dr: {
                             type: String,
-                            label: "单选",
+                            label: "删除标记",
                             inputType: 'boolean-radios', items: {
-                                a: 'A-01', b: 'B-02'
+                                '0': '否', '1': '是'
                             },
-                            default: 'a'
-                        },
-                        booleanCheckbox: {
-                            type: String,
-                            label: "多选",
-                            inputType: 'boolean-checkbox', items: {
-                                a: 'A-01', b: 'B-02', c: 'C-03'
-                            },
-                            default: 'b,c'
-                        },
-                        number: {
-                            type: Number,
-                            label: "数字",
-                            inputType: 'number'
-                        },
-                        textarea: {
-                            type: String,
-                            label: "编辑器",
-                            inputType: 'textarea'
-                        },
-                        ref: {
-                            type: String,
-                            label: "编辑器",
-                            inputType: 'ref',
-                            ref: 'Usermdl'
-                        },
-                        file: {
-                            type: String,
-                            label: "单文件/图片",
-                            inputType: 'file'
+                            default: '0'
                         }
-                    },
-                    "options": {},
-                    "customSchema": function (schema) {
-                        return schema;
                     }
-                }
-            },
-            "routes": {
-                '/haha1': function (req, res) {
-                    return res.end('hello.../system/haha1...');
                 },
-                '/haha2': function (req, res) {
-                    return res.end('hello.../system/haha2...');
-                },
-                '/hehe1': {
-                    "post": function (req, res) {
-                        return res.end('...post./system/hehe1...');
-                    }
-                }
-            }
-        },
-        "custom": {
-            "label": "自定义模块",
-            "icon": "bars",
-            "schemas": {
-                "usermdl": {
+                "param": {
+                    "label": "系统参数",
                     "obj": {
                         code: {
                             type: String,
-                            label: "编码",
+                            label: "参数编码",
                             unique: true,
                             required: "编码({PATH})不能为空",
-                            index: true
+                            index: true,
+                            default: function () {
+                                return uuid.v1();
+                            }
                         },
                         name: {
                             type: String,
-                            label: "名称",
+                            label: "参数名称",
                             required: "名称({PATH})不能为空"
                         },
-                        password: {
+                        value: {
                             type: String,
-                            required: true
+                            label: "参数值",
+                            required: "参数值({PATH})不能为空"
                         },
                         remark: {
                             type: String,
-                            title: "备注({PATH})不能为空"
+                            label: "备注"
                         },
                         ts: {
                             type: String,
-                            label: "时间戳"
+                            label: "时间戳",
+                            default: function () {
+                                return moment().format('x');
+                            }
                         },
                         dr: {
-                            type: Boolean,
+                            type: String,
                             label: "删除标记",
-                            default: false
+                            inputType: 'boolean-radios', items: {
+                                '0': '否', '1': '是'
+                            },
+                            default: '0'
                         }
                     },
                     "options": {},
@@ -254,6 +157,7 @@ server.init({
                     }
                 },
                 "commdl": {
+                    "label": "测试模型",
                     "obj": {
                         text: {
                             type: String,
@@ -349,6 +253,125 @@ server.init({
                         // schemaOptions
                         // virtuals
                         // validations
+                        return schema;
+                    }
+                }
+            },
+            "routes": {
+                "/login": {
+                    "post": function (req, res) {
+                        const User = app.model('system_user');
+                        const username = req.body.username || req.body.username;
+                        const password = req.body.password || req.body.password;
+                        User.findOne({code: username}, function (err, data) {
+                            if (err || !data) return res.json({err: {message: "用户 " + username + " 不存在"}});
+                            if (!data.verifyPassword(password)) return res.json({err: {message: "密码不正确"}});
+                            return res.json(auth.authorization());
+                        });
+                    }
+                },
+                "/logout": {
+                    "post": function (req, res) {
+                        const User = app.model('system_user');
+                        const access_token = req.get('access_token');
+                        res.json(auth.remove(access_token));
+                        res.json({message: '退出成功'});
+                    }
+                }
+            }
+        },
+        "business": {
+            "label": "业务模块",
+            "icon": "suitcase",
+            "schemas": {
+                "dept": {
+                    "label": "部门",
+                    "obj": {
+                        code: {
+                            type: String,
+                            label: "编码",
+                            unique: true,
+                            required: "编码({PATH})不能为空",
+                            index: true,
+                            default: function () {
+                                return uuid.v1();
+                            }
+                        },
+                        name: {
+                            type: String,
+                            label: "名称",
+                            required: "名称({PATH})不能为空"
+                        },
+                        remark: {
+                            type: String,
+                            label: "备注"
+                        },
+                        ts: {
+                            type: String,
+                            label: "时间戳",
+                            default: function () {
+                                return moment().format('x');
+                            }
+                        },
+                        dr: {
+                            type: String,
+                            label: "删除标记",
+                            inputType: 'boolean-radios', items: {
+                                '0': '否', '1': '是'
+                            },
+                            default: '0'
+                        }
+                    },
+                    "options": {},
+                    "customSchema": function (schema) {
+                        return schema;
+                    }
+                },
+                "param": {
+                    "label": "业务参数",
+                    "obj": {
+                        code: {
+                            type: String,
+                            label: "参数编码",
+                            unique: true,
+                            required: "编码({PATH})不能为空",
+                            index: true,
+                            default: function () {
+                                return uuid.v1();
+                            }
+                        },
+                        name: {
+                            type: String,
+                            label: "参数名称",
+                            required: "名称({PATH})不能为空"
+                        },
+                        value: {
+                            type: String,
+                            label: "参数值",
+                            required: "参数值({PATH})不能为空"
+                        },
+                        remark: {
+                            type: String,
+                            label: "备注"
+                        },
+                        ts: {
+                            type: String,
+                            label: "时间戳",
+                            default: function () {
+                                return moment().format('x');
+                            }
+                        },
+                        dr: {
+                            type: String,
+                            label: "删除标记",
+                            inputType: 'boolean-radios', items: {
+                                '0': '否', '1': '是'
+                            },
+                            default: '0'
+                        }
+                    },
+                    "options": {},
+                    "customSchema": function (schema) {
                         return schema;
                     }
                 }
