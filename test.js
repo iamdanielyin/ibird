@@ -7,7 +7,6 @@ const server = require('./index.js');
 const moment = require('moment');
 const path = require('path');
 const uuid = require('node-uuid');
-const auth = require('./lib/ibird-auth');
 moment.locale('zh-cn');
 
 server.init({
@@ -266,7 +265,7 @@ server.init({
                         User.findOne({code: username}, function (err, data) {
                             if (err || !data) return res.json({err: {message: "用户 " + username + " 不存在"}});
                             if (!data.verifyPassword(password)) return res.json({err: {message: "密码不正确"}});
-                            return res.json(auth.authorization());
+                            return res.json(app.auth.authorization());
                         });
                     }
                 },
@@ -274,7 +273,7 @@ server.init({
                     "post": function (req, res) {
                         const User = app.model('system_user');
                         const access_token = req.get('access_token');
-                        res.json(auth.remove(access_token));
+                        res.json(app.auth.remove(access_token));
                         res.json({message: '退出成功'});
                     }
                 }
