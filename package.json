@@ -4,7 +4,7 @@
   "description": "A complete admin dashboard solution",
   "main": "index.js",
   "scripts": {
-    "start": "node test.js"
+    "start": "node usage.js"
   },
   "repository": {
     "type": "git",
@@ -39,6 +39,7 @@
     "express": "^4.13.4",
     "file-stream-rotator": "0.0.6",
     "ioredis": "^2.0.0",
+    "markdown": "^0.5.0",
     "moment": "^2.13.0",
     "mongoose": "^4.4.19",
     "morgan": "^1.7.0",
