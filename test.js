@@ -10,7 +10,7 @@ const uuid = require('node-uuid');
 const _ = require('underscore');
 moment.locale('zh-cn');
 
-server.init({
+server.initialize({
     "name": "ibird",
     "route": "/admin",
     "publicRoot": '/home/yinfx/WebstormProjects/ibird-server/public',
@@ -111,7 +111,8 @@ server.init({
                         "toObject": {
                             "transform": (doc, ret, options) =>_.omit(ret, 'hashedPassword', 'passwordSalt')
                         }
-                    }
+                    },
+                    "auths": "GET,POST,DELETE,PUT"
                 },
                 "param": {
                     "label": "系统参数",
