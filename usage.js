@@ -278,10 +278,10 @@ server.initialize({
                 },
                 "/logout": {
                     "post": function (req, res) {
-                        const User = app.model('system_user');
+                        const User = server.model('system_user');
                         const access_token = req.get('access_token');
-                        res.json(app.auth.remove(access_token));
-                        res.json({message: '退出成功'});
+                        server.auth.remove(access_token);
+                        return res.json({message: '退出成功'});
                     }
                 }
             }
