@@ -112,7 +112,7 @@ server.initialize({
                             "transform": (doc, ret, options) =>_.omit(ret, 'hashedPassword', 'passwordSalt')
                         }
                     },
-                    "auths": ""
+                    "auths": "GET,PUT"
                 },
                 "param": {
                     "label": "系统参数",
@@ -266,13 +266,13 @@ server.initialize({
             "routes": {
                 "/login": {
                     "post": function (req, res) {
-                        const User = app.model('system_user');
+                        const User = server.model('system_user');
                         const username = req.body.username || req.body.username;
                         const password = req.body.password || req.body.password;
                         User.findOne({code: username}, function (err, data) {
                             if (err || !data) return res.json({err: {message: "用户 " + username + " 不存在"}});
                             if (!data.verifyPassword(password)) return res.json({err: {message: "密码不正确"}});
-                            return res.json(app.auth.authorization());
+                            return res.json(server.auth.authorization());
                         });
                     }
                 },
