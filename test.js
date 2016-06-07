@@ -7,6 +7,7 @@ const server = require('./index.js');
 const moment = require('moment');
 const path = require('path');
 const uuid = require('node-uuid');
+const _ = require('underscore');
 moment.locale('zh-cn');
 
 server.init({
@@ -104,6 +105,11 @@ server.init({
                                 '0': '否', '1': '是'
                             },
                             default: '0'
+                        }
+                    },
+                    "options": {
+                        "toObject": {
+                            "transform": (doc, ret, options) =>_.omit(ret, 'hashedPassword', 'passwordSalt')
                         }
                     }
                 },
