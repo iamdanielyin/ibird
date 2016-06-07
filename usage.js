@@ -112,7 +112,7 @@ server.initialize({
                             "transform": (doc, ret, options) =>_.omit(ret, 'hashedPassword', 'passwordSalt')
                         }
                     },
-                    "auths": "GET,POST,DELETE,PUT"
+                    "auths": ""
                 },
                 "param": {
                     "label": "系统参数",
