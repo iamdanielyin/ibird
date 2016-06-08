@@ -29,9 +29,10 @@ server.initialize({
         "yinfxs@gmail.com",
         "yinfxs"
     ],
-    "modules": {
-        "system": {
+    "modules": [
+        {
             "label": "系统模块",
+            "code": "system",
             "icon": "bars",
             "menu": [
                 {
@@ -286,8 +287,9 @@ server.initialize({
                 }
             }
         },
-        "business": {
+        {
             "label": "业务模块",
+            "code": "business",
             "icon": "suitcase",
             "schemas": {
                 "dept": {
@@ -383,7 +385,7 @@ server.initialize({
                 }
             }
         }
-    }
+    ]
 });
 
 
