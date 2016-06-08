@@ -113,7 +113,7 @@ server.initialize({
                             "transform": (doc, ret, options) =>_.omit(ret, 'hashedPassword', 'passwordSalt')
                         }
                     },
-                    "auths": "GET,PUT"
+                    "auths": "PUT"
                 },
                 "param": {
                     "label": "系统参数",
@@ -284,6 +284,9 @@ server.initialize({
                         server.auth.remove(access_token);
                         return res.json({message: '退出成功'});
                     }
+                },
+                "/user": function (req, res) {
+                    return res.end('测试路由重写');
                 }
             }
         },
