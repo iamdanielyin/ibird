@@ -11,7 +11,8 @@ const _ = require('underscore');
 const moment = require('moment');
 moment.locale('zh-cn');
 
-const systemModule = require('./lib/modules/system');
+//导入模块
+const systemModule = require('./lib/modules/system');// 导入系统模块
 
 server.initialize({
     "name": "ibird",
