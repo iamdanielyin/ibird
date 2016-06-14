@@ -1,7 +1,7 @@
 {
   "name": "ibird-server",
   "version": "0.1.0",
-  "description": "A complete admin dashboard solution",
+  "description": "A General Background Solution",
   "main": "index.js",
   "scripts": {
     "start": "node usage.js"
