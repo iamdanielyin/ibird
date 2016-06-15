@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yinfxs/ibird-server.git"
+    "url": "git+https://github.com/yinfxs/ibird.git"
   },
   "keywords": [
     "admin",
@@ -30,9 +30,9 @@
   "author": "yinfxs",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/yinfxs/ibird-server/issues"
+    "url": "https://github.com/yinfxs/ibird/issues"
   },
-  "homepage": "https://github.com/yinfxs/ibird-server#readme",
+  "homepage": "https://github.com/yinfxs/ibird#readme",
   "dependencies": {
     "body-parser": "^1.15.1",
     "cookie-parser": "^1.4.3",

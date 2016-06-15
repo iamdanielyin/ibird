@@ -7,6 +7,7 @@
 
 const server = require('./index.js');
 const uuid = require('node-uuid');
+const path = require('path');
 const _ = require('underscore');
 const moment = require('moment');
 moment.locale('zh-cn');
@@ -17,7 +18,7 @@ const systemModule = require('./lib/modules/system');// 导入系统模块
 server.initialize({
     "name": "ibird",
     "route": "/admin",
-    "publicRoot": '/home/yinfx/WebstormProjects/ibird-server/public',
+    "publicRoot": path.resolve(__dirname, 'public'),
     "config": {
         "mongodb": "mongodb://master:!QAZ2wsx@ds034279.mlab.com:34279/ibird-test",
         "redis": "",
@@ -137,7 +138,7 @@ server.initialize({
 
 
 server.app.get('/', function (req, res) {
-    res.end('Hello ibird-server!');
+    res.end('Hello ibird!');
 });
 
 server.start();

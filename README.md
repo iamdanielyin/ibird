@@ -1,1 +1,1 @@
-# ibird-server
+# ibird
