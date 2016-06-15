@@ -1,5 +1,5 @@
 {
-  "name": "ibird-server",
+  "name": "ibird",
   "version": "0.1.0",
   "description": "A General Background Solution",
   "main": "index.js",
