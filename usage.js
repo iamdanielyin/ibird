@@ -18,7 +18,9 @@ const systemModule = require('./lib/modules/system');// 导入系统模块
 server.initialize({
     "name": "ibird",
     "route": "/admin",
-    "publicRoot": path.resolve(__dirname, 'public'),
+    "middlewares": function (app) {
+        //挂载express中间件
+    },
     "config": {
         "mongodb": "mongodb://master:!QAZ2wsx@ds034279.mlab.com:34279/ibird-test",
         "redis": "",
@@ -135,7 +137,6 @@ server.initialize({
         }
     ]
 });
-
 
 server.app.get('/', function (req, res) {
     res.end('Hello ibird!');
