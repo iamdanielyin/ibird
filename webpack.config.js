@@ -13,7 +13,7 @@ const DIST_DIR = path.resolve(__dirname, 'client/build');
 
 module.exports = {
     entry: {
-        app: path.resolve(__dirname, 'client/src/index.jsx'),
+        app: [path.resolve(__dirname, 'client/src/index.jsx'), 'whatwg-fetch'],
         vendors: require('./webpack.vendors')
     },
     output: {
@@ -33,13 +33,20 @@ module.exports = {
             },
             {test: /\.less$/, include: SOURCE_DIR, loader: 'style!css!less'},
             {test: /\.css$/, include: SOURCE_DIR, loader: "style!css"},
-            {test: /\.(jpg|png|jpeg)/, include: SOURCE_DIR, loader: "url?limit=8192"}
+            {test: /\.(jpg|png|jpeg)$/, include: SOURCE_DIR, loader: "url?limit=8192"},
+            {test: /\.json$/, loader: 'json'},
+            {test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'file'}
         ]
     },
     plugins: [
         new HtmlWebpackPlugin({
             title: 'Hello ibird!',
             hash: true
+        }),
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery",
+            "window.jQuery": "jquery"
         }),
         new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js')
     ],
