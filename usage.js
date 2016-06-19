@@ -13,7 +13,7 @@ const moment = require('moment');
 moment.locale('zh-cn');
 
 //导入模块
-const systemModule = require('./lib/modules/system');// 导入系统模块
+const system = require('./lib/modules/system');// 导入系统模块
 
 server.initialize({
     "name": "ibird",
@@ -36,11 +36,39 @@ server.initialize({
         "yinfxs@gmail.com"
     ],
     "modules": [
-        systemModule(server),
+        system(server),
         {
             "label": "业务模块",
             "code": "business",
             "icon": "suitcase",
+            "menu": [
+                {
+                    "code": "basicdocs",
+                    "label": "基本档案",
+                    "icon": "bars",
+                    "items": [
+                        {
+                            "code": "dept",
+                            "label": "部门档案",
+                            "icon": "bell",
+                            "model": "dept"
+                        }
+                    ]
+                },
+                {
+                    "code": "busconfigs",
+                    "label": "业务配置",
+                    "icon": "cog",
+                    "items": [
+                        {
+                            "code": "param",
+                            "label": "业务参数",
+                            "icon": "list",
+                            "model": "param"
+                        }
+                    ]
+                }
+            ],
             "schemas": {
                 "dept": {
                     "label": "部门",

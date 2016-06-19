@@ -7,25 +7,13 @@
 
 const React = require('react');
 const ReactDOM = require('react-dom');
-require('whatwg-fetch');
-const routes = require('./routes');
+const AdminConfigUtils = require('./utils/AdminConfigUtils');
 const index_less = require('./public/styles/index.less');
 const MyButtonController = require('./components/MyButtonController');
 
-function getAdminConfig() {
-    fetch(routes.ADMIN_CONFIG).then(function (res) {
-        return res.json();
-    }).then(function (json) {
-        console.log(json);
-    });
-}
-getAdminConfig();
-
-// const App = React.createClass({
-//     render() {
-//         return (<MyButtonController/>);
-//     }
-// });
+AdminConfigUtils.initialize(function (configs) {
+    console.log(configs);
+});
 
 const app = document.createElement('div');
 document.body.appendChild(app);
