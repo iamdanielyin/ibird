@@ -6,7 +6,6 @@
 'use strict';
 
 const RouteUtils = require('./RouteUtils');
-require('whatwg-fetch');
 
 /**
  * 获取服务端配置项
