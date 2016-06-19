@@ -9,12 +9,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
 const SOURCE_DIR = path.resolve(__dirname, 'client/src');
-const DIST_DIR = path.resolve(__dirname, 'client/deploy');
+const DIST_DIR = path.resolve(__dirname, 'client/dist');
 
 module.exports = {
     entry: {
         app: path.resolve(__dirname, 'client/src/index.jsx'),
-        vendors: ['react', 'react-router', 'flux', 'react-dom']
+        vendors: require('./webpack.vendors')
     },
     output: {
         path: DIST_DIR,

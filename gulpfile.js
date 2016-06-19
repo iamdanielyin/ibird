@@ -39,20 +39,20 @@ gulp.task('server:others', function () {
 
 // 前端图片处理任务
 gulp.task('client:images', function () {
-    return gulp.src('client/deploy/**/*.(png|jpg|jpeg)')        //引入所有需处理的图片文件
+    return gulp.src('client/dist/**/*.(png|jpg|jpeg)')        //引入所有需处理的图片文件
         .pipe(imagemin({optimizationLevel: 3, progressive: true, interlaced: true}))      //压缩图片
         .pipe(gulp.dest('./dist/client/')); //输出压缩后的图片
 });
 
 // 前端模块处理任务
 gulp.task('client:scripts', function () {
-    return gulp.src('client/deploy/**/*.+(js|jsx)')      //引入所有需处理的JS和JSX文件
+    return gulp.src('client/dist/**/*.+(js|jsx)')      //引入所有需处理的JS和JSX文件
         .pipe(gulp.dest('./dist/client/'));        //输出压缩后的文件
 });
 
 // 前端网页压缩处理任务
 gulp.task('client:htmls', function () {
-    return gulp.src('client/deploy/*.html')    //引入所有前端网页文件
+    return gulp.src('client/dist/*.html')    //引入所有前端网页文件
         .pipe(htmlmin({collapseWhitespace: true}))           //压缩网页文件
         .pipe(gulp.dest('./dist/client/'));      //输出压缩后的文件
 });

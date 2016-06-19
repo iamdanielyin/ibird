@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "prestart": "npm i && npm run build",
+    "prestart": "npm run build",
     "start": "node usage.js",
     "predeploy": "NODE_ENV=production webpack -p --config webpack.production.config.js",
     "deploy": "gulp"
@@ -38,22 +38,25 @@
   },
   "homepage": "https://github.com/yinfxs/ibird#readme",
   "dependencies": {
+    "admin-lte": "^2.3.3",
     "body-parser": "^1.15.1",
     "cookie-parser": "^1.4.3",
     "express": "^4.13.4",
     "file-stream-rotator": "0.0.6",
+    "flux": "^2.1.1",
+    "font-awesome": "^4.6.3",
     "ioredis": "^2.0.0",
+    "jquery": "^3.0.0",
     "markdown": "^0.5.0",
     "moment": "^2.13.0",
     "mongoose": "^4.4.19",
     "morgan": "^1.7.0",
     "node-uuid": "^1.4.7",
-    "underscore": "^1.8.3",
-    "winston": "^2.2.0",
-    "flux": "^2.1.1",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
-    "react-router": "^2.4.1"
+    "react-router": "^2.4.1",
+    "underscore": "^1.8.3",
+    "winston": "^2.2.0"
   },
   "devDependencies": {
     "babel-core": "^6.9.1",
