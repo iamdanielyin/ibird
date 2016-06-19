@@ -31,11 +31,11 @@ module.exports = {
                     compact: false
                 }
             },
-            {test: /\.less$/, include: SOURCE_DIR, loader: 'style!css!less'},
-            {test: /\.css$/, include: SOURCE_DIR, loader: "style!css"},
-            {test: /\.(jpg|png|jpeg)$/, include: SOURCE_DIR, loader: "url?limit=8192"},
-            {test: /\.json$/, loader: 'json'},
-            {test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'file'}
+            {test: /\.less$/, include: SOURCE_DIR, exclude: /node_modules/, loader: 'style!css!less'},
+            {test: /\.css$/, include: SOURCE_DIR, exclude: /node_modules/, loader: "style!css"},
+            {test: /\.(jpg|png|jpeg)$/, include: SOURCE_DIR, exclude: /node_modules/, loader: "url?limit=8192"},
+            {test: /\.json$/, include: SOURCE_DIR, exclude: /node_modules/, loader: 'json'},
+            {test: /\.(png|woff|woff2|eot|ttf|svg)$/, include: SOURCE_DIR, exclude: /node_modules/, loader: 'file'}
         ]
     },
     plugins: [
