@@ -4,7 +4,11 @@
   "description": "A General Background Solution",
   "main": "index.js",
   "scripts": {
-    "start": "node usage.js"
+    "build": "webpack",
+    "prestart": "npm i && npm run build",
+    "start": "node usage.js",
+    "predeploy": "NODE_ENV=production webpack -p --config webpack.production.config.js",
+    "deploy": "gulp"
   },
   "repository": {
     "type": "git",
@@ -45,6 +49,33 @@
     "morgan": "^1.7.0",
     "node-uuid": "^1.4.7",
     "underscore": "^1.8.3",
-    "winston": "^2.2.0"
+    "winston": "^2.2.0",
+    "flux": "^2.1.1",
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0",
+    "react-router": "^2.4.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.9.1",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.5.0",
+    "css-loader": "^0.23.1",
+    "file-loader": "^0.8.5",
+    "html-webpack-plugin": "^2.21.0",
+    "less": "^2.7.1",
+    "less-loader": "^2.2.3",
+    "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.13.1",
+    "webpack-dev-middleware": "^1.6.1",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-clean": "^0.3.2",
+    "gulp-htmlmin": "^2.0.0",
+    "gulp-imagemin": "^3.0.1",
+    "gulp-jshint": "^2.0.1",
+    "jshint": "^2.9.2",
+    "run-sequence": "^1.2.1"
   }
 }
