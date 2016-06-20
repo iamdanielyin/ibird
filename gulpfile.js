@@ -57,14 +57,28 @@ gulp.task('client:htmls', function () {
         .pipe(gulp.dest('./dist/client/'));      //输出压缩后的文件
 });
 
+// 前端模块处理任务
+gulp.task('client:others', function () {
+    return gulp.src('client/dist/**/*')      //引入所有需处理的JS和JSX文件
+        .pipe(gulp.dest('./dist/client/'));        //输出压缩后的文件
+});
+
 // 输出目录清理任务
 gulp.task('clean', function () {
-    return gulp.src(['./dist','./client/build','./client/dist'], {read: false})
+    return gulp.src(['./dist'], {read: false})
+        .pipe(clean());
+});
+
+// 输出目录清理任务
+gulp.task('client:clean', function () {
+    return gulp.src(['./client/build', './client/dist'], {read: false})
         .pipe(clean());
 });
 
 // 注册编译任务
-gulp.task('build', ['server', 'server:index', 'server:others', 'client:images', 'client:scripts', 'client:htmls']);
+gulp.task('build', function () {
+    runSequence('server', 'server:index', 'server:others', 'client:others', 'client:images', 'client:scripts', 'client:htmls');
+});
 
 // 注册默认任务
 gulp.task('default', function () {
