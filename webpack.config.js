@@ -6,50 +6,75 @@
 
 const path = require('path');
 const webpack = require('webpack');
+const isProduction = (process.env.NODE_ENV == 'production') ? true : false;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const SOURCE_DIR = path.resolve(__dirname, 'client/src');
-const DIST_DIR = path.resolve(__dirname, 'client/build');
+const SOURCEDIR = path.resolve(__dirname, 'client/src');
+const DISTDIR = path.resolve(__dirname, 'client/' + (isProduction ? 'dist' : 'build'));
+
+const plugins = [
+    new HtmlWebpackPlugin({
+        title: 'Hello ibird!'
+    }),
+    new webpack.DefinePlugin({
+        $: "client/publics/js/jquery.js",
+        jQuery: "client/publics/js/jquery.js",
+        "window.jQuery": "client/publics/js/jquery.js"
+    }),
+    new webpack.IgnorePlugin(/(jquery|AdminLTE|bootstrap).js$/),
+    new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors' + (isProduction ? '.min' : '.') + '.js')
+];
+if (isProduction) plugins.push(new webpack.optimize.UglifyJsPlugin({
+    compress: {
+        warnings: false
+    }
+}));
+
 
 module.exports = {
     entry: {
         app: [path.resolve(__dirname, 'client/src/index.jsx'), 'whatwg-fetch'],
-        vendors: require('./webpack.vendors')
+        vendors: ['react', 'react-router', 'flux', 'react-dom']
     },
     output: {
-        path: DIST_DIR,
-        filename: '[name].js'
+        path: DISTDIR,
+        filename: '[name]' + (isProduction ? '.min' : '.') + '.js'
     },
     module: {
         loaders: [
             {
                 test: /\.(jsx|js)?$/,
-                loader: 'babel',
+                include: SOURCEDIR,
                 exclude: /node_modules/,
+                loader: 'babel',
                 query: {
                     presets: ['es2015', 'react'],
                     compact: false
                 }
             },
-            {test: /\.less$/, include: SOURCE_DIR, exclude: /node_modules/, loader: 'style!css!less'},
-            {test: /\.css$/, include: SOURCE_DIR, exclude: /node_modules/, loader: "style!css"},
-            {test: /\.(jpg|png|jpeg)$/, include: SOURCE_DIR, exclude: /node_modules/, loader: "url?limit=8192"},
-            {test: /\.json$/, include: SOURCE_DIR, exclude: /node_modules/, loader: 'json'},
-            {test: /\.(png|woff|woff2|eot|ttf|svg)$/, include: SOURCE_DIR, exclude: /node_modules/, loader: 'file'}
+            {test: /\.json$/, include: SOURCEDIR, exclude: /node_modules/, loader: 'json'},
+            {test: /\.(less|css)$/, include: SOURCEDIR, exclude: /node_modules/, loaders: ['style', 'css', 'less']},
+            {
+                test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                include: SOURCEDIR, exclude: /node_modules/,
+                loader: "url-loader?limit=10000&minetype=application/font-woff"
+            },
+            {
+                test: /\.(ttf|eot|svg)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                include: SOURCEDIR,
+                exclude: /node_modules/,
+                loader: "file"
+            },
+            {test: /\.(jpg|png|jpeg)$/, include: SOURCEDIR, exclude: /node_modules/, loader: "url?limit=8192"},
+            {
+                test: /\.(jpg|jpeg|png|woff|woff2|eot|ttf|svg|gif)$/,
+                include: SOURCEDIR,
+                exclude: /node_modules/,
+                loader: 'file'
+            }
         ]
     },
-    plugins: [
-        new HtmlWebpackPlugin({
-            title: 'Hello ibird!',
-            hash: true
-        }),
-        new webpack.ProvidePlugin({
-            $: "jquery",
-            jQuery: "jquery",
-            "window.jQuery": "jquery"
-        }),
-        new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js')
-    ],
+    plugins: plugins,
     resolve: {
         extensions: ['', '.js', '.jsx']
     }

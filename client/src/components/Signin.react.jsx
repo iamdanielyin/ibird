@@ -7,10 +7,6 @@
 
 const React = require('react');
 
-// require('../../../node_modules/bootstrap/dist/css/bootstrap.css');
-// require('../../../node_modules/admin-lte/dist/css/AdminLTE.css');
-// require('../../../node_modules/font-awesome/css/font-awesome.css');
-
 const Signin = React.createClass({
     render(){
         return (

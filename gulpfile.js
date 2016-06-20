@@ -59,7 +59,7 @@ gulp.task('client:htmls', function () {
 
 // 输出目录清理任务
 gulp.task('clean', function () {
-    return gulp.src(['./dist'], {read: false})
+    return gulp.src(['./dist','./client/build','./client/dist'], {read: false})
         .pipe(clean());
 });
 
