@@ -65,12 +65,12 @@ module.exports = {
                 exclude: /node_modules/,
                 loader: "file"
             },
-            {
-                test: /\.(jpg|png|jpeg)$/,
-                include: SOURCEDIR,
-                exclude: [path.resolve(__dirname, 'node_modules'), path.resolve(__dirname, 'client/src/publics/plugins')],
-                loader: "url?limit=8192"
-            },
+            // {
+            //     test: /\.(jpg|png|jpeg)$/,
+            //     include: SOURCEDIR,
+            //     exclude: [path.resolve(__dirname, 'node_modules'), path.resolve(__dirname, 'client/src/publics/plugins')],
+            //     loader: "url?limit=8192"
+            // },
             {
                 test: /\.(jpg|jpeg|png|woff|woff2|eot|ttf|svg|gif)$/,
                 include: SOURCEDIR,
