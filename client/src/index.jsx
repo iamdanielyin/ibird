@@ -17,6 +17,7 @@ const MyButtonController = require('./components/MyButtonController');
 const App = require('./components/App.react');
 const Signin = require('./components/Signin.react');
 const Signup = require('./components/Signup.react');
+const Forgot = require('./components/Forgot.react');
 const Admin = require('./components/Admin.react');
 const NoMatch = require('./components/NoMatch.react');
 
@@ -53,6 +54,7 @@ ReactDOM.render((
         <Route path="/" component={App}>
             <Route path="signin" component={Signin}/>
             <Route path="signup" component={Signup}/>
+            <Route path="forgot" component={Forgot}/>
             <Route path="index" component={Admin}/>
             <Route path="*" component={NoMatch}/>
         </Route>

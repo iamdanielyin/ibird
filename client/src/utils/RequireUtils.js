@@ -13,7 +13,8 @@ require('../publics/css/bootstrap.css');
 require('../publics/css/AdminLTE.css');
 require('../publics/css/AdminLTE-skins.css');
 require('../publics/css/font-awesome.css');
+require('../publics/plugins/iCheck/blue.css');
 
-require('../publics/js/jquery');
 require('../publics/js/bootstrap');
 require('../publics/js/AdminLTE');
+require('../publics/plugins/iCheck/icheck');

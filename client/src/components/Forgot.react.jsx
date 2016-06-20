@@ -1,5 +1,5 @@
 /**
- * 注册组件
+ * 忘记密码组件
  * Created by yinfxs on 16-6-14.
  */
 
@@ -8,7 +8,7 @@
 const React = require('react');
 const Link = require('react-router').Link;
 
-const Signup = React.createClass({
+const Forgot = React.createClass({
     componentDidMount(){
         $('input').iCheck({
             checkboxClass: 'icheckbox_square-blue',
@@ -25,7 +25,7 @@ const Signup = React.createClass({
                     </div>
 
                     <div className="register-box-body">
-                        <p className="login-box-msg">请认真填写以下信息注册</p>
+                        <p className="login-box-msg">请填写注册邮箱接收验证码</p>
 
                         <form action="#" method="post">
                             <div className="form-group has-feedback">
@@ -36,30 +36,16 @@ const Signup = React.createClass({
                                 <input type="email" className="form-control" placeholder="邮箱"/>
                                 <span className="fa fa-envelope form-control-feedback"></span>
                             </div>
-                            <div className="form-group has-feedback">
-                                <input type="password" className="form-control" placeholder="输入密码"/>
-                                <span className="fa fa-lock form-control-feedback"></span>
-                            </div>
-                            <div className="form-group has-feedback">
-                                <input type="password" className="form-control" placeholder="确认密码"/>
-                                <span className="fa fa-lock form-control-feedback"></span>
-                            </div>
 
 
                             <div className="row">
-                                <div className="col-xs-8">
-                                    <div className="checkbox icheck">
-                                        <label>
-                                            <input type="checkbox"/> 我同意 <Link to='/signup'>《ibird用户协议》</Link>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div className="col-xs-4">
-                                    <button type="submit" className="btn btn-primary btn-block btn-flat">注册</button>
+                                <div className="col-xs-12">
+                                    <button type="submit" className="btn btn-primary btn-block btn-flat">接收验证码</button>
                                 </div>
                             </div>
                         </form>
-                        <Link to='/signin' className="text-center">直接登录</Link>
+                        <Link to='/signin' className="text-center">返回登录</Link><br/>
+                        <Link to='/signup' className="text-center">注册新帐号</Link>
                     </div>
                 </div>
             </div>
@@ -67,4 +53,4 @@ const Signup = React.createClass({
     }
 });
 
-module.exports = Signup;
+module.exports = Forgot;

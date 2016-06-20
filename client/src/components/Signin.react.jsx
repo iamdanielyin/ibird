@@ -6,53 +6,58 @@
 'use strict';
 
 const React = require('react');
+const Link = require('react-router').Link;
 
 const Signin = React.createClass({
+    componentDidMount(){
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%' // optional
+        });
+    },
     render(){
         return (
             <div className="hold-transition login-page">
                 <div className="login-box">
                     <div className="login-logo">
-                        <a href="../../index2.html"><b>Admin</b>LTE</a>
+                        <Link to='/signin'>i<b>bird</b></Link>
                     </div>
                     <div className="login-box-body">
-                        <p className="login-box-msg">Sign in to start your session</p>
-                        <form action="../../index2.html" method="post">
+                        <p className="login-box-msg">请填写以下信息登录</p>
+                        <form action="#" method="post">
                             <div className="form-group has-feedback">
-                                <input type="email" className="form-control" placeholder="Email"/>
-                                <span className="glyphicon glyphicon-envelope form-control-feedback"></span>
+                                <input type="text" className="form-control" placeholder="帐号"/>
+                                <span className="fa fa-user form-control-feedback" aria-hidden="true"></span>
                             </div>
                             <div className="form-group has-feedback">
-                                <input type="password" className="form-control" placeholder="Password"/>
-                                <span className="glyphicon glyphicon-lock form-control-feedback"></span>
+                                <input type="password" className="form-control" placeholder="密码"/>
+                                <span className="fa fa-lock form-control-feedback" aria-hidden="true"></span>
                             </div>
                             <div className="row">
                                 <div className="col-xs-8">
                                     <div className="checkbox icheck">
                                         <label>
-                                            <input type="checkbox"/> Remember Me
+                                            <input type="checkbox"/>
+                                            <span>记住我</span>
                                         </label>
                                     </div>
                                 </div>
                                 <div className="col-xs-4">
-                                    <button type="submit" className="btn btn-primary btn-block btn-flat">Sign In
-                                    </button>
+                                    <button type="submit" className="btn btn-primary btn-block btn-flat">登录</button>
                                 </div>
                             </div>
                         </form>
 
                         <div className="social-auth-links text-center">
-                            <p>- OR -</p>
-                            <a href="#" className="btn btn-block btn-social btn-facebook btn-flat"><i
-                                className="fa fa-facebook"></i> Sign in using
-                                Facebook</a>
-                            <a href="#" className="btn btn-block btn-social btn-google btn-flat"><i
-                                className="fa fa-google-plus"></i> Sign in using
-                                Google+</a>
+                            <p>- 第三方登录 -</p>
+                            <Link to='/signin' className="btn btn-block btn-social btn-facebook btn-flat"><i className="fa fa-facebook"></i> 使用Facebook帐号登录</Link>
+                            <Link to='/signin' className="btn btn-block btn-social btn-google btn-flat"><i className="fa fa-google"></i> 使用Google帐号登录</Link>
+                            <Link to='/signin' className="btn btn-block btn-social btn-github btn-flat"><i className="fa fa-github"></i> 使用Github帐号登录</Link>
                         </div>
 
-                        <a href="#">I forgot my password</a><br/>
-                        <a href="register.html" className="text-center">Register a new membership</a>
+                        <Link to='/forgot' className="text-center">忘记密码</Link><br/>
+                        <Link to='/signup' className="text-center">注册新帐号</Link>
                     </div>
                 </div>
             </div>
