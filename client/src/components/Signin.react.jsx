@@ -18,7 +18,7 @@ const Signin = React.createClass({
     },
     render(){
         return (
-            <div className="hold-transition login-page">
+            <div className="login-page">
                 <div className="login-box">
                     <div className="login-logo">
                         <Link to='/signin'>i<b>bird</b></Link>

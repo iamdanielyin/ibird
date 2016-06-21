@@ -18,7 +18,7 @@ const Forgot = React.createClass({
     },
     render(){
         return (
-            <div className="hold-transition register-page">
+            <div className="register-page">
                 <div className="register-box">
                     <div className="register-logo">
                         <Link to='/signin'>i<b>bird</b></Link>

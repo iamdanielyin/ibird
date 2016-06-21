@@ -9,7 +9,8 @@
     "start": "node usage.js",
     "predeploy": "NODE_ENV=production webpack -p",
     "deploy": "gulp",
-    "clean": "gulp clean"
+    "clean": "gulp clean",
+    "clean-client": "gulp clean:client"
   },
   "repository": {
     "type": "git",
@@ -68,6 +69,7 @@
     "gulp-jshint": "^2.0.1",
     "html-webpack-plugin": "^2.21.0",
     "jquery": "^2.2.4",
+    "jquery-slimscroll": "^1.3.8",
     "jshint": "^2.9.2",
     "json-loader": "^0.5.4",
     "less": "^2.7.1",

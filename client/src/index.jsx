@@ -22,6 +22,7 @@ const Admin = require('./components/Admin.react');
 const NoMatch = require('./components/NoMatch.react');
 
 require('whatwg-fetch');
+require('jquery-slimscroll');
 require('./utils/RequireUtils');
 
 require('./publics/css/index.less');

@@ -9,12 +9,13 @@
 
 'use strict';
 
-require('../publics/css/bootstrap.css');
-require('../publics/css/AdminLTE.css');
-require('../publics/css/AdminLTE-skins.css');
-require('../publics/css/font-awesome.css');
+
+require('../publics/lib/bootstrap/css/bootstrap.css');
+require('../publics/lib/adminlte/css/AdminLTE.css');
+require('../publics/lib/adminlte/css/AdminLTE-skins.css');
+require('../publics/lib/font-awesome/font-awesome.css');
 require('../publics/plugins/iCheck/blue.css');
 
-require('../publics/js/bootstrap');
-require('../publics/js/AdminLTE');
+require('../publics/lib/bootstrap/js/bootstrap');
+require('../publics/lib/adminlte/js/AdminLTE');
 require('../publics/plugins/iCheck/icheck');

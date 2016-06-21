@@ -70,7 +70,7 @@ gulp.task('clean', function () {
 });
 
 // 输出目录清理任务
-gulp.task('client:clean', function () {
+gulp.task('clean:client', function () {
     return gulp.src(['./client/build', './client/dist'], {read: false})
         .pipe(clean());
 });

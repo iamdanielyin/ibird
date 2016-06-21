@@ -14,14 +14,15 @@ const DISTDIR = path.resolve(__dirname, 'client/' + (isProduction ? 'dist' : 'bu
 
 const plugins = [
     new HtmlWebpackPlugin({
-        title: 'Hello ibird!'
+        title: 'Hello ibird!',
+        template: path.resolve(__dirname, 'client/src/templates/index.ejs')
     }),
     new webpack.ProvidePlugin({
         $: "jquery",
         jQuery: "jquery",
         "window.jQuery": "jquery"
     }),
-    new webpack.IgnorePlugin(/(AdminLTE|bootstrap).js$/),
+    new webpack.IgnorePlugin(/(AdminLTE|bootstrap|jquery.slimscroll.min).js$/),
     new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors' + (isProduction ? '.min' : '.') + '.js')
 ];
 if (isProduction) plugins.push(new webpack.optimize.UglifyJsPlugin({
