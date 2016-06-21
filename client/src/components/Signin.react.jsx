@@ -44,7 +44,7 @@ const Signin = React.createClass({
                                     </div>
                                 </div>
                                 <div className="col-xs-4">
-                                    <button type="submit" className="btn btn-primary btn-block btn-flat">登录</button>
+                                    <Link className="btn btn-primary btn-block btn-flat" to='/index'>登录</Link>
                                 </div>
                             </div>
                         </form>
