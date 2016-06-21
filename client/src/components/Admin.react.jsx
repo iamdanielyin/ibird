@@ -14,29 +14,24 @@ const Admin = React.createClass({
     },
     render(){
         return (
-
-
             <div className="wrapper">
-
                 <header className="main-header">
-
-                    <a href="index2.html" className="logo">
+                    <Link to="/index" className="logo">
                         <span className="logo-mini">i<b>bird</b></span>
                         <span className="logo-lg">i<b>bird</b></span>
-                    </a>
-
+                    </Link>
                     <nav className="navbar navbar-static-top">
-                        <a href="#" className="sidebar-toggle" data-toggle="offcanvas" role="button">
+                        <Link to="/index" className="sidebar-toggle" data-toggle="offcanvas" role="button">
                             <span className="sr-only">Toggle navigation</span>
-                        </a>
+                        </Link>
                         <div className="navbar-custom-menu">
                             <ul className="nav navbar-nav">
                                 <li className="dropdown user user-menu">
-                                    <a href="#" className="dropdown-toggle" data-toggle="dropdown">
+                                    <Link to="/index" className="dropdown-toggle" data-toggle="dropdown">
                                         <img src={avatar} className="user-image"
                                              alt="User Image"/>
                                         <span className="hidden-xs">Daniel Yin</span>
-                                    </a>
+                                    </Link>
                                     <ul className="dropdown-menu">
                                         <li className="user-header">
                                             <img src={avatar} className="img-circle"
@@ -47,25 +42,12 @@ const Admin = React.createClass({
                                                 <small>Member since Nov. 2012</small>
                                             </p>
                                         </li>
-                                        <li className="user-body">
-                                            <div className="row">
-                                                <div className="col-xs-4 text-center">
-                                                    <a href="#">Followers</a>
-                                                </div>
-                                                <div className="col-xs-4 text-center">
-                                                    <a href="#">Sales</a>
-                                                </div>
-                                                <div className="col-xs-4 text-center">
-                                                    <a href="#">Friends</a>
-                                                </div>
-                                            </div>
-                                        </li>
                                         <li className="user-footer">
                                             <div className="pull-left">
-                                                <a href="#" className="btn btn-default btn-flat">Profile</a>
+                                                <Link to="/index" className="btn btn-default btn-flat">个人详情</Link>
                                             </div>
                                             <div className="pull-right">
-                                                <a href="#" className="btn btn-default btn-flat">Sign out</a>
+                                                <Link to="/index" className="btn btn-default btn-flat">退出</Link>
                                             </div>
                                         </li>
                                     </ul>
@@ -83,7 +65,7 @@ const Admin = React.createClass({
                             </div>
                             <div className="pull-left info">
                                 <p>Daniel Yin</p>
-                                <a href="#"><i className="fa fa-circle text-success"></i> Online</a>
+                                <Link to="/index"><i className="fa fa-circle text-success"></i> Online</Link>
                             </div>
                         </div>
                         <form action="#" method="get" className="sidebar-form">
@@ -99,18 +81,18 @@ const Admin = React.createClass({
                         <ul className="sidebar-menu">
                             <li className="header">导航栏</li>
                             <li className="treeview">
-                                <a href="#">
+                                <Link to="/index">
                                     <i className="fa fa-inbox"></i>
                                     <span>其他页面</span>
                                     <i className="fa fa-angle-left pull-right"></i>
-                                </a>
+                                </Link>
                                 <ul className="treeview-menu">
                                     <li>
-                                        <a href="#">
+                                        <Link to="/index">
                                             <i className="fa fa-circle-o"></i>
                                             <span>报错页面</span>
                                             <i className="fa fa-angle-left pull-right"></i>
-                                        </a>
+                                        </Link>
                                         <ul className="treeview-menu">
                                             <li>
                                                 <Link to='/signin' className="fa fa-circle-o"><i></i>
@@ -127,42 +109,66 @@ const Admin = React.createClass({
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="#"><i className="fa fa-circle-o"></i>注册页面<i
-                                            className="fa fa-angle-left pull-right"></i></a>
+                                        <Link to="/index">
+                                            <i className="fa fa-circle-o"></i>
+                                            <span>注册页面</span>
+                                            <i className="fa fa-angle-left pull-right"></i>
+                                        </Link>
                                         <ul className="treeview-menu">
                                             <li>
-                                                <a href="demo_page/other_page/step_by_step_register.html"><i
-                                                    className="fa fa-circle-o"></i>三步注册</a>
+                                                <Link to="/index">
+                                                    <i className="fa fa-circle-o"></i>
+                                                    <span>三步注册</span>
+                                                </Link>
                                             </li>
                                             <li>
-                                                <a href="demo_page/other_page/login_register.html"><i
-                                                    className="fa fa-circle-o"></i>全屏注册登录</a>
+                                                <Link to="/index">
+                                                    <i className="fa fa-circle-o"></i>
+                                                    <span>全屏注册登录</span>
+                                                </Link>
                                             </li>
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="#"><i className="fa fa-circle-o"></i>找回密码</a>
+                                        <Link to="/index">
+                                            <i className="fa fa-circle-o"></i>
+                                            <span>找回密码</span>
+                                        </Link>
                                     </li>
                                 </ul>
                             </li>
                             <li className="treeview">
-                                <a href="#">
+                                <Link to="/index">
                                     <i className="fa fa-share"></i> <span>多级菜单</span>
                                     <i className="fa fa-angle-left pull-right"></i>
-                                </a>
+                                </Link>
                                 <ul className="treeview-menu">
-                                    <li><a href="#"><i className="fa fa-circle-o"></i> 菜单</a></li>
                                     <li>
-                                        <a href="#"><i className="fa fa-circle-o"></i>二级菜单<i
-                                            className="fa fa-angle-left pull-right"></i></a>
+                                        <Link to="/index">
+                                        <i className="fa fa-circle-o"></i> <span>菜单</span></Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/index">
+                                            <i className="fa fa-circle-o"></i>
+                                            <span>二级菜单</span>
+                                            <i className="fa fa-angle-left pull-right"></i>
+                                        </Link>
                                         <ul className="treeview-menu">
-                                            <li><a href="#"><i className="fa fa-circle-o"></i>三级菜单</a></li>
                                             <li>
-                                                <a href="#"><i className="fa fa-circle-o"></i>三级菜单<i
-                                                    className="fa fa-angle-left pull-right"></i></a>
+                                                <Link to="/index">
+                                                    <i className="fa fa-circle-o"></i>
+                                                    <span>三级菜单</span>
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link to="/index">
+                                                    <i className="fa fa-circle-o"></i>
+                                                    <span>三级菜单</span>
+                                                    <i className="fa fa-angle-left pull-right"></i>
+                                                </Link>
                                                 <ul className="treeview-menu">
-                                                    <li><a href="#"><i className="fa fa-circle-o"></i>三级菜单</a></li>
-                                                    <li><a href="#"><i className="fa fa-circle-o"></i>三级菜单</a></li>
+                                                    <li><Link to="/index"><i className="fa fa-circle-o"></i>三级菜单</Link></li>
+                                                    <li><Link to="/index"><i className="fa fa-circle-o"></i>三级菜单</Link></li>
                                                 </ul>
                                             </li>
                                         </ul>
@@ -180,12 +186,12 @@ const Admin = React.createClass({
                             <small>Version 0.1.0</small>
                         </h1>
                         <ol className="breadcrumb">
-                            <li><a href="#"><i className="fa fa-dashboard"></i> Home</a></li>
+                            <li><Link to="/index"><i className="fa fa-dashboard"></i> Home</Link></li>
                             <li className="active">Dashboard</li>
                         </ol>
                     </section>
 
-                    <section className="content">
+                    <section className="content" style={{minHeight:'500px'}}>
                         <div className="row">
                             <div className="col-md-3 col-sm-6 col-xs-12">
                                 <div className="info-box">
