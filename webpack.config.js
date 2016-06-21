@@ -35,7 +35,7 @@ if (isProduction) plugins.push(new webpack.optimize.UglifyJsPlugin({
 module.exports = {
     entry: {
         app: [path.resolve(__dirname, 'client/src/index.jsx'), 'whatwg-fetch'],
-        vendors: ['react', 'react-router', 'flux', 'react-dom', 'jquery']
+        vendors: ['react', 'react-router', 'flux', 'react-dom', 'jquery', 'moment']
     },
     output: {
         path: DISTDIR,
@@ -49,7 +49,7 @@ module.exports = {
                 exclude: /node_modules/,
                 loader: 'babel',
                 query: {
-                    presets: ['es2015', 'react'],
+                    presets: ['es2015', 'react', 'stage-3'],
                     compact: false
                 }
             },

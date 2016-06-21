@@ -7,6 +7,7 @@
 
 const React = require('react');
 const ReactDOM = require('react-dom');
+const moment = require('moment');
 const Router = require('react-router').Router;
 const Route = require('react-router').Route;
 const hashHistory = require('react-router').hashHistory;
@@ -22,27 +23,15 @@ const Admin = require('./components/Admin.react');
 const NoMatch = require('./components/NoMatch.react');
 const RouteCatcher = require('./components/RouteCatcher.react');
 
+moment.locale('zh-cn');//设置全局国际化
+
 require('./utils/RequireUtils');
 
 
-AdminConfigUtils.initialize(function (configs) {
-    console.log(configs);
-    initMenus(configs);
-    initRoutes(configs);
-});
+const configs = AdminConfigUtils.initialize();
 
-/**
- * 初始化菜单
- */
-function initMenus(configs) {
-
-}
-/**
- * 初始化路由
- */
-function initRoutes(configs) {
-
-}
+console.log(configs);
+console.log(moment().format('llll'));
 
 const app = document.createElement('div');
 document.body.appendChild(app);
