@@ -98,36 +98,31 @@ const Admin = React.createClass({
                         </form>
                         <ul className="sidebar-menu">
                             <li className="header">导航栏</li>
-                            <li>
-                                <Link to='/signin'><i class="fa fa-link"></i> <span>登录页</span></Link>
-                            </li>
-                            <li>
-                                <Link to='/signup'><i class="fa fa-link"></i> <span>注册页</span></Link>
-                            </li>
-                            <li>
-                                <Link to='/forgot'><i class="fa fa-link"></i> <span>忘记密码</span></Link>
-                            </li>
                             <li className="treeview">
                                 <a href="#">
-                                    <i className="fa fa-inbox"></i> <span>其他页面</span>
+                                    <i className="fa fa-inbox"></i>
+                                    <span>其他页面</span>
                                     <i className="fa fa-angle-left pull-right"></i>
                                 </a>
                                 <ul className="treeview-menu">
                                     <li>
-                                        <a href="#"><i className="fa fa-circle-o"></i>报错页面<i
-                                            className="fa fa-angle-left pull-right"></i></a>
+                                        <a href="#">
+                                            <i className="fa fa-circle-o"></i>
+                                            <span>报错页面</span>
+                                            <i className="fa fa-angle-left pull-right"></i>
+                                        </a>
                                         <ul className="treeview-menu">
-                                            <li><a href="demo_page/error/404.html"><i className="fa fa-circle-o"></i>404_fullpage</a>
+                                            <li>
+                                                <Link to='/signin' className="fa fa-circle-o"><i></i>
+                                                    <span>登录页</span></Link>
                                             </li>
                                             <li>
-                                                <a href="demo_page/error/404_inner.html"><i
-                                                    className="fa fa-circle-o"></i>404_inner</a>
-                                            </li>
-                                            <li><a href="demo_page/error/500.html"><i className="fa fa-circle-o"></i>500_fullpage</a>
+                                                <Link to='/signup' className="fa fa-circle-o"><i></i>
+                                                    <span>注册页</span></Link>
                                             </li>
                                             <li>
-                                                <a href="demo_page/error/500_inner.html"><i
-                                                    className="fa fa-circle-o"></i>500_inner</a>
+                                                <Link to='/forgot' className="fa fa-link"><i></i>
+                                                    <span>忘记密码</span></Link>
                                             </li>
                                         </ul>
                                     </li>
@@ -182,7 +177,7 @@ const Admin = React.createClass({
                     <section className="content-header">
                         <h1>
                             Dashboard
-                            <small>Version 2.0</small>
+                            <small>Version 0.1.0</small>
                         </h1>
                         <ol className="breadcrumb">
                             <li><a href="#"><i className="fa fa-dashboard"></i> Home</a></li>
@@ -195,7 +190,7 @@ const Admin = React.createClass({
                             <div className="col-md-3 col-sm-6 col-xs-12">
                                 <div className="info-box">
                                         <span className="info-box-icon bg-aqua"><i
-                                            className="ion ion-ios-gear-outline"></i></span>
+                                            className="fa fa-google"></i></span>
 
                                     <div className="info-box-content">
                                         <span className="info-box-text">CPU Traffic</span>
@@ -206,7 +201,7 @@ const Admin = React.createClass({
                             <div className="col-md-3 col-sm-6 col-xs-12">
                                 <div className="info-box">
                                         <span className="info-box-icon bg-red"><i
-                                            className="fa fa-google-plus"></i></span>
+                                            className="fa fa-google"></i></span>
 
                                     <div className="info-box-content">
                                         <span className="info-box-text">Likes</span>
@@ -220,7 +215,7 @@ const Admin = React.createClass({
                             <div className="col-md-3 col-sm-6 col-xs-12">
                                 <div className="info-box">
                                         <span className="info-box-icon bg-green"><i
-                                            className="ion ion-ios-cart-outline"></i></span>
+                                            className="fa fa-google"></i></span>
 
                                     <div className="info-box-content">
                                         <span className="info-box-text">Sales</span>
@@ -231,7 +226,7 @@ const Admin = React.createClass({
                             <div className="col-md-3 col-sm-6 col-xs-12">
                                 <div className="info-box">
                                         <span className="info-box-icon bg-yellow"><i
-                                            className="ion ion-ios-people-outline"></i></span>
+                                            className="fa fa-google"></i></span>
 
                                     <div className="info-box-content">
                                         <span className="info-box-text">New Members</span>
@@ -245,10 +240,10 @@ const Admin = React.createClass({
 
                 <footer className="main-footer">
                     <div className="pull-right hidden-xs">
-                        <b>Version</b> 2.3.3
+                        <b>Version</b> 0.1.0
                     </div>
-                    <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed
-                        Studio</a>.</strong> All rights
+                    <strong>Copyright &copy; 2016 <a href="https://github.com/yinfxs/ibird">ibird</a>.</strong> All
+                    rights
                     reserved.
                 </footer>
 
