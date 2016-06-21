@@ -39,7 +39,7 @@ server.initialize({
         system(server),
         {
             "label": "业务模块",
-            "code": "business",
+            "code": "business",//模块编码不能重复
             "icon": "suitcase",
             "menu": [
                 {
@@ -48,7 +48,7 @@ server.initialize({
                     "icon": "bars",
                     "items": [
                         {
-                            "code": "dept",
+                            "code": "dept",//菜单编码模块内不能重复
                             "label": "部门档案",
                             "icon": "bell",
                             "model": "dept"

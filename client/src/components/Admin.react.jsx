@@ -8,11 +8,15 @@
 const React = require('react');
 const Link = require('react-router').Link;
 const avatar = require('../publics/images/avatar.jpg');
+const AdminIndex = require('./AdminIndex.react');
 
 const Admin = React.createClass({
     componentDidMount(){
     },
     render(){
+        const module = this.props.params.module;
+        const path = this.props.params.path;
+        let content = (!module && !path) ? <AdminIndex/> : this.props.children;
         return (
             <div className="wrapper">
                 <header className="main-header">
@@ -24,22 +28,20 @@ const Admin = React.createClass({
                         <Link to="/index" className="sidebar-toggle" data-toggle="offcanvas" role="button">
                             <span className="sr-only">Toggle navigation</span>
                         </Link>
+                        {/* 自定义菜单 */}
                         <div className="navbar-custom-menu">
                             <ul className="nav navbar-nav">
                                 <li className="dropdown user user-menu">
                                     <Link to="/index" className="dropdown-toggle" data-toggle="dropdown">
-                                        <img src={avatar} className="user-image"
-                                             alt="User Image"/>
+                                        <img src={avatar} className="user-image" alt="User Image"/>
                                         <span className="hidden-xs">Daniel Yin</span>
                                     </Link>
                                     <ul className="dropdown-menu">
                                         <li className="user-header">
-                                            <img src={avatar} className="img-circle"
-                                                 alt="User Image"/>
-
+                                            <img src={avatar} className="img-circle" alt="User Image"/>
                                             <p>
-                                                Daniel Yin - Web Developer
-                                                <small>Member since Nov. 2012</small>
+                                                <span>Daniel Yin - Web开发者</span>
+                                                <small>注册日期：2012.09</small>
                                             </p>
                                         </li>
                                         <li className="user-footer">
@@ -54,7 +56,6 @@ const Admin = React.createClass({
                                 </li>
                             </ul>
                         </div>
-
                     </nav>
                 </header>
                 <aside className="main-sidebar">
@@ -65,17 +66,17 @@ const Admin = React.createClass({
                             </div>
                             <div className="pull-left info">
                                 <p>Daniel Yin</p>
-                                <Link to="/index"><i className="fa fa-circle text-success"></i> Online</Link>
+                                <Link to="/index"><i className="fa fa-circle text-success"></i> 在线</Link>
                             </div>
                         </div>
                         <form action="#" method="get" className="sidebar-form">
                             <div className="input-group">
                                 <input type="text" name="q" className="form-control" placeholder="搜索..."/>
-              <span className="input-group-btn">
-                <button type="submit" name="search" id="search-btn" className="btn btn-flat"><i
-                    className="fa fa-search"></i>
-                </button>
-              </span>
+                                <span className="input-group-btn">
+                                    <button type="submit" name="search" id="search-btn" className="btn btn-flat">
+                                        <i className="fa fa-search"></i>
+                                    </button>
+                                </span>
                             </div>
                         </form>
                         <ul className="sidebar-menu">
@@ -145,7 +146,7 @@ const Admin = React.createClass({
                                 <ul className="treeview-menu">
                                     <li>
                                         <Link to="/index">
-                                        <i className="fa fa-circle-o"></i> <span>菜单</span></Link>
+                                            <i className="fa fa-circle-o"></i> <span>菜单</span></Link>
                                     </li>
                                     <li>
                                         <Link to="/index">
@@ -167,8 +168,10 @@ const Admin = React.createClass({
                                                     <i className="fa fa-angle-left pull-right"></i>
                                                 </Link>
                                                 <ul className="treeview-menu">
-                                                    <li><Link to="/index"><i className="fa fa-circle-o"></i>三级菜单</Link></li>
-                                                    <li><Link to="/index"><i className="fa fa-circle-o"></i>三级菜单</Link></li>
+                                                    <li><Link to="/index"><i className="fa fa-circle-o"></i>三级菜单</Link>
+                                                    </li>
+                                                    <li><Link to="/index"><i className="fa fa-circle-o"></i>三级菜单</Link>
+                                                    </li>
                                                 </ul>
                                             </li>
                                         </ul>
@@ -182,75 +185,24 @@ const Admin = React.createClass({
                 <div className="content-wrapper">
                     <section className="content-header">
                         <h1>
-                            Dashboard
-                            <small>Version 0.1.0</small>
+                            仪表盘
+                            <small>版本 0.1.0</small>
                         </h1>
                         <ol className="breadcrumb">
-                            <li><Link to="/index"><i className="fa fa-dashboard"></i> Home</Link></li>
-                            <li className="active">Dashboard</li>
+                            <li><Link to="/index"><i className="fa fa-dashboard"></i> 主页</Link></li>
+                            <li className="active">仪表盘</li>
                         </ol>
                     </section>
 
-                    <section className="content" style={{minHeight:'500px'}}>
-                        <div className="row">
-                            <div className="col-md-3 col-sm-6 col-xs-12">
-                                <div className="info-box">
-                                        <span className="info-box-icon bg-aqua"><i
-                                            className="fa fa-google"></i></span>
-
-                                    <div className="info-box-content">
-                                        <span className="info-box-text">CPU Traffic</span>
-                                        <span className="info-box-number">90<small>%</small></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-md-3 col-sm-6 col-xs-12">
-                                <div className="info-box">
-                                        <span className="info-box-icon bg-red"><i
-                                            className="fa fa-google"></i></span>
-
-                                    <div className="info-box-content">
-                                        <span className="info-box-text">Likes</span>
-                                        <span className="info-box-number">41,410</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="clearfix visible-sm-block"></div>
-
-                            <div className="col-md-3 col-sm-6 col-xs-12">
-                                <div className="info-box">
-                                        <span className="info-box-icon bg-green"><i
-                                            className="fa fa-google"></i></span>
-
-                                    <div className="info-box-content">
-                                        <span className="info-box-text">Sales</span>
-                                        <span className="info-box-number">760</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="col-md-3 col-sm-6 col-xs-12">
-                                <div className="info-box">
-                                        <span className="info-box-icon bg-yellow"><i
-                                            className="fa fa-google"></i></span>
-
-                                    <div className="info-box-content">
-                                        <span className="info-box-text">New Members</span>
-                                        <span className="info-box-number">2,000</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
+                    <section className="content" style={{minHeight:'600px'}}>{content}</section>
                 </div>
 
                 <footer className="main-footer">
                     <div className="pull-right hidden-xs">
                         <b>Version</b> 0.1.0
                     </div>
-                    <strong>Copyright &copy; 2016 <a href="https://github.com/yinfxs/ibird">ibird</a>.</strong> All
-                    rights
-                    reserved.
+                    <strong>&copy; 2016 <a href="https://github.com/yinfxs/ibird" target="__blank">ibird</a>.</strong>
+                    版权所有
                 </footer>
 
             </div>

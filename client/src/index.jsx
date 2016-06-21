@@ -20,9 +20,9 @@ const Signup = require('./components/Signup.react');
 const Forgot = require('./components/Forgot.react');
 const Admin = require('./components/Admin.react');
 const NoMatch = require('./components/NoMatch.react');
+const RouteCatcher = require('./components/RouteCatcher.react');
 
 require('./utils/RequireUtils');
-
 
 
 AdminConfigUtils.initialize(function (configs) {
@@ -53,7 +53,9 @@ ReactDOM.render((
             <Route path="signin" component={Signin}/>
             <Route path="signup" component={Signup}/>
             <Route path="forgot" component={Forgot}/>
-            <Route path="index" component={Admin}/>
+            <Route path="index" component={Admin}>
+                <Route path=":module/:path" component={RouteCatcher}/>
+            </Route>
             <Route path="*" component={NoMatch}/>
         </Route>
     </Router>
