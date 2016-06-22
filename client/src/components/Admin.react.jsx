@@ -14,6 +14,7 @@ const AdminConfigUtils = require('../utils/AdminConfigUtils');
 const Admin = React.createClass({
     createMenus() {
         console.log(AdminConfigUtils.configs);
+
     },
     componentDidMount(){
         console.log('componentDidMount');
@@ -171,14 +172,7 @@ const Admin = React.createClass({
                                                 <Link to="/index">
                                                     <i className="fa fa-circle-o"></i>
                                                     <span>三级菜单</span>
-                                                    <i className="fa fa-angle-left pull-right"></i>
                                                 </Link>
-                                                <ul className="treeview-menu">
-                                                    <li><Link to="/index"><i className="fa fa-circle-o"></i>三级菜单</Link>
-                                                    </li>
-                                                    <li><Link to="/index"><i className="fa fa-circle-o"></i>三级菜单</Link>
-                                                    </li>
-                                                </ul>
                                             </li>
                                         </ul>
                                     </li>

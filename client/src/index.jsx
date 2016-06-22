@@ -12,7 +12,6 @@ const Router = require('react-router').Router;
 const Route = require('react-router').Route;
 const hashHistory = require('react-router').hashHistory;
 
-const AdminConfigUtils = require('./utils/AdminConfigUtils');
 const MyButtonController = require('./components/MyButtonController');
 
 const App = require('./components/App.react');
@@ -27,11 +26,6 @@ moment.locale('zh-cn');//设置全局国际化
 
 require('./utils/RequireUtils');
 
-
-const configs = AdminConfigUtils.initialize();
-
-console.log(configs);
-console.log(moment().format('llll'));
 
 const app = document.createElement('div');
 document.body.appendChild(app);

@@ -10,10 +10,9 @@ const RouteUtils = require('./RouteUtils');
 /**
  * 获取服务端配置项
  */
-module.exports.initialize = async function initialize() {
-    const result = await fetch(RouteUtils.ADMIN_CONFIG);
-
-    module.exports.configs = result;
-    console.log(result);
-    return result;
+module.exports.initialize = function initialize() {
+    const result = fetch(RouteUtils.ADMIN_CONFIG);
+    const json = result.json();
+    module.exports.configs = json;
+    return json;
 };

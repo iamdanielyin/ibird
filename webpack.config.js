@@ -34,7 +34,7 @@ if (isProduction) plugins.push(new webpack.optimize.UglifyJsPlugin({
 
 module.exports = {
     entry: {
-        app: [path.resolve(__dirname, 'client/src/index.jsx'), 'whatwg-fetch'],
+        app: ['whatwg-fetch', path.resolve(__dirname, 'client/src/index.jsx')],
         vendors: ['react', 'react-router', 'flux', 'react-dom', 'jquery', 'moment']
     },
     output: {
