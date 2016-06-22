@@ -8,5 +8,7 @@
 const prefix = location.protocol + '//' + location.host;
 
 module.exports = {
-    ADMIN_CONFIG: prefix + '/adminConfig'
+    CONFIG_PUBLIC: prefix + '/config/public',
+    CONFIG_MENU: prefix + '/config/menu',
+    CONFIG_SCHEMA: prefix + '/config/schema'
 };

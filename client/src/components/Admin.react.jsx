@@ -9,11 +9,10 @@ const React = require('react');
 const Link = require('react-router').Link;
 const avatar = require('../publics/images/avatar.jpg');
 const AdminIndex = require('./AdminIndex.react');
-const AdminConfigUtils = require('../utils/AdminConfigUtils');
 
 const Admin = React.createClass({
     createMenus() {
-        console.log(AdminConfigUtils.configs);
+        // console.log(AdminConfigUtils.configs);
 
     },
     componentDidMount(){
