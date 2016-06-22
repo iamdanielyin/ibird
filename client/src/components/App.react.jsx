@@ -23,7 +23,8 @@ const App = React.createClass({
             }).then(function (json) {
                 //TODO C_P代表config_public的意思
                 localStorage.setItem('C_P', CodeUtils.encodeBase64(JSON.stringify(json), 5));
-                return self.context.router.push('/signin');
+                const currPathname = self.props.location.pathname;
+                if (currPathname == '/' || currPathname.startsWith('/index')) return self.context.router.push('/signin');
             });
         }
     },

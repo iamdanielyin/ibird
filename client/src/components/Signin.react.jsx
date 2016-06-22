@@ -27,7 +27,7 @@ const Signin = React.createClass({
         });
         $('#signin-remeber').on('ifToggled', this._onRemeberChange);
         this.refs.username.value = localStorage.getItem('username');
-        toastr.info('请先登录', null, ToastrUtils.defaultOptions);
+        toastr.info('欢迎来到登录界面', null, ToastrUtils.defaultOptions);
     },
     _onValidate(){
         const self = this;
@@ -82,7 +82,7 @@ const Signin = React.createClass({
                             </div>
                             <div className="row">
                                 <div className="col-xs-8">
-                                    <div className="checkbox icheck" ref="remeber">
+                                    <div className="checkbox icheck">
                                         <label>
                                             <input type="checkbox" id="signin-remeber"/>
                                             <span>记住我</span>

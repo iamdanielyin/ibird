@@ -33,7 +33,8 @@ server.initialize({
     },
     "admins": [
         "13538828221@qq.com",
-        "yinfxs@gmail.com"
+        "yinfxs@gmail.com",
+        "yinfxs"
     ],
     "modules": [
         system(server),
