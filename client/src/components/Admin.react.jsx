@@ -6,6 +6,7 @@
 'use strict';
 
 const React = require('react');
+const moment = require('moment');
 const Link = require('react-router').Link;
 const avatar = require('../publics/images/avatar.jpg');
 const AdminIndex = require('./AdminIndex.react');
@@ -17,18 +18,40 @@ const Admin = React.createClass({
         router: React.PropTypes.object
     },
     getInitialState(){
-        const state = {};
+        const state = {profile: {}, menu: {}};
         const token = localStorage.getItem('access_token');
         if (token) state.token = JSON.parse(token);
         return state;
     },
+    getUserProfile(access_token){
+        fetch(RouteUtils.PROFILE, {
+            headers: {
+                "access_token": access_token
+            }
+        }).then(function (res) {
+            return res.json();
+        }).then(function (json) {
+            if (json.err) return toastr.error(json.err.message, null, ToastrUtils.defaultOptions);
+            this.state.profile = json;
+        }.bind(this));
+    },
     createMenus() {
-        // console.log(AdminConfigUtils.configs);
-
+        const self = this;
+        fetch(RouteUtils.CONFIG_MENU, {
+            headers: {
+                "access_token": self.state.token.access_token
+            }
+        }).then(function (res) {
+            return res.json();
+        }).then(function (json) {
+            if (json.err) return toastr.error(json.err.message, null, ToastrUtils.defaultOptions);
+            if (self.isMounted()) self.state.menu = json;
+        });
     },
     componentDidMount(){
-        this.createMenus();
         if (!localStorage.getItem('access_token')) return this.context.router.push('/signin');
+        this.createMenus();
+        this.getUserProfile(this.state.token.access_token);
     },
     _onLogout(){
         const self = this;
@@ -75,7 +98,7 @@ const Admin = React.createClass({
                                             <img src={avatar} className="img-circle" alt="User Image"/>
                                             <p>
                                                 <span>{username} - Web开发者</span>
-                                                <small>注册日期：2012.09</small>
+                                                <small>注册日期：{this.state.profile.ts}</small>
                                             </p>
                                         </li>
                                         <li className="user-footer">
@@ -117,6 +140,7 @@ const Admin = React.createClass({
                         </form>
                         <ul className="sidebar-menu">
                             <li className="header">导航栏</li>
+                            <li>{123 + '' + JSON.stringify(this.state.menu)}</li>
                             <li className="treeview">
                                 <Link to="/index">
                                     <i className="fa fa-inbox"></i>
