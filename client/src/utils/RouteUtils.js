@@ -12,7 +12,8 @@ module.exports = {
     CONFIG_MENU: prefix + '/config/menu',
     CONFIG_SCHEMA: prefix + '/config/schema',
     SIGNIN: prefix + '/system/signin',
-    SIGNUP: prefix + '/system/signup',
+    SIGNUP: prefix + '/system/user',
     LOGOUT: prefix + '/system/logout',
-    FORGOT: prefix + '/system/forgot'
+    FORGOT: prefix + '/system/forgot',
+    PROFILE: prefix + '/system/profile'
 };

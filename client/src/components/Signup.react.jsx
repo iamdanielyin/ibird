@@ -21,7 +21,7 @@ const Signup = React.createClass({
             <div className="register-page">
                 <div className="register-box">
                     <div className="register-logo">
-                        <Link to='/signin'>i<b>bird</b></Link>
+                        <Link to='/signup'>i<b>bird</b></Link>
                     </div>
 
                     <div className="register-box-body">
