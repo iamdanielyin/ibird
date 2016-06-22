@@ -20,7 +20,8 @@ const plugins = [
     new webpack.ProvidePlugin({
         $: "jquery",
         jQuery: "jquery",
-        "window.jQuery": "jquery"
+        "window.jQuery": "jquery",
+        toastr: "toastr"
     }),
     new webpack.IgnorePlugin(/(AdminLTE|bootstrap|jquery.slimscroll.min).js$/),
     new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors' + (isProduction ? '.min' : '.') + '.js')
@@ -82,6 +83,9 @@ module.exports = {
     },
     plugins: plugins,
     resolve: {
-        extensions: ['', '.js', '.jsx']
+        extensions: ['', '.js', '.jsx'],
+        alias: {
+            toastr: path.resolve(__dirname, 'client/src/publics/plugins/toastr/toastr.min.js')
+        }
     }
 };

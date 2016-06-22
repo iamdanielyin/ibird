@@ -9,20 +9,48 @@ const React = require('react');
 const Link = require('react-router').Link;
 const avatar = require('../publics/images/avatar.jpg');
 const AdminIndex = require('./AdminIndex.react');
+const RouteUtils = require('../utils/RouteUtils');
+const ToastrUtils = require('../utils/ToastrUtils');
 
 const Admin = React.createClass({
+    contextTypes: {
+        router: React.PropTypes.object
+    },
+    getInitialState(){
+        const state = {};
+        const token = localStorage.getItem('access_token');
+        if (token) state.token = JSON.parse(token);
+        return state;
+    },
     createMenus() {
         // console.log(AdminConfigUtils.configs);
 
     },
     componentDidMount(){
-        console.log('componentDidMount');
         this.createMenus();
+        if (!localStorage.getItem('access_token')) return this.context.router.push('/signin');
+    },
+    _onLogout(){
+        const self = this;
+        fetch(RouteUtils.LOGOUT, {
+            method: "POST",
+            headers: {
+                "access_token": self.state.token.access_token
+            }
+        }).then(function (res) {
+            return res.json();
+        }).then(function (json) {
+            if (json.err) return toastr.error(json.err.message, null, ToastrUtils.defaultOptions);
+            localStorage.removeItem('access_token');
+            return self.context.router.push('/signin');
+        });
     },
     render(){
+        const self = this;
         const module = this.props.params.module;
         const path = this.props.params.path;
         let content = (!module && !path) ? <AdminIndex/> : this.props.children;
+        const username = localStorage.getItem('username');
         return (
             <div className="wrapper">
                 <header className="main-header">
@@ -40,13 +68,13 @@ const Admin = React.createClass({
                                 <li className="dropdown user user-menu">
                                     <Link to="/index" className="dropdown-toggle" data-toggle="dropdown">
                                         <img src={avatar} className="user-image" alt="User Image"/>
-                                        <span className="hidden-xs">Daniel Yin</span>
+                                        <span className="hidden-xs">{username}</span>
                                     </Link>
                                     <ul className="dropdown-menu">
                                         <li className="user-header">
                                             <img src={avatar} className="img-circle" alt="User Image"/>
                                             <p>
-                                                <span>Daniel Yin - Web开发者</span>
+                                                <span>{username} - Web开发者</span>
                                                 <small>注册日期：2012.09</small>
                                             </p>
                                         </li>
@@ -55,7 +83,9 @@ const Admin = React.createClass({
                                                 <Link to="/index" className="btn btn-default btn-flat">个人详情</Link>
                                             </div>
                                             <div className="pull-right">
-                                                <Link to="/index" className="btn btn-default btn-flat">退出</Link>
+                                                <button onClick={self._onLogout} className="btn btn-default btn-flat">
+                                                    退出
+                                                </button>
                                             </div>
                                         </li>
                                     </ul>
@@ -71,7 +101,7 @@ const Admin = React.createClass({
                                 <img src={avatar} className="img-circle" alt="User Image"/>
                             </div>
                             <div className="pull-left info">
-                                <p>Daniel Yin</p>
+                                <p>{username}</p>
                                 <Link to="/index"><i className="fa fa-circle text-success"></i> 在线</Link>
                             </div>
                         </div>

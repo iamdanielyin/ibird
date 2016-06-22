@@ -17,6 +17,7 @@ require('../publics/lib/bootstrap/js/bootstrap');
 require('../publics/lib/adminlte/js/AdminLTE');
 require('../publics/css/index.less');
 require('../publics/plugins/iCheck/blue.css');
+require('../publics/plugins/toastr/toastr.css');
 
 require('whatwg-fetch');
 require('jquery-slimscroll');
