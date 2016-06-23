@@ -85,7 +85,10 @@ module.exports = {
     resolve: {
         extensions: ['', '.js', '.jsx'],
         alias: {
-            toastr: path.resolve(__dirname, 'client/src/publics/plugins/toastr/toastr.min.js')
+            toastr: path.resolve(__dirname, 'client/src/publics/plugins/toastr/toastr.min.js'),
+            icheck: path.resolve(__dirname, 'client/src/publics/plugins/iCheck/icheck.js'),
+            datatables: path.resolve(__dirname, 'client/src/publics/plugins/datatables/jquery.dataTables.min.js'),
+            dataTablesBootstrap: path.resolve(__dirname, 'client/src/publics/plugins/datatables/dataTables.bootstrap.min.js')
         }
     }
 };
