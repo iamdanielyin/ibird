@@ -10,6 +10,7 @@ const Link = require('react-router').Link;
 const util = require('util');
 const RouteUtils = require('../utils/RouteUtils');
 const CodeUtils = require('../utils/CodeUtils');
+const ToastrUtils = require('../utils/ToastrUtils');
 
 const App = React.createClass({
     contextTypes: {
@@ -17,16 +18,29 @@ const App = React.createClass({
     },
     componentDidMount() {
         const self = this;
-        if (!localStorage.getItem('access_token')) {
-            fetch(RouteUtils.CONFIG_PUBLIC).then(function (res) {
+        const currPathname = self.props.location.pathname;
+
+        fetch(RouteUtils.CONFIG_PUBLIC).then(function (res) {
+            return res.json();
+        }).then(function (json) {
+            //TODO C_P代表config_public的意思
+            localStorage.setItem('C_P', CodeUtils.encodeBase64(JSON.stringify(json), 5));
+            //如果没有缓存token直接跳转到登录
+            if (!localStorage.getItem('access_token')) return self.context.router.push('/signin');
+            //如果已有token，则鉴定token是否过期
+            const token = JSON.parse(localStorage.getItem('access_token'));
+            fetch(RouteUtils.AUTHENTICATION, {
+                headers: {
+                    "access_token": token.access_token
+                }
+            }).then(function (res) {
                 return res.json();
             }).then(function (json) {
-                //TODO C_P代表config_public的意思
-                localStorage.setItem('C_P', CodeUtils.encodeBase64(JSON.stringify(json), 5));
-                const currPathname = self.props.location.pathname;
-                if (currPathname == '/' || currPathname.startsWith('/index')) return self.context.router.push('/signin');
+                if (!json.err && !currPathname.startsWith('/index')) return self.context.router.push('/index');
+                toastr.error(json.err.message, null, ToastrUtils.defaultOptions);
+                return self.context.router.push('/signin');
             });
-        }
+        });
     },
     render(){
         return <div className="mainContent">

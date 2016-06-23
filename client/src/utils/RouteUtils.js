@@ -15,5 +15,6 @@ module.exports = {
     SIGNUP: prefix + '/system/user',
     LOGOUT: prefix + '/system/logout',
     FORGOT: prefix + '/system/forgot',
-    PROFILE: prefix + '/system/profile'
+    PROFILE: prefix + '/system/profile',
+    AUTHENTICATION: prefix + '/system/authentication'
 };

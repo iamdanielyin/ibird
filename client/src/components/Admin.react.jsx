@@ -50,8 +50,8 @@ const Admin = React.createClass({
     },
     componentDidMount(){
         if (!localStorage.getItem('access_token')) return this.context.router.push('/signin');
-        this.createMenus();
-        this.getUserProfile(this.state.token.access_token);
+        // this.createMenus();
+        // this.getUserProfile(this.state.token.access_token);
     },
     _onLogout(){
         const self = this;
