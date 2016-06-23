@@ -32,7 +32,7 @@ const Admin = React.createClass({
             return res.json();
         }).then(function (json) {
             if (json.err) return toastr.error(json.err.message, null, ToastrUtils.defaultOptions);
-            this.state.profile = json;
+            this.setState({profile: json});
         }.bind(this));
     },
     createMenus() {
@@ -45,13 +45,13 @@ const Admin = React.createClass({
             return res.json();
         }).then(function (json) {
             if (json.err) return toastr.error(json.err.message, null, ToastrUtils.defaultOptions);
-            if (self.isMounted()) self.state.menu = json;
+            if (self.isMounted()) self.setState({menu: json});
         });
     },
     componentDidMount(){
         if (!localStorage.getItem('access_token')) return this.context.router.push('/signin');
         // this.createMenus();
-        // this.getUserProfile(this.state.token.access_token);
+        this.getUserProfile(this.state.token.access_token);
     },
     _onLogout(){
         const self = this;
@@ -98,7 +98,7 @@ const Admin = React.createClass({
                                             <img src={avatar} className="img-circle" alt="User Image"/>
                                             <p>
                                                 <span>{username} - Web开发者</span>
-                                                <small>注册日期：{this.state.profile.ts}</small>
+                                                <small>注册日期：{moment(this.state.profile.ts,'x').format('llll')}</small>
                                             </p>
                                         </li>
                                         <li className="user-footer">

@@ -36,9 +36,13 @@ const App = React.createClass({
             }).then(function (res) {
                 return res.json();
             }).then(function (json) {
-                if (!json.err && !currPathname.startsWith('/index')) return self.context.router.push('/index');
-                toastr.error(json.err.message, null, ToastrUtils.defaultOptions);
-                return self.context.router.push('/signin');
+                //如果鉴权异常，提示并跳转到登录
+                if (json.err) {
+                    toastr.error(json.err.message, null, ToastrUtils.defaultOptions);
+                    return self.context.router.push('/signin');
+                }
+                //如果无异常，不在主页的跳转到主页
+                if (!currPathname.startsWith('/index')) return self.context.router.push('/index');
             });
         });
     },
