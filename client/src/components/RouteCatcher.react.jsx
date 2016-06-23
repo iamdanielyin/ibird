@@ -8,19 +8,23 @@
 
 const React = require('react');
 const AdminIndex = require('./AdminIndex.react');
+const AdminTable = require('./AdminTable.react');
 
 const RouteCatcher = React.createClass({
+    contextTypes: {
+        router: React.PropTypes.object
+    },
     componentDidMount(){
-        console.log('RouteCatcher...');
+        // console.log('RouteCatcher...');
     },
     render(){
-        const module = this.props.params.module;
-        const path = this.props.params.path;
-        console.log('模块编码 =', module, '路由指向 =', path);
-        return (<div>
-            <h3>{'模块编码 = ' + module}</h3>
-            <h3>{'路由指向 = ' + path}</h3>
-        </div>);
+        const props = this.props;
+        const module = props.params.module;
+        const path = props.params.path;
+        const query = props.location.query;
+        return (
+            <AdminTable module={module} path={path} model={query.m}/>
+        );
     }
 });
 

@@ -83,7 +83,7 @@ const Admin = React.createClass({
                         {m.items.map(function (item) {
                             return (
                                 <li key={"/"+moduleCode+"/"+item.code}>
-                                    <Link to={"/index/"+moduleCode+"/"+item.code}>
+                                    <Link to={{pathname:"/index/"+moduleCode+"/"+item.code,query:{m:item.model}}}>
                                         <i className={"fa fa-"+item.icon}></i>
                                         <span>{item.label}</span>
                                     </Link>
