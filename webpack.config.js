@@ -40,8 +40,8 @@ module.exports = {
     },
     output: {
         path: DISTDIR,
-        filename: '[name]' + (isProduction ? '.min' : '.') + '.js',
-        publicPath: 'http://localhost:3000/'
+        filename: '[name]' + (isProduction ? '.min' : '.') + '.js'
+        //, publicPath: '/assets/'
     },
     module: {
         loaders: [
