@@ -21,9 +21,10 @@ const Admin = React.createClass({
         const state = {profile: {}, menu: {}};
         const token = localStorage.getItem('access_token');
         if (token) state.token = JSON.parse(token);
+        state.access_token = token.access_token;
         return state;
     },
-    getUserProfile(access_token){
+    getProfile(access_token){
         fetch(RouteUtils.PROFILE, {
             headers: {
                 "access_token": access_token
@@ -35,11 +36,11 @@ const Admin = React.createClass({
             this.setState({profile: json});
         }.bind(this));
     },
-    createMenus() {
+    getMenu() {
         const self = this;
         fetch(RouteUtils.CONFIG_MENU, {
             headers: {
-                "access_token": self.state.token.access_token
+                "access_token": self.state.access_token
             }
         }).then(function (res) {
             return res.json();
@@ -50,15 +51,15 @@ const Admin = React.createClass({
     },
     componentDidMount(){
         if (!localStorage.getItem('access_token')) return this.context.router.push('/signin');
-        // this.createMenus();
-        this.getUserProfile(this.state.token.access_token);
+        this.getMenu();
+        this.getProfile(this.state.access_token);
     },
     _onLogout(){
         const self = this;
         fetch(RouteUtils.LOGOUT, {
             method: "POST",
             headers: {
-                "access_token": self.state.token.access_token
+                "access_token": self.state.access_token
             }
         }).then(function (res) {
             return res.json();
@@ -98,7 +99,7 @@ const Admin = React.createClass({
                                             <img src={avatar} className="img-circle" alt="User Image"/>
                                             <p>
                                                 <span>{username} - Web开发者</span>
-                                                <small>注册日期：{moment(this.state.profile.ts,'x').format('llll')}</small>
+                                                <small>注册日期：{moment(this.state.profile.ts, 'x').format('llll')}</small>
                                             </p>
                                         </li>
                                         <li className="user-footer">
