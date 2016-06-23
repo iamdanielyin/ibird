@@ -16,9 +16,11 @@ const RouteCatcher = React.createClass({
     render(){
         const module = this.props.params.module;
         const path = this.props.params.path;
-        let content = <AdminIndex/>;
         console.log('模块编码 =', module, '路由指向 =', path);
-        return content;
+        return (<div>
+            <h3>{'模块编码 = ' + module}</h3>
+            <h3>{'路由指向 = ' + path}</h3>
+        </div>);
     }
 });
 
