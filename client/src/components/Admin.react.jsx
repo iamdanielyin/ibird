@@ -18,16 +18,17 @@ const Admin = React.createClass({
         router: React.PropTypes.object
     },
     getInitialState(){
-        const state = {profile: {}, menu: {}};
-        const token = localStorage.getItem('access_token');
-        if (token) state.token = JSON.parse(token);
+        const state = {profile: {}, menu: <li></li>}
+        let token = localStorage.getItem('access_token');
+        if (token) token = JSON.parse(token);
+        state.token = token;
         state.access_token = token.access_token;
         return state;
     },
-    getProfile(access_token){
+    getProfile(){
         fetch(RouteUtils.PROFILE, {
             headers: {
-                "access_token": access_token
+                "access_token": this.state.access_token
             }
         }).then(function (res) {
             return res.json();
@@ -40,19 +41,66 @@ const Admin = React.createClass({
         const self = this;
         fetch(RouteUtils.CONFIG_MENU, {
             headers: {
-                "access_token": self.state.access_token
+                "access_token": this.state.access_token
             }
         }).then(function (res) {
             return res.json();
         }).then(function (json) {
             if (json.err) return toastr.error(json.err.message, null, ToastrUtils.defaultOptions);
-            if (self.isMounted()) self.setState({menu: json});
+            self.setState({menu: self.createMenu(json)});
         });
+    },
+    createMenu(modules){
+        const self = this;
+        const menu = [];
+        modules.map(function (module) {
+            if (!module || !module.menu) return;
+            menu.push(
+                <li className="treeview" key={"/"+module.code}>
+                    <Link to={"/"+module.code}>
+                        <i className={"fa fa-"+module.icon}></i> <span>{module.label}</span>
+                        <i className="fa fa-angle-left pull-right"></i>
+                    </Link>
+                    <ul className="treeview-menu">
+                        {self.createMenuItems(module.menu, module.code)}
+                    </ul>
+                </li>
+            );
+        });
+        return menu;
+    },
+    createMenuItems(menu, moduleCode){
+        const items = [];
+        menu.map(function (m) {
+            const content = (
+                <li key={"/"+moduleCode+"/"+m.code}>
+                    <Link to={"/"+moduleCode+"/"+m.code}>
+                        <i className={"fa fa-"+m.icon}></i>
+                        <span>{m.label}</span>
+                        <i className="fa fa-angle-left pull-right"></i>
+                    </Link>
+                    <ul className="treeview-menu">
+                        {m.items.map(function (item) {
+                            return (
+                                <li key={"/"+moduleCode+"/"+item.code}>
+                                    <Link to={"/"+moduleCode+"/"+item.code}>
+                                        <i className={"fa fa-"+item.icon}></i>
+                                        <span>{item.label}</span>
+                                    </Link>
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </li>
+            );
+            items.push(content);
+        });
+        return items;
     },
     componentDidMount(){
         if (!localStorage.getItem('access_token')) return this.context.router.push('/signin');
         this.getMenu();
-        this.getProfile(this.state.access_token);
+        this.getProfile();
     },
     _onLogout(){
         const self = this;
@@ -141,97 +189,7 @@ const Admin = React.createClass({
                         </form>
                         <ul className="sidebar-menu">
                             <li className="header">导航栏</li>
-                            <li>{123 + '' + JSON.stringify(this.state.menu)}</li>
-                            <li className="treeview">
-                                <Link to="/index">
-                                    <i className="fa fa-inbox"></i>
-                                    <span>其他页面</span>
-                                    <i className="fa fa-angle-left pull-right"></i>
-                                </Link>
-                                <ul className="treeview-menu">
-                                    <li>
-                                        <Link to="/index">
-                                            <i className="fa fa-circle-o"></i>
-                                            <span>报错页面</span>
-                                            <i className="fa fa-angle-left pull-right"></i>
-                                        </Link>
-                                        <ul className="treeview-menu">
-                                            <li>
-                                                <Link to='/signin' className="fa fa-circle-o"><i></i>
-                                                    <span>登录页</span></Link>
-                                            </li>
-                                            <li>
-                                                <Link to='/signup' className="fa fa-circle-o"><i></i>
-                                                    <span>注册页</span></Link>
-                                            </li>
-                                            <li>
-                                                <Link to='/forgot' className="fa fa-link"><i></i>
-                                                    <span>忘记密码</span></Link>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <Link to="/index">
-                                            <i className="fa fa-circle-o"></i>
-                                            <span>注册页面</span>
-                                            <i className="fa fa-angle-left pull-right"></i>
-                                        </Link>
-                                        <ul className="treeview-menu">
-                                            <li>
-                                                <Link to="/index">
-                                                    <i className="fa fa-circle-o"></i>
-                                                    <span>三步注册</span>
-                                                </Link>
-                                            </li>
-                                            <li>
-                                                <Link to="/index">
-                                                    <i className="fa fa-circle-o"></i>
-                                                    <span>全屏注册登录</span>
-                                                </Link>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <Link to="/index">
-                                            <i className="fa fa-circle-o"></i>
-                                            <span>找回密码</span>
-                                        </Link>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li className="treeview">
-                                <Link to="/index">
-                                    <i className="fa fa-share"></i> <span>多级菜单</span>
-                                    <i className="fa fa-angle-left pull-right"></i>
-                                </Link>
-                                <ul className="treeview-menu">
-                                    <li>
-                                        <Link to="/index">
-                                            <i className="fa fa-circle-o"></i> <span>菜单</span></Link>
-                                    </li>
-                                    <li>
-                                        <Link to="/index">
-                                            <i className="fa fa-circle-o"></i>
-                                            <span>二级菜单</span>
-                                            <i className="fa fa-angle-left pull-right"></i>
-                                        </Link>
-                                        <ul className="treeview-menu">
-                                            <li>
-                                                <Link to="/index">
-                                                    <i className="fa fa-circle-o"></i>
-                                                    <span>三级菜单</span>
-                                                </Link>
-                                            </li>
-                                            <li>
-                                                <Link to="/index">
-                                                    <i className="fa fa-circle-o"></i>
-                                                    <span>三级菜单</span>
-                                                </Link>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
+                            {this.state.menu}
                         </ul>
                     </section>
                 </aside>
