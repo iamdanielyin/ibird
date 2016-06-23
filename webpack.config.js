@@ -40,7 +40,8 @@ module.exports = {
     },
     output: {
         path: DISTDIR,
-        filename: '[name]' + (isProduction ? '.min' : '.') + '.js'
+        filename: '[name]' + (isProduction ? '.min' : '.') + '.js',
+        publicPath: 'http://localhost:3000/'
     },
     module: {
         loaders: [
@@ -61,6 +62,10 @@ module.exports = {
             //     include: SOURCEDIR, exclude: /node_modules/,
             //     loader: "url-loader?limit=10000&minetype=application/font-woff"
             // },
+            // {
+            //     test: /\.(woff|woff2|eot|ttf|svg)$/,
+            //     loader: 'file-loader?name="[name]-[hash].[ext]"'
+            // },
             {
                 test: /\.(ttf|eot|svg|woff|woff2)?(\?\S*)?$/,
                 include: SOURCEDIR,
@@ -74,7 +79,7 @@ module.exports = {
             //     loader: "url?limit=8192"
             // },
             {
-                test: /\.(jpg|jpeg|png|woff|woff2|eot|ttf|svg|gif)$/,
+                test: /\.(jpg|jpeg|png|gif)$/,
                 include: SOURCEDIR,
                 exclude: /node_modules/,
                 loader: 'file'

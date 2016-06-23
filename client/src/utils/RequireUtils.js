@@ -25,4 +25,15 @@ require('jquery-slimscroll');
 require('icheck');
 require('dataTablesBootstrap');
 
+// require('../publics/fonts/FontAwesome.otf');
+// require('../publics/fonts/fontawesome-webfont.eot');
+// require('../publics/fonts/fontawesome-webfont.svg');
+// require('../publics/fonts/fontawesome-webfont.ttf');
+// require('../publics/fonts/fontawesome-webfont.woff');
+// require('../publics/fonts/fontawesome-webfont.woff2');
+// require('../publics/fonts/glyphicons-halflings-regular.eot');
+// require('../publics/fonts/glyphicons-halflings-regular.svg');
+// require('../publics/fonts/glyphicons-halflings-regular.ttf');
+// require('../publics/fonts/glyphicons-halflings-regular.woff');
+// require('../publics/fonts/glyphicons-halflings-regular.woff2');
 
