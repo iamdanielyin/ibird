@@ -57,10 +57,10 @@ const Admin = React.createClass({
             if (!module || !module.menu) return;
             menu.push(
                 <li className="treeview" key={"/"+module.code}>
-                    <Link to={"/"+module.code}>
+                    <a href="#">
                         <i className={"fa fa-"+module.icon}></i> <span>{module.label}</span>
                         <i className="fa fa-angle-left pull-right"></i>
-                    </Link>
+                    </a>
                     <ul className="treeview-menu">
                         {self.createMenuItems(module.menu, module.code)}
                     </ul>
@@ -74,16 +74,16 @@ const Admin = React.createClass({
         menu.map(function (m) {
             const content = (
                 <li key={"/"+moduleCode+"/"+m.code}>
-                    <Link to={"/"+moduleCode+"/"+m.code}>
+                    <a href="#">
                         <i className={"fa fa-"+m.icon}></i>
                         <span>{m.label}</span>
                         <i className="fa fa-angle-left pull-right"></i>
-                    </Link>
+                    </a>
                     <ul className="treeview-menu">
                         {m.items.map(function (item) {
                             return (
                                 <li key={"/"+moduleCode+"/"+item.code}>
-                                    <Link to={"/"+moduleCode+"/"+item.code}>
+                                    <Link to={"/index/"+moduleCode+"/"+item.code}>
                                         <i className={"fa fa-"+item.icon}></i>
                                         <span>{item.label}</span>
                                     </Link>
