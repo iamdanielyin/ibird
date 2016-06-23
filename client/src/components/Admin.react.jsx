@@ -11,6 +11,7 @@ const Link = require('react-router').Link;
 const avatar = require('../publics/images/avatar.jpg');
 const AdminIndex = require('./AdminIndex.react');
 const RouteUtils = require('../utils/RouteUtils');
+const CodeUtils = require('../utils/CodeUtils');
 const ToastrUtils = require('../utils/ToastrUtils');
 
 const Admin = React.createClass({
@@ -37,9 +38,9 @@ const Admin = React.createClass({
             this.setState({profile: json});
         }.bind(this));
     },
-    getMenu() {
+    getPrivateConfig() {
         const self = this;
-        fetch(RouteUtils.CONFIG_MENU, {
+        fetch(RouteUtils.CONFIG_PRIVATE, {
             headers: {
                 "access_token": this.state.access_token
             }
@@ -47,6 +48,8 @@ const Admin = React.createClass({
             return res.json();
         }).then(function (json) {
             if (json.err) return toastr.error(json.err.message, null, ToastrUtils.defaultOptions);
+            //TODO C_V代表config_private的意思
+            localStorage.setItem('C_V', CodeUtils.encodeBase64(JSON.stringify(json), 5));
             self.setState({menu: self.createMenu(json)});
         });
     },
@@ -99,7 +102,7 @@ const Admin = React.createClass({
     },
     componentDidMount(){
         if (!localStorage.getItem('access_token')) return this.context.router.push('/signin');
-        this.getMenu();
+        this.getPrivateConfig();
         this.getProfile();
     },
     _onLogout(){

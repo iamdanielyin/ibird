@@ -9,12 +9,12 @@ const prefix = location.protocol + '//' + location.host;
 
 module.exports = {
     CONFIG_PUBLIC: prefix + '/config/public',
-    CONFIG_MENU: prefix + '/config/menu',
-    CONFIG_SCHEMA: prefix + '/config/schema',
+    CONFIG_PRIVATE: prefix + '/config/private',
     SIGNIN: prefix + '/system/signin',
     SIGNUP: prefix + '/system/user',
     LOGOUT: prefix + '/system/logout',
     FORGOT: prefix + '/system/forgot',
     PROFILE: prefix + '/system/profile',
-    AUTHENTICATION: prefix + '/system/authentication'
+    AUTHENTICATION: prefix + '/system/authentication',
+    CUSTOM: (part) => (prefix + part)
 };
