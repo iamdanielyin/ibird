@@ -81,16 +81,39 @@ const AdminTable = React.createClass({
         });
     },
     createTableHeader(){
+        const self = this;
         const schema = this.props.schema;
+        const dinfo = this.state.dinfo;
         const obj = schema.obj;
         const colsTh = [], colsOrder = [], columns = [];
         Object.keys(obj).map(function (key) {
             if (!obj[key] || !obj[key].label) return;
-            colsTh.push(<th key={key}>{obj[key].label}</th>);
+            console.log(dinfo.sort);
+            let sortIconDOM = null;
+            if (key == dinfo.sort)
+                sortIconDOM = <i data-code={key} className="fa fa-sort-asc" aria-hidden="true"></i>;
+            else if ('-' + key == dinfo.sort)
+                sortIconDOM = <i data-code={key} className="fa fa-sort-desc" aria-hidden="true"></i>;
+            colsTh.push(
+                <th style={{cursor:'pointer'}} onClick={self._onSortAction} data-code={key}
+                    key={key}>{obj[key].label} {sortIconDOM}</th>
+            );
             colsOrder.push(key);
             columns.push({data: key});
         });
         this.setState({colsTh: colsTh, colsOrder: colsOrder, columns: columns});
+    },
+    _onSortAction(e){
+        const code = e.target.getAttribute('data-code');
+        console.log(code);
+        if (!code) return;
+        const dinfo = this.state.dinfo;
+        dinfo.sort = (dinfo.sort != code) ? code : '-' + code;
+        this.setState({dinfo: dinfo}, function () {
+            setTimeout(function () {
+                this.fetchModelData();
+            }.bind(this));
+        }.bind(this));
     },
     _onSizeChange(e){
         if (!e.target.value) return;
@@ -137,7 +160,6 @@ const AdminTable = React.createClass({
         }.bind(this));
     },
     _onKeywordAction(){
-        if (!this.refs.keyword.value) return;
         const dinfo = this.state.dinfo;
         dinfo.keyword = this.refs.keyword.value;
         this.setState({dinfo: dinfo}, function () {
@@ -170,6 +192,7 @@ const AdminTable = React.createClass({
                 <span>显示&nbsp;{dinfo.start}&nbsp;
                     -&nbsp;{dinfo.end},共&nbsp;{dinfo.totalelements}&nbsp;条记录</span>
             </span>;
+        console.log(detail);
         return (
             <div className="row">
                 <div className="col-xs-12">
