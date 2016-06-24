@@ -65,7 +65,8 @@ const AdminTable = React.createClass({
         const query = qs.stringify({
             page: dinfo.page > 1 ? dinfo.page : 1,
             size: dinfo.size,
-            sort: dinfo.sort
+            sort: dinfo.sort,
+            keyword: dinfo.keyword
         });
         fetch(RouteUtils.CUSTOM('/' + this.state.moduleCode + '/' + this.state.modelCode + '?' + query), {
             headers: {
@@ -135,9 +136,15 @@ const AdminTable = React.createClass({
             }.bind(this));
         }.bind(this));
     },
-    _onKeywordChange(e){
-        if (!e.target.value) return;
-        console.log('_onKeywordChange...');
+    _onKeywordAction(){
+        if (!this.refs.keyword.value) return;
+        const dinfo = this.state.dinfo;
+        dinfo.keyword = this.refs.keyword.value;
+        this.setState({dinfo: dinfo}, function () {
+            setTimeout(function () {
+                this.fetchModelData();
+            }.bind(this));
+        }.bind(this));
     },
     refreshTableRows(){
         const dinfo = this.state.dinfo;
@@ -172,10 +179,11 @@ const AdminTable = React.createClass({
                             <div className="box-tools">
                                 <div className="input-group input-group-sm" style={{width: '150px'}}>
                                     <input type="text" name="table_search" className="form-control pull-right"
-                                           placeholder="请输入关键字" onChange={self._onKeywordChange}/>
-                                    <div className="input-group-btn">
-                                        <button type="submit" className="btn btn-default"><i
-                                            className="fa fa-search"></i>
+                                           placeholder="请输入关键字" ref="keyword"
+                                           defaultValue={dinfo.keyword || ''}/>
+                                    <div className="input-group-btn" onClick={self._onKeywordAction}>
+                                        <button className="btn btn-default">
+                                            <i className="fa fa-search"></i>
                                         </button>
                                     </div>
                                 </div>
