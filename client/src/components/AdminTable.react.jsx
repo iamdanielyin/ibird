@@ -18,6 +18,7 @@ const React = require('react');
 const RouteUtils = require('../utils/RouteUtils');
 const ToastrUtils = require('../utils/ToastrUtils');
 const _ = require('underscore');
+const qs = require('qs');
 const uuid = require('node-uuid');
 
 
@@ -48,23 +49,25 @@ const AdminTable = React.createClass({
             trs: []
         }, function () {
             self.createTableHeader();
-            self.getModelData(function () {
-                self.refreshTableRows()
-            });
+            self.fetchModelData();
         });
     },
     componentDidMount(){
         // console.log('AdminTable...');
         const self = this;
         this.createTableHeader();
-        this.getModelData(function () {
-            self.refreshTableRows();
-        });
+        this.fetchModelData();
     },
-    getModelData(callback){
-        // console.log('getModelData...', this.state.moduleCode, this.state.modelCode);
+    fetchModelData(){
+        // console.log('fetchModelData...', this.state.moduleCode, this.state.modelCode);
         const self = this;
-        fetch(RouteUtils.CUSTOM('/' + this.state.moduleCode + '/' + this.state.modelCode), {
+        const dinfo = this.state.dinfo;
+        const query = qs.stringify({
+            page: dinfo.page > 1 ? dinfo.page : 1,
+            size: dinfo.size,
+            sort: dinfo.sort
+        });
+        fetch(RouteUtils.CUSTOM('/' + this.state.moduleCode + '/' + this.state.modelCode + '?' + query), {
             headers: {
                 "access_token": this.state.access_token
             }
@@ -73,7 +76,7 @@ const AdminTable = React.createClass({
         }).then(function (json) {
             if (json.err) return toastr.error(json.err.message, null, ToastrUtils.defaultOptions);
             self.setState({dinfo: json});
-            if (_.isFunction(callback)) callback();
+            self.refreshTableRows();
         });
     },
     createTableHeader(){
@@ -87,6 +90,26 @@ const AdminTable = React.createClass({
             columns.push({data: key});
         });
         this.setState({colsTh: colsTh, colsOrder: colsOrder, columns: columns});
+    },
+    _onSizeChange(e){
+        if (!e.target.value) return;
+        const dinfo = this.state.dinfo;
+        dinfo.size = e.target.value;
+        this.setState({dinfo: dinfo}, function () {
+            this.fetchModelData();
+        }.bind(this));
+    },
+    _onPageChange(e){
+        if (!e.target.value) return;
+        const dinfo = this.state.dinfo;
+        dinfo.page = e.target.value;
+        this.setState({dinfo: dinfo}, function () {
+            this.fetchModelData();
+        }.bind(this));
+    },
+    _onKeywordChange(e){
+        if (!e.target.value) return;
+        console.log('_onKeywordChange...');
     },
     refreshTableRows(){
         const dinfo = this.state.dinfo;
@@ -105,6 +128,8 @@ const AdminTable = React.createClass({
         this.setState({trs: trs});
     },
     render(){
+        const self = this;
+        const dinfo = this.state.dinfo;
         return (
             <div className="row">
                 <div className="col-xs-12">
@@ -114,8 +139,7 @@ const AdminTable = React.createClass({
                             <div className="box-tools">
                                 <div className="input-group input-group-sm" style={{width: '150px'}}>
                                     <input type="text" name="table_search" className="form-control pull-right"
-                                           placeholder="请输入关键字"/>
-
+                                           placeholder="请输入关键字" onChange={self._onKeywordChange}/>
                                     <div className="input-group-btn">
                                         <button type="submit" className="btn btn-default"><i
                                             className="fa fa-search"></i>
@@ -138,10 +162,12 @@ const AdminTable = React.createClass({
                             <div className="pull-left" style={{}}>
                                 <span className="pull-left">每页</span>
                                 <input type="text" className="form-control pull-left"
-                                       style={{width:'20px',height:'20px',padding:'0px'}}/>
+                                       style={{width:'20px',height:'20px',padding:'0px'}}
+                                       onChange={self._onSizeChange}/>
                                 <span className="pull-left">条，当前第</span>
                                 <input type="text" className="form-control pull-left"
-                                       style={{width:'40px',height:'20px',padding:'0px'}}/>
+                                       style={{width:'40px',height:'20px',padding:'0px'}}
+                                       onChange={self._onPageChange}/>
                                 <span className="pull-left">页</span>
                             </div>
                             <ul className="pagination pagination-sm no-margin pull-right">

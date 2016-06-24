@@ -75,6 +75,7 @@
     "json-loader": "^0.5.4",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
+    "qs": "^6.2.0",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-router": "^2.4.1",
