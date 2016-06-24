@@ -111,6 +111,7 @@ const AdminTable = React.createClass({
         dinfo.sort = (dinfo.sort != code) ? code : '-' + code;
         this.setState({dinfo: dinfo}, function () {
             setTimeout(function () {
+                this.createTableHeader();
                 this.fetchModelData();
             }.bind(this));
         }.bind(this));
