@@ -93,18 +93,46 @@ const AdminTable = React.createClass({
     },
     _onSizeChange(e){
         if (!e.target.value) return;
+        console.log(e.target.value);
         const dinfo = this.state.dinfo;
         dinfo.size = e.target.value;
         this.setState({dinfo: dinfo}, function () {
-            this.fetchModelData();
+            setTimeout(function () {
+                this.fetchModelData();
+            }.bind(this));
         }.bind(this));
     },
     _onPageChange(e){
         if (!e.target.value) return;
+        console.log(e.target.value);
         const dinfo = this.state.dinfo;
         dinfo.page = e.target.value;
         this.setState({dinfo: dinfo}, function () {
-            this.fetchModelData();
+            setTimeout(function () {
+                this.fetchModelData();
+            }.bind(this));
+        }.bind(this));
+    },
+    _onPreviousAction(e){
+        console.log('_onPreviousAction...');
+        const dinfo = this.state.dinfo;
+        if (dinfo.page <= 1) return toastr.info((dinfo.totalpages == 1) ? '只有一页' : '已是第一页', null, ToastrUtils.defaultOptions);
+        dinfo.page--;
+        this.setState({dinfo: dinfo}, function () {
+            setTimeout(function () {
+                this.fetchModelData();
+            }.bind(this));
+        }.bind(this));
+    },
+    _onNextAction(e){
+        console.log('_onNextAction...');
+        const dinfo = this.state.dinfo;
+        if (dinfo.page >= dinfo.totalpages) return toastr.info((dinfo.totalpages == 1) ? '只有一页' : '已是最后一页', null, ToastrUtils.defaultOptions);
+        dinfo.page++;
+        this.setState({dinfo: dinfo}, function () {
+            setTimeout(function () {
+                this.fetchModelData();
+            }.bind(this));
         }.bind(this));
     },
     _onKeywordChange(e){
@@ -130,6 +158,11 @@ const AdminTable = React.createClass({
     render(){
         const self = this;
         const dinfo = this.state.dinfo;
+        const detail = !dinfo.totalpages ? <span></span> :
+            <span style={{color:'#B1A9A9'}}>
+                <span>显示&nbsp;{dinfo.start}&nbsp;
+                    -&nbsp;{dinfo.end},共&nbsp;{dinfo.totalelements}&nbsp;条记录</span>
+            </span>;
         return (
             <div className="row">
                 <div className="col-xs-12">
@@ -160,24 +193,28 @@ const AdminTable = React.createClass({
                         </div>
                         <div className="box-footer clearfix">
                             <div className="pull-left" style={{}}>
-                                <span className="pull-left">每页</span>
-                                <input type="text" className="form-control pull-left"
-                                       style={{width:'20px',height:'20px',padding:'0px'}}
-                                       onChange={self._onSizeChange}/>
-                                <span className="pull-left">条，当前第</span>
-                                <input type="text" className="form-control pull-left"
-                                       style={{width:'40px',height:'20px',padding:'0px'}}
+                                <span>第</span>
+                                <input type="text" className="form-control"
+                                       style={{width:'25px',height:'20px',padding:'0px',display:'inline-block',textAlign:'center'}}
+                                       value={this.state.dinfo.page || 1}
                                        onChange={self._onPageChange}/>
-                                <span className="pull-left">页</span>
+                                <span>/{dinfo.totalpages}页,每页</span>
+                                <input type="text" className="form-control"
+                                       style={{width:'25px',height:'20px',padding:'0px',display:'inline-block',textAlign:'center'}}
+                                       value={this.state.dinfo.size || 0}
+                                       onChange={self._onSizeChange}/>
+                                <span>条</span>
+                                &nbsp;&nbsp;&nbsp;
+                                {detail}
                             </div>
                             <ul className="pagination pagination-sm no-margin pull-right">
                                 <li>
-                                    <a style={{cursor:'pointer'}}>
+                                    <a style={{cursor:'pointer'}} onClick={self._onPreviousAction}>
                                         <i className="fa fa-caret-left" aria-hidden="true"></i>
                                     </a>
                                 </li>
                                 <li>
-                                    <a style={{cursor:'pointer'}}>
+                                    <a style={{cursor:'pointer'}} onClick={self._onNextAction}>
                                         <i className="fa fa-caret-right" aria-hidden="true"></i>
                                     </a>
                                 </li>
