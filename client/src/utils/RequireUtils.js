@@ -18,10 +18,7 @@ require('../publics/lib/adminlte/js/AdminLTE');
 require('../publics/css/index.less');
 require('../publics/plugins/iCheck/blue.css');
 require('../publics/plugins/toastr/toastr.css');
-// require('../publics/plugins/datatables/jquery.dataTables.min.css');
-require('../publics/plugins/datatables/dataTables.bootstrap.css');
 
 require('whatwg-fetch');
 require('jquery-slimscroll');
 require('icheck');
-require('dataTablesBootstrap');
