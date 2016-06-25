@@ -15,6 +15,7 @@
 'use strict';
 
 const React = require('react');
+const Link = require('react-router').Link;
 const RouteUtils = require('../utils/RouteUtils');
 const ToastrUtils = require('../utils/ToastrUtils');
 const _ = require('underscore');
@@ -30,6 +31,7 @@ const AdminTable = React.createClass({
         const state = {
             dinfo: {},
             moduleCode: this.props.module,
+            path: this.props.path,
             modelCode: this.props.model,
             colsTh: [],
             colsOrder: [],
@@ -100,6 +102,7 @@ const AdminTable = React.createClass({
             colsOrder.push(key);
             columns.push({data: key});
         });
+        colsTh.push(<th key={uuid.v4()}>操作</th>);
         this.setState({colsTh: colsTh, colsOrder: colsOrder, columns: columns});
     },
     _onSortAction(e){
@@ -169,6 +172,7 @@ const AdminTable = React.createClass({
         }.bind(this));
     },
     refreshTableRows(){
+        const self = this;
         const dinfo = this.state.dinfo;
         const colsOrder = this.state.colsOrder;
         const trs = [], dataArray = [];
@@ -179,6 +183,15 @@ const AdminTable = React.createClass({
                 tds.push(<td key={uuid.v4()}>{item[key]}</td>);
                 row[key] = item[key] || '';
             });
+            tds.push(
+                <td key={uuid.v4()}>
+                    <Link
+                        to={{pathname:"/index/"+self.props.module+"/"+self.props.path,query:{m:self.props.model,f:uuid.v4(),i:item._id}}}
+                        className="btn btn-default btn-xs">
+                        <i className="fa fa-minus"></i>
+                    </Link>
+                </td>
+            );
             trs.push(<tr key={uuid.v4()}>{tds}</tr>);
             dataArray.push(row);
         });
@@ -187,27 +200,26 @@ const AdminTable = React.createClass({
     render(){
         const self = this;
         const dinfo = this.state.dinfo;
-        const detail = !dinfo.totalpages ? <span></span> :
-            <span style={{color:'#B1A9A9'}}>
-                <span>显示&nbsp;{dinfo.start}&nbsp;
-                    -&nbsp;{dinfo.end},共&nbsp;{dinfo.totalelements}&nbsp;条记录</span>
-            </span>;
-        console.log(detail);
         return (
             <div className="row">
                 <div className="col-xs-12">
                     <div className="box">
                         <div className="box-header">
                             <h3 className="box-title">{this.props.schema.label}</h3>
-                            <div className="box-tools">
-                                <div className="input-group input-group-sm" style={{width: '150px'}}>
-                                    <input type="text" name="table_search" className="form-control pull-right"
+                            <div className="box-tools pull-right">
+                                <div className="input-group input-group-sm" style={{width: '200px'}}>
+                                    <input type="text" name="table_search" className="form-control"
                                            placeholder="请输入关键字" ref="keyword"
                                            defaultValue={dinfo.keyword || ''}/>
-                                    <div className="input-group-btn" onClick={self._onKeywordAction}>
-                                        <button className="btn btn-default">
+                                    <div className="input-group-btn">
+                                        <button className="btn btn-default" onClick={self._onKeywordAction}>
                                             <i className="fa fa-search"></i>
                                         </button>
+                                        <Link
+                                            to={{pathname:"/index/"+this.props.module+"/"+this.props.path,query:{m:this.props.model,f:uuid.v4()}}}
+                                            className="btn btn-default">
+                                            <i className="fa fa-plus"></i>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
@@ -236,7 +248,10 @@ const AdminTable = React.createClass({
                                        onChange={self._onSizeChange}/>
                                 <span>条</span>
                                 &nbsp;&nbsp;&nbsp;
-                                {detail}
+                                <span style={{color:'#B1A9A9'}}>
+                                    <span>显示&nbsp;{dinfo.start}&nbsp;
+                                        -&nbsp;{dinfo.end},共&nbsp;{dinfo.totalelements}&nbsp;条记录</span>
+                                </span>
                             </div>
                             <ul className="pagination pagination-sm no-margin pull-right">
                                 <li>

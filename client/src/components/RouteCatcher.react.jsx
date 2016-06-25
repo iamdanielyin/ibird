@@ -9,6 +9,7 @@
 const React = require('react');
 const AdminIndex = require('./AdminIndex.react');
 const AdminTable = require('./AdminTable.react');
+const AdminForm = require('./AdminForm.react');
 const CodeUtils = require('../utils/CodeUtils');
 const cv = JSON.parse(CodeUtils.decodeBase64(localStorage.getItem('C_V'), 5)) || [];
 
@@ -41,8 +42,11 @@ const RouteCatcher = React.createClass({
         const path = props.params.path;
         const query = props.location.query;
         const schema = this.getSchemaByCode(module, query.m);
+        const f = query.f;
+        const i = query.i;
         return (
-            <AdminTable module={module} path={path} model={query.m} schema={schema}/>
+            !f ? <AdminTable module={module} path={path} model={query.m} schema={schema}/> :
+                <AdminForm module={module} path={path} model={query.m} schema={schema} i={i}/>
         );
     }
 });
