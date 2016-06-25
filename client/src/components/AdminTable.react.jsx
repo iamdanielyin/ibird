@@ -88,7 +88,6 @@ const AdminTable = React.createClass({
         const colsTh = [], colsOrder = [], columns = [];
         Object.keys(obj).map(function (key) {
             if (!obj[key] || !obj[key].label) return;
-            console.log(dinfo.sort);
             let sortIconDOM = null;
             if (key == dinfo.sort)
                 sortIconDOM = <i data-code={key} className="fa fa-sort-asc" aria-hidden="true"></i>;
