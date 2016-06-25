@@ -28,7 +28,7 @@ exports.number = function (label) {
 exports.textarea = function (label) {
     return <div className="form-group" key={uuid.v4()}>
         <label>{label}</label>
-        <textarea className="form-control" rows="3" placeholder={label}></textarea>
+        <textarea className="form-control" rows="3" placeholder={label} style={{resize:'vertical'}}></textarea>
     </div>
 };
 exports.date = function (label) {
