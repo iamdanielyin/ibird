@@ -16,9 +16,12 @@ require('../publics/lib/font-awesome/font-awesome.css');
 require('../publics/lib/bootstrap/js/bootstrap');
 require('../publics/lib/adminlte/js/AdminLTE');
 require('../publics/css/index.less');
-require('../publics/plugins/iCheck/blue.css');
+require('../publics/plugins/iCheck/all.css');
 require('../publics/plugins/toastr/toastr.css');
+require('../publics/plugins/datetimepicker/css/bootstrap-datetimepicker.min.css');
 
 require('whatwg-fetch');
 require('jquery-slimscroll');
 require('icheck');
+require('datetimepicker');
+require('../publics/plugins/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN');

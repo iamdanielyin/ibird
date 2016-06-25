@@ -16,10 +16,10 @@ const App = React.createClass({
     contextTypes: {
         router: React.PropTypes.object
     },
+    
     componentDidMount() {
         const self = this;
         const currPathname = self.props.location.pathname;
-
         fetch(RouteUtils.CONFIG_PUBLIC).then(function (res) {
             return res.json();
         }).then(function (json) {
