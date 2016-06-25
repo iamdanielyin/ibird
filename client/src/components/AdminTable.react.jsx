@@ -60,6 +60,9 @@ const AdminTable = React.createClass({
         this.createTableHeader();
         this.fetchModelData();
     },
+    componentWillUnmount(){
+        console.log('componentWillUnmount...');
+    },
     fetchModelData(){
         // console.log('fetchModelData...', this.state.moduleCode, this.state.modelCode);
         const self = this;
@@ -111,65 +114,44 @@ const AdminTable = React.createClass({
         if (!code) return;
         const dinfo = this.state.dinfo;
         dinfo.sort = (dinfo.sort != code) ? code : '-' + code;
-        this.setState({dinfo: dinfo}, function () {
-            setTimeout(function () {
-                this.createTableHeader();
-                this.fetchModelData();
-            }.bind(this));
-        }.bind(this));
+
+        this.setState({dinfo: dinfo}, () => {
+            this.createTableHeader();
+            this.fetchModelData();
+        });
     },
     _onSizeChange(e){
         if (!e.target.value) return;
         console.log(e.target.value);
         const dinfo = this.state.dinfo;
         dinfo.size = e.target.value;
-        this.setState({dinfo: dinfo}, function () {
-            setTimeout(function () {
-                this.fetchModelData();
-            }.bind(this));
-        }.bind(this));
+        this.setState({dinfo: dinfo}, () => setTimeout(() => this.fetchModelData()));
     },
     _onPageChange(e){
         if (!e.target.value) return;
         console.log(e.target.value);
         const dinfo = this.state.dinfo;
         dinfo.page = e.target.value;
-        this.setState({dinfo: dinfo}, function () {
-            setTimeout(function () {
-                this.fetchModelData();
-            }.bind(this));
-        }.bind(this));
+        this.setState({dinfo: dinfo}, () => setTimeout(() => this.fetchModelData()));
     },
     _onPreviousAction(e){
         console.log('_onPreviousAction...');
         const dinfo = this.state.dinfo;
         if (dinfo.page <= 1) return toastr.info((dinfo.totalpages == 1) ? '只有一页' : '已是第一页', null, ToastrUtils.defaultOptions);
         dinfo.page--;
-        this.setState({dinfo: dinfo}, function () {
-            setTimeout(function () {
-                this.fetchModelData();
-            }.bind(this));
-        }.bind(this));
+        this.setState({dinfo: dinfo}, () =>this.fetchModelData());
     },
     _onNextAction(e){
         console.log('_onNextAction...');
         const dinfo = this.state.dinfo;
         if (dinfo.page >= dinfo.totalpages) return toastr.info((dinfo.totalpages == 1) ? '只有一页' : '已是最后一页', null, ToastrUtils.defaultOptions);
         dinfo.page++;
-        this.setState({dinfo: dinfo}, function () {
-            setTimeout(function () {
-                this.fetchModelData();
-            }.bind(this));
-        }.bind(this));
+        this.setState({dinfo: dinfo}, () => this.fetchModelData());
     },
     _onKeywordAction(){
         const dinfo = this.state.dinfo;
         dinfo.keyword = this.refs.keyword.value;
-        this.setState({dinfo: dinfo}, function () {
-            setTimeout(function () {
-                this.fetchModelData();
-            }.bind(this));
-        }.bind(this));
+        this.setState({dinfo: dinfo}, () => this.fetchModelData());
     },
     refreshTableRows(){
         const self = this;
@@ -185,11 +167,18 @@ const AdminTable = React.createClass({
             });
             tds.push(
                 <td key={uuid.v4()}>
-                    <Link
-                        to={{pathname:"/index/"+self.props.module+"/"+self.props.path,query:{m:self.props.model,f:uuid.v4(),i:item._id}}}
-                        className="btn btn-default btn-xs">
-                        <i className="fa fa-minus"></i>
-                    </Link>
+                    <div className="btn-group">
+                        <Link
+                            to={{pathname:"/index/"+self.props.module+"/"+self.props.path,query:{m:self.props.model,f:uuid.v4(),i:item._id}}}
+                            className="btn btn-primary btn-xs">
+                            <i className="fa fa-edit"></i>
+                        </Link>
+                        <Link
+                            to={{pathname:"/index/"+self.props.module+"/"+self.props.path,query:{m:self.props.model,f:uuid.v4(),i:item._id}}}
+                            className="btn btn-danger btn-xs">
+                            <i className="fa fa-minus"></i>
+                        </Link>
+                    </div>
                 </td>
             );
             trs.push(<tr key={uuid.v4()}>{tds}</tr>);

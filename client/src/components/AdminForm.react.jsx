@@ -95,16 +95,19 @@ const AdminForm = React.createClass({
                     formGroup = FormUtils.textarea(label);
                     break;
                 case 'ref':
-                    //编辑器
+                    //单引用
                     formGroup = FormUtils.ref(label);
+                    break;
+                case 'refs':
+                    //多引用
+                    formGroup = FormUtils.refs(label);
                     break;
                 case 'file':
                     //单文件/图片
                     formGroup = FormUtils.file(label);
-                case 'editor':
-                    //单文件/图片
-                    formGroup = FormUtils.editor(label);
-                    break;
+                case 'files':
+                    //多文件/图片
+                    formGroup = FormUtils.files(label);
                 default:
                     //文本框
                     break;
@@ -168,10 +171,12 @@ const AdminForm = React.createClass({
         $('.ibird-form-checkbox').iCheck({
             checkboxClass: 'icheckbox_square-blue'
         });
-        // $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
-        //     checkboxClass: 'icheckbox_minimal-blue',
-        //     radioClass: 'iradio_minimal-blue'
-        // });
+        $('.ibird-form-ref').select2({
+            language: 'zh-CN'
+        });
+        $('.ibird-form-refs').select2({
+            language: 'zh-CN'
+        });
     },
     render(){
         const formGroupArray = this.state.form;

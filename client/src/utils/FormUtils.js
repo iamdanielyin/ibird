@@ -35,7 +35,7 @@ exports.date = function (label) {
     return <div className="form-group" key={uuid.v4()}>
         <label className="col-md-2 control-label">{label}</label>
         <div className="input-append date ibird-form-date">
-            <input className="span2 form-control" type="text"/>
+            <input className="span2 form-control" type="text" placeholder={label}/>
             <span className="add-on"><i className="icon-remove"></i></span>
             <span className="add-on"><i className="icon-th"></i></span>
         </div>
@@ -45,7 +45,7 @@ exports.time = function (label) {
     return <div className="form-group" key={uuid.v4()}>
         <label className="col-md-2 control-label">{label}</label>
         <div className="input-append date ibird-form-time">
-            <input className="span2 form-control" type="text"/>
+            <input className="span2 form-control" type="text" placeholder={label}/>
             <span className="add-on"><i className="icon-remove"></i></span>
             <span className="add-on"><i className="icon-th"></i></span>
         </div>
@@ -55,7 +55,7 @@ exports.datetime = function (label) {
     return <div className="form-group" key={uuid.v4()}>
         <label className="col-md-2 control-label">{label}</label>
         <div className="input-append date ibird-form-datetime">
-            <input className="span2 form-control" type="text"/>
+            <input className="span2 form-control" type="text" placeholder={label}/>
             <span className="add-on"><i className="icon-remove"></i></span>
             <span className="add-on"><i className="icon-th"></i></span>
         </div>
@@ -67,7 +67,7 @@ exports['boolean-radios'] = function (label, options) {
     Object.keys(options).map(function (key) {
         if (!key || !options[key]) return;
         optionArray.push(
-            <label key={uuid.v4()}>
+            <label key={uuid.v4()} style={{marginRight:'5px'}}>
                 <input type="radio" className="ibird-form-radios" name={name} value={key}/>
                 <span>{options[key]}</span>
             </label>
@@ -80,7 +80,7 @@ exports['boolean-checkbox'] = function (label, options) {
     Object.keys(options).map(function (key) {
         if (!key || !options[key]) return;
         optionArray.push(
-            <label key={uuid.v4()}>
+            <label key={uuid.v4()} style={{marginRight:'5px'}}>
                 <input type="checkbox" className="ibird-form-checkbox" value={key}/>
                 <span>{options[key]}</span>
             </label>
@@ -92,20 +92,45 @@ exports['boolean-checkbox'] = function (label, options) {
 exports.ref = function (label) {
     return <div className="form-group" key={uuid.v4()}>
         <label>{label}</label>
-        <input type="text" className="form-control" placeholder={label}/>
+        <select className="form-control ibird-form-ref" placeholder={label} defaultValue="Alabama"
+                style={{width: '100%'}}>
+            <option value="Alabama">Alabama</option>
+            <option value="Alaska">Alaska</option>
+            <option value="California">California</option>
+            <option value="Delaware">Delaware</option>
+            <option value="Tennessee">Tennessee</option>
+            <option value="Texas">Texas</option>
+            <option value="Washington">Washington</option>
+        </select>
+    </div>;
+};
+//TODO 引用采用select2实现
+exports.refs = function (label) {
+    return <div className="form-group" key={uuid.v4()}>
+        <label>{label}</label>
+        <select className="form-control ibird-form-refs" multiple="multiple" placeholder={label} defaultValue="Alabama"
+                style={{width: '100%'}}>
+            <option value="Alabama">Alabama</option>
+            <option value="Alaska">Alaska</option>
+            <option value="California">California</option>
+            <option value="Delaware">Delaware</option>
+            <option value="Tennessee">Tennessee</option>
+            <option value="Texas">Texas</option>
+            <option value="Washington">Washington</option>
+        </select>
     </div>;
 };
 //TODO 未实现
 exports.file = function (label) {
-    return <div className="form-group" key={uuid.v4()}>
+    return <div className="form-group">
         <label>{label}</label>
-        <input type="text" className="form-control" placeholder={label}/>
+        <input type="file" className="form-control" placeholder={"请选择"+label}/>
     </div>;
 };
 //TODO 未实现
-exports.editor = function (label) {
-    return <div className="form-group" key={uuid.v4()}>
+exports.files = function (label) {
+    return <div className="form-group">
         <label>{label}</label>
-        <input type="text" className="form-control" placeholder={label}/>
+        <input type="file" className="form-control" placeholder={"请选择"+label} multiple/>
     </div>;
 };
