@@ -94,13 +94,13 @@ exports.ref = function (label) {
         <label>{label}</label>
         <select className="form-control ibird-form-ref" placeholder={label} defaultValue="Alabama"
                 style={{width: '100%'}}>
-            <option value="Alabama">Alabama</option>
-            <option value="Alaska">Alaska</option>
-            <option value="California">California</option>
-            <option value="Delaware">Delaware</option>
-            <option value="Tennessee">Tennessee</option>
-            <option value="Texas">Texas</option>
-            <option value="Washington">Washington</option>
+            <option defaultValue="Alabama" key="Alabama">Alabama</option>
+            <option defaultValue="Alaska" key="Alaska">Alaska</option>
+            <option defaultValue="California" key="California">California</option>
+            <option defaultValue="Delaware" key="Delaware">Delaware</option>
+            <option defaultValue="Tennessee" key="Tennessee">Tennessee</option>
+            <option defaultValue="Texas" key="Texas">Texas</option>
+            <option defaultValue="Washington" key="Washington">Washington</option>
         </select>
     </div>;
 };
@@ -108,29 +108,30 @@ exports.ref = function (label) {
 exports.refs = function (label) {
     return <div className="form-group" key={uuid.v4()}>
         <label>{label}</label>
-        <select className="form-control ibird-form-refs" multiple="multiple" placeholder={label} defaultValue="Alabama"
+        <select className="form-control ibird-form-refs" multiple="multiple" placeholder={label}
+                defaultValue={['Alabama']}
                 style={{width: '100%'}}>
-            <option value="Alabama">Alabama</option>
-            <option value="Alaska">Alaska</option>
-            <option value="California">California</option>
-            <option value="Delaware">Delaware</option>
-            <option value="Tennessee">Tennessee</option>
-            <option value="Texas">Texas</option>
-            <option value="Washington">Washington</option>
+            <option defaultValue="Alabama" key="Alabama">Alabama</option>
+            <option defaultValue="Alaska" key="Alaska">Alaska</option>
+            <option defaultValue="California" key="California">California</option>
+            <option defaultValue="Delaware" key="Delaware">Delaware</option>
+            <option defaultValue="Tennessee" key="Tennessee">Tennessee</option>
+            <option defaultValue="Texas" key="Texas">Texas</option>
+            <option defaultValue="Washington" key="Washington">Washington</option>
         </select>
     </div>;
 };
 //TODO 未实现
 exports.file = function (label) {
-    return <div className="form-group">
+    return <div className="form-group" key={uuid.v4()}>
         <label>{label}</label>
-        <input type="file" className="form-control" placeholder={"请选择"+label}/>
+        <input type="file" className="form-control"/>
     </div>;
 };
 //TODO 未实现
 exports.files = function (label) {
-    return <div className="form-group">
+    return <div className="form-group" key={uuid.v4()}>
         <label>{label}</label>
-        <input type="file" className="form-control" placeholder={"请选择"+label} multiple/>
+        <input type="file" className="form-control"/>
     </div>;
 };
