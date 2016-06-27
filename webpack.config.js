@@ -93,7 +93,7 @@ module.exports = {
             toastr: path.resolve(__dirname, 'client/src/publics/plugins/toastr/toastr.min.js'),
             icheck: path.resolve(__dirname, 'client/src/publics/plugins/iCheck/icheck.js'),
             datetimepicker: path.resolve(__dirname, 'client/src/publics/plugins/datetimepicker/js/bootstrap-datetimepicker.min.js'),
-            select2: path.resolve(__dirname, 'client/src/publics/plugins/select2/select2.full.min.js')
+            select2: path.resolve(__dirname, 'client/src/publics/plugins/select2/select2.full.js')
         }
     }
 };

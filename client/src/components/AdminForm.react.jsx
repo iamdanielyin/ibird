@@ -11,7 +11,7 @@
 const React = require('react');
 const RouteUtils = require('../utils/RouteUtils');
 const ToastrUtils = require('../utils/ToastrUtils');
-const FormUtils = require('../utils/FormUtils');
+const FormFactory = require('../utils/FormFactory');
 const _ = require('underscore');
 const qs = require('qs');
 const uuid = require('node-uuid');
@@ -48,70 +48,29 @@ const AdminForm = React.createClass({
             self.setState({data: json});
         });
     },
-    createForm(){
-        const obj = this.props.schema ? this.props.schema.obj : {};
-        const formGroupArray = [];
+    getIdentifier(key){
+        if (!key) return null;
+        //identifier = id = ref = moduleCode-modelCode[-_id]-xxx
+        return this.props.module + '-' + this.props.model + '-' + (this.props.i ? '-' + this.props.i : '') + key;
+    },
+    mapSchemaObjKeys(callback){
+        const schema = this.props.schema;
+        if (!schema) return;
+        const obj = schema.obj || {};
         Object.keys(obj).map(function (key) {
+            callback(key, obj);
+        });
+    },
+    createForm(){
+        const self = this;
+        const formGroupArray = [];
+        this.mapSchemaObjKeys(function (key, obj) {
             if (!key || !obj[key].label) return;
             const item = obj[key];
             const label = item.label;
             const inputType = item.inputType ? item.inputType.toLowerCase() : 'string';
-            let formGroup = null;
-            switch (inputType) {
-                case 'string':
-                    //文本框
-                    formGroup = FormUtils.string(label);
-                    break;
-                case 'password':
-                    //密码框
-                    formGroup = FormUtils.password(label);
-                    break;
-                case 'date':
-                    //日期
-                    formGroup = FormUtils.date(label);
-                    break;
-                case 'time':
-                    //时间
-                    formGroup = FormUtils.time(label);
-                    break;
-                case 'datetime':
-                    //日期时间
-                    formGroup = FormUtils.datetime(label);
-                    break;
-                case 'boolean-radios':
-                    //单选
-                    formGroup = FormUtils['boolean-radios'](label, item.items);
-                    break;
-                case 'boolean-checkbox':
-                    //多选
-                    formGroup = FormUtils['boolean-checkbox'](label, item.items);
-                    break;
-                case 'number':
-                    //数字
-                    formGroup = FormUtils.number(label);
-                    break;
-                case 'textarea':
-                    //编辑器
-                    formGroup = FormUtils.textarea(label);
-                    break;
-                case 'ref':
-                    //单引用
-                    formGroup = FormUtils.ref(label);
-                    break;
-                case 'refs':
-                    //多引用
-                    formGroup = FormUtils.refs(label);
-                    break;
-                case 'file':
-                    //单文件/图片
-                    formGroup = FormUtils.file(label);
-                case 'files':
-                    //多文件/图片
-                    formGroup = FormUtils.files(label);
-                default:
-                    //文本框
-                    break;
-            }
+            //TODO item.items代表表单项额外数据
+            const formGroup = FormFactory(inputType, label, self.getIdentifier(key), item.items);
             formGroupArray.push(formGroup);
         });
         this.setState({form: formGroupArray});
@@ -123,59 +82,117 @@ const AdminForm = React.createClass({
         if (this.state.i) this.fetchData();
     },
     componentDidMount(){
-        this.globalRegister();
+        this.ctrlKeyRegister();
     },
-    globalRegister(){
-        //日期时间
-        $('.ibird-form-datetime').datetimepicker({
-            language: 'zh-CN',
-            weekStart: 1,
-            todayBtn: 1,
-            autoclose: 1,
-            todayHighlight: 1,
-            minuteStep: 1,
-            startView: 2,
-            forceParse: 1,
-            showMeridian: 1,
-            format: 'yyyy-mm-dd hh:ii:ss'
-        });
-        //日期
-        $('.ibird-form-date').datetimepicker({
-            language: 'zh-CN',
-            weekStart: 1,
-            todayBtn: 1,
-            autoclose: 1,
-            todayHighlight: 1,
-            startView: 2,
-            minView: 2,
-            forceParse: 1,
-            format: 'yyyy-mm-dd'
-        });
-        //时间
-        $('.ibird-form-time').datetimepicker({
-            language: 'zh-CN',
-            weekStart: 1,
-            todayBtn: 1,
-            autoclose: 1,
-            todayHighlight: 1,
-            minuteStep: 1,
-            startView: 1,
-            minView: 0,
-            maxView: 1,
-            forceParse: 1,
-            format: 'hh:ii:ss'
-        });
-        $('.ibird-form-radios').iCheck({
-            radioClass: 'iradio_square-blue'
-        });
-        $('.ibird-form-checkbox').iCheck({
-            checkboxClass: 'icheckbox_square-blue'
-        });
-        $('.ibird-form-ref').select2({
-            language: 'zh-CN'
-        });
-        $('.ibird-form-refs').select2({
-            language: 'zh-CN'
+    ctrlKeyRegister(){
+        const self = this;
+        this.mapSchemaObjKeys(function (key, obj) {
+            if (!key || !obj[key].label) return;
+            const item = obj[key];
+            const label = item.label;
+            const identifier = self.getIdentifier(key);
+            let selector = $('#' + identifier);
+            let inputType = item.inputType ? item.inputType.toLowerCase() : 'string';
+            inputType = (inputType == 'ref' || inputType == 'refs') ? 'ref' : inputType;
+            switch (inputType) {
+                case 'date':
+                    //日期
+                    selector.datetimepicker({
+                        language: 'zh-CN',
+                        weekStart: 1,
+                        todayBtn: 1,
+                        autoclose: 1,
+                        todayHighlight: 1,
+                        startView: 2,
+                        minView: 2,
+                        forceParse: 1,
+                        format: 'yyyy-mm-dd'
+                    });
+                    break;
+                case 'time':
+                    //时间
+                    selector.datetimepicker({
+                        language: 'zh-CN',
+                        weekStart: 1,
+                        todayBtn: 1,
+                        autoclose: 1,
+                        todayHighlight: 1,
+                        minuteStep: 1,
+                        startView: 1,
+                        minView: 0,
+                        maxView: 1,
+                        forceParse: 1,
+                        format: 'hh:ii:ss'
+                    });
+                    break;
+                case 'datetime':
+                    //日期时间
+                    selector.datetimepicker({
+                        language: 'zh-CN',
+                        weekStart: 1,
+                        todayBtn: 1,
+                        autoclose: 1,
+                        todayHighlight: 1,
+                        minuteStep: 1,
+                        startView: 2,
+                        forceParse: 1,
+                        showMeridian: 1,
+                        format: 'yyyy-mm-dd hh:ii:ss'
+                    });
+                    break;
+                case 'boolean-radios':
+                    selector = $('.' + identifier);
+                    selector.iCheck({
+                        radioClass: 'iradio_square-blue'
+                    });
+                    break;
+                case 'boolean-checkbox':
+                    selector = $('.' + identifier);
+                    selector.iCheck({
+                        checkboxClass: 'icheckbox_square-blue'
+                    });
+                    break;
+                case 'ref':
+                    const refOptions = item.refOptions;
+                    selector.select2({
+                        language: 'zh-CN',
+                        placeholder: label,
+                        minimumInputLength: 1,
+                        ajax: {
+                            url: RouteUtils.CUSTOM('/' + self.props.module + '/' + item.ref),
+                            data: function (params) {
+                                const query = qs.stringify({
+                                    keyword: params.term,
+                                    page: params.page,
+                                    size: params.size || 10
+                                });
+                                return query;
+                            },
+                            dataType: 'json',
+                            beforeSend: function (request) {
+                                request.setRequestHeader("access_token", self.state.access_token);
+                            },
+                            processResults: function (json, params) {
+                                const resultArray = [];
+                                json.data.map(function (object) {
+                                    const value = object[refOptions.value];
+                                    const display = object[refOptions.display];
+                                    if (!value || !display) return;
+                                    resultArray.push({id: value, text: display});
+                                });
+                                return {
+                                    results: resultArray,
+                                    pagination: {
+                                        more: (json.page * json.size) < json.totalelements,
+                                        page: json.page,
+                                        size: json.size
+                                    }
+                                };
+                            }
+                        }
+                    });
+                    break;
+            }
         });
     },
     render(){
