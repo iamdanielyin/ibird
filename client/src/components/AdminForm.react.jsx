@@ -83,6 +83,58 @@ const AdminForm = React.createClass({
     },
     componentDidMount(){
         this.ctrlKeyRegister();
+        this.setValue();
+    },
+    setValue(){
+        // const self = this;
+        // this.mapSchemaObjKeys(function (key, obj) {
+        //     if (!key || !obj[key].label) return;
+        //     const item = obj[key];
+        //     const identifier = self.getIdentifier(key);
+        //     const inputType = item.inputType ? item.inputType.toLowerCase() : 'string';
+        //     if (inputType == 'string') $('#' + identifier).val('哈哈123');
+        // });
+        const $option = $('<option selected></option>').val('5756cf972b5bc7601be033f5').text('yinfxs');
+        $('#system-commdl-ref').append($option).trigger('change');
+
+
+        const $options = $('<option selected value="5756cfa62b5bc7601be033f6">yinfxs@gmail.com</option><option selected value="576ddbf8dce28d2b30533d00">lisi</option>');
+        $('#system-commdl-refs').append($options).trigger('change');
+
+        const checkboxes = $('.system-commdl-booleanCheckbox').each(function () {
+            if ($(this).val() == 'b' || $(this).val() == 'c') $(this).iCheck('check');
+        });
+        const radios = $('.system-commdl-booleanRadios').each(function () {
+            if ($(this).val() == 'a') $(this).iCheck('check');
+        });
+
+        $('#system-commdl-textarea').val('哈哈哈我萨拉卡萨积分拉丝机弗兰克');
+
+        $('#system-commdl-date').val('2015-10-23');
+        $('#system-commdl-time').val('15:12:10');
+        $('#system-commdl-datetime').val('2016-12-25 09:59:20');
+
+    },
+    _onSaveAction(){
+        console.log($('#system-commdl-text').val());
+        console.log($('#system-commdl-ref').val());
+        console.log($('#system-commdl-refs').val());
+
+        $('.system-commdl-booleanRadios').each(function () {
+            if ($(this).is(':checked') == true) console.log('booleanRadios...', $(this).val());
+        });
+
+        $('.system-commdl-booleanCheckbox').each(function () {
+            if ($(this).is(':checked') == true) console.log('booleanCheckbox...', $(this).val());
+        });
+
+        console.log($('#system-commdl-textarea').val());
+
+
+        console.log($('#system-commdl-date').val());
+        console.log($('#system-commdl-time').val());
+        console.log($('#system-commdl-datetime').val());
+
     },
     ctrlKeyRegister(){
         const self = this;
@@ -212,7 +264,8 @@ const AdminForm = React.createClass({
                                 {formGroupArray}
                             </div>
                             <div className="box-footer">
-                                <button type="submit" className="btn btn-primary">保存</button>
+                                <span className="btn btn-primary" onClick={this._onSaveAction}
+                                      style={{cursor:'pointer'}}>保存</span>
                             </div>
                         </form>
                     </div>

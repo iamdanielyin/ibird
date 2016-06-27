@@ -58,9 +58,11 @@ module.exports = function (inputType, label, identifier, data) {
         case 'file':
             //单文件/图片
             formGroup = FormUtils.file(label, identifier);
+            break;
         case 'files':
             //多文件/图片
             formGroup = FormUtils.files(label, identifier);
+            break;
         default:
             //文本框
             formGroup = FormUtils.string(label, identifier);
