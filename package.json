@@ -41,6 +41,7 @@
   "homepage": "https://github.com/yinfxs/ibird#readme",
   "dependencies": {
     "body-parser": "^1.15.1",
+    "connect-multiparty": "^2.0.0",
     "cookie-parser": "^1.4.3",
     "express": "^4.13.4",
     "file-stream-rotator": "0.0.6",

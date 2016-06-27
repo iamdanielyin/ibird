@@ -10,6 +10,7 @@
  * @param times 次数
  */
 exports.encodeBase64 = function (string, times = 1) {
+    if(!string) return null;
     for (let i = 0; i < times; i++) {
         string = new Buffer(string).toString('base64');
     }
@@ -21,6 +22,7 @@ exports.encodeBase64 = function (string, times = 1) {
  * @param times 次数
  */
 exports.decodeBase64 = function (string, times = 1) {
+    if(!string) return null;
     for (let i = 0; i < times; i++) {
         string = new Buffer(string, 'base64').toString();
     }
