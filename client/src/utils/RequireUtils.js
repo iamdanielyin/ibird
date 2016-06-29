@@ -28,3 +28,6 @@ require('datetimepicker');
 require('../publics/plugins/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN');
 require('select2');
 require('../publics/plugins/select2/i18n/zh-CN.js');
+require('jquery.ui.widget');
+require('jquery.iframe-transport');
+require('jquery.fileupload');

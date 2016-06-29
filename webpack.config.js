@@ -21,7 +21,8 @@ const plugins = [
         $: "jquery",
         jQuery: "jquery",
         "window.jQuery": "jquery",
-        toastr: "toastr"
+        toastr: "toastr",
+        "slimscroll": "jquery-slimscroll"
     }),
     new webpack.IgnorePlugin(/(AdminLTE|bootstrap|jquery.slimscroll.min).js$/),
     new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors' + (isProduction ? '.min' : '.') + '.js')
@@ -93,7 +94,10 @@ module.exports = {
             toastr: path.resolve(__dirname, 'client/src/publics/plugins/toastr/toastr.min.js'),
             icheck: path.resolve(__dirname, 'client/src/publics/plugins/iCheck/icheck.js'),
             datetimepicker: path.resolve(__dirname, 'client/src/publics/plugins/datetimepicker/js/bootstrap-datetimepicker.min.js'),
-            select2: path.resolve(__dirname, 'client/src/publics/plugins/select2/select2.full.js')
+            select2: path.resolve(__dirname, 'client/src/publics/plugins/select2/select2.full.js'),
+            'jquery.fileupload': path.resolve(__dirname, 'client/src/publics/plugins/jqueryFileUpload/jquery.fileupload.js'),
+            'jquery.iframe-transport': path.resolve(__dirname, 'client/src/publics/plugins/jqueryFileUpload/jquery.iframe-transport.js'),
+            'jquery.ui.widget': path.resolve(__dirname, 'client/src/publics/plugins/jqueryFileUpload/jquery.ui.widget.js')
         }
     }
 };

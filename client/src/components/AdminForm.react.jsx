@@ -45,7 +45,7 @@ const AdminForm = React.createClass({
         }).then(function (json) {
             console.log(json);
             if (json.err) return toastr.error(json.err.message, null, ToastrUtils.defaultOptions);
-            self.setState({data: json});
+            self.setState({data: json}, () => self.setValue());
         });
     },
     getIdentifier(key){
@@ -63,14 +63,15 @@ const AdminForm = React.createClass({
     },
     createForm(){
         const self = this;
-        const formGroupArray = [];
+        const formGroupArray = [], identifiers = [];
         this.mapSchemaObjKeys(function (key, obj) {
             if (!key || !obj[key].label) return;
             const item = obj[key];
             const label = item.label;
             const inputType = item.inputType ? item.inputType.toLowerCase() : 'string';
             //TODO item.items代表表单项额外数据
-            const formGroup = FormFactory(inputType, label, self.getIdentifier(key), item.items);
+            const identifier = self.getIdentifier(key);
+            const formGroup = FormFactory(inputType, label, identifier, item.items);
             formGroupArray.push(formGroup);
         });
         this.setState({form: formGroupArray});
@@ -86,55 +87,131 @@ const AdminForm = React.createClass({
         this.setValue();
     },
     setValue(){
-        // const self = this;
-        // this.mapSchemaObjKeys(function (key, obj) {
-        //     if (!key || !obj[key].label) return;
-        //     const item = obj[key];
-        //     const identifier = self.getIdentifier(key);
-        //     const inputType = item.inputType ? item.inputType.toLowerCase() : 'string';
-        //     if (inputType == 'string') $('#' + identifier).val('哈哈123');
-        // });
-        const $option = $('<option selected></option>').val('5756cf972b5bc7601be033f5').text('yinfxs');
-        $('#system-commdl-ref').append($option).trigger('change');
-
-
-        const $options = $('<option selected value="5756cfa62b5bc7601be033f6">yinfxs@gmail.com</option><option selected value="576ddbf8dce28d2b30533d00">lisi</option>');
-        $('#system-commdl-refs').append($options).trigger('change');
-
-        const checkboxes = $('.system-commdl-booleanCheckbox').each(function () {
-            if ($(this).val() == 'b' || $(this).val() == 'c') $(this).iCheck('check');
+        if (!this.state.data) return;
+        const self = this;
+        const data = this.state.data;
+        this.mapSchemaObjKeys(function (key, obj) {
+            if (!key || !obj[key].label || !data[key]) return;
+            const item = obj[key];
+            const identifier = self.getIdentifier(key);
+            const inputType = item.inputType ? item.inputType.toLowerCase() : 'string';
+            const value = data[key];
+            const refOptions = item.refOptions;
+            switch (inputType) {
+                case 'boolean-checkbox':
+                    if (!_.isArray(value)) return;
+                    $('.' + identifier).each(function () {
+                        if ($(this).val() != value) return;
+                        $(this).iCheck('check');
+                    });
+                    break;
+                case 'boolean-radios':
+                    $('.' + identifier).each(function () {
+                        if (value.indexOf($(this).val()) == -1) return;
+                        $(this).iCheck('check');
+                    });
+                    break;
+                case 'file':
+                    $('#' + identifier + '-preview').attr('src', value);
+                    break;
+                case 'files':
+                    if (!_.isArray(value)) return;
+                    value.map(function (url) {
+                        const $img = $("<img/>").attr({'width': '150', src: url}).css({
+                            'margin': '2px',
+                            'max-width': '100%'
+                        });
+                        $('#' + identifier + '-previews').append($img);
+                    });
+                    break;
+                case 'ref':
+                    const $option = $('<option selected></option>').val(value[refOptions.value]).text(value[refOptions.display]);
+                    $('#' + identifier).append($option).trigger('change');
+                    break;
+                case 'refs':
+                    if (!_.isArray(value)) return;
+                    value.map(function (valueItem) {
+                        const $options = $('<option selected></option>').val(valueItem[refOptions.value]).text(valueItem[refOptions.display]);
+                        $('#' + identifier).append($options).trigger('change');
+                    });
+                    break;
+                default:
+                    $('#' + identifier).val(value);
+                    break;
+            }
         });
-        const radios = $('.system-commdl-booleanRadios').each(function () {
-            if ($(this).val() == 'a') $(this).iCheck('check');
+    },
+    getValue(){
+        const self = this;
+        const data = {};
+        this.mapSchemaObjKeys(function (key, obj) {
+            if (!key || !obj[key].label) return;
+            const item = obj[key];
+            const identifier = self.getIdentifier(key);
+            const inputType = item.inputType ? item.inputType.toLowerCase() : 'string';
+            let value = null;
+            switch (inputType) {
+                case 'boolean-checkbox':
+                    value = [];
+                    $('.' + identifier).each(function () {
+                        if ($(this).is(':checked') != true) return;
+                        value.push($(this).val());
+                    });
+                    break;
+                case 'boolean-radios':
+                    $('.' + identifier).each(function () {
+                        if ($(this).is(':checked') != true) return;
+                        value = $(this).val();
+                    });
+                    break;
+                case 'file':
+                    //TODO 上传文件
+                    break;
+                case 'files':
+                    //TODO 上传文件
+                    break;
+                default:
+                    value = $('#' + identifier).val();
+                    break;
+            }
+            data[key] = value;
         });
-
-        $('#system-commdl-textarea').val('哈哈哈我萨拉卡萨积分拉丝机弗兰克');
-
-        $('#system-commdl-date').val('2015-10-23');
-        $('#system-commdl-time').val('15:12:10');
-        $('#system-commdl-datetime').val('2016-12-25 09:59:20');
-
+        return data;
+    },
+    validate(data){
+        if (!data) return false;
+        const self = this;
+        const messageArray = [];
+        this.mapSchemaObjKeys(function (key, obj) {
+            if (!key || !obj[key].label || (!obj[key].required || data[key])) return;
+            const identifier = self.getIdentifier(key);
+            let message = _.isString(obj[key].required) ? obj[key].required : '{PATH}不能为空';
+            message = message.replace(/\{PATH\}/g, obj[key].label);
+            if ($('#' + identifier).focus) $('#' + identifier).focus();
+            messageArray.push(message);
+        });
+        if (messageArray.length == 0) return true;
+        messageArray.map((message) => (toastr.error(message, null, ToastrUtils.defaultOptions)));
+        return false;
     },
     _onSaveAction(){
-        console.log($('#system-commdl-text').val());
-        console.log($('#system-commdl-ref').val());
-        console.log($('#system-commdl-refs').val());
-
-        $('.system-commdl-booleanRadios').each(function () {
-            if ($(this).is(':checked') == true) console.log('booleanRadios...', $(this).val());
+        const self = this;
+        const data = this.getValue();
+        if (this.validate(data) != true) return;
+        const body = !this.state.i ? data : {cond: {_id: this.state.i}, doc: data};
+        fetch(RouteUtils.CUSTOM('/' + this.state.moduleCode + '/' + this.state.modelCode), {
+            method: (!this.state.i ? 'POST' : 'PUT'),
+            body: JSON.stringify(body),
+            headers: {
+                "Content-Type": "application/json",
+                "access_token": this.state.access_token
+            }
+        }).then(function (res) {
+            return res.json();
+        }).then(function (json) {
+            if (json.err) return toastr.error(json.err.message, null, ToastrUtils.defaultOptions);
+            toastr.info((!self.state.i ? '新增成功' : '修改成功'), null, ToastrUtils.defaultOptions);
         });
-
-        $('.system-commdl-booleanCheckbox').each(function () {
-            if ($(this).is(':checked') == true) console.log('booleanCheckbox...', $(this).val());
-        });
-
-        console.log($('#system-commdl-textarea').val());
-
-
-        console.log($('#system-commdl-date').val());
-        console.log($('#system-commdl-time').val());
-        console.log($('#system-commdl-datetime').val());
-
     },
     ctrlKeyRegister(){
         const self = this;
@@ -206,12 +283,14 @@ const AdminForm = React.createClass({
                     break;
                 case 'ref':
                     const refOptions = item.refOptions;
+                    const refModuleCode = item.ref.substring(0, item.ref.indexOf('_'));
+                    const refModelCode = item.ref.substring(item.ref.indexOf('_') + 1);
                     selector.select2({
                         language: 'zh-CN',
                         placeholder: label,
                         minimumInputLength: 1,
                         ajax: {
-                            url: RouteUtils.CUSTOM('/' + self.props.module + '/' + item.ref),
+                            url: RouteUtils.CUSTOM('/' + refModuleCode + '/' + refModelCode),
                             data: function (params) {
                                 const query = qs.stringify({
                                     keyword: params.term,
@@ -241,6 +320,41 @@ const AdminForm = React.createClass({
                                     }
                                 };
                             }
+                        }
+                    });
+                    break;
+                case 'file':
+                    $('#' + identifier).fileupload({
+                        url: RouteUtils.CUSTOM('/upload'),
+                        type: 'POST',
+                        dataType: 'json',
+                        add: function (e, data) {
+                            self.setState({'system-commdl-file-data': data});
+                            $('#' + identifier + '-text').text('已选择1个文件');
+                        },
+                        done: function (e, data) {
+                            //TODO 文件上传成功后的通知
+                            console.log(data);
+                        }
+                    });
+                    break;
+                case 'files':
+                    $('#' + identifier).fileupload({
+                        url: RouteUtils.CUSTOM('/upload'),
+                        type: 'POST',
+                        dataType: 'json',
+                        add: function (e, data) {
+                            const daKey = identifier + '-dataArray';
+                            const dataArray = self.state[daKey] || [];
+                            const object = {};
+                            dataArray.push(data);
+                            object[daKey] = dataArray;
+                            self.setState(object);
+                            $('#' + identifier + '-text').text((!dataArray || dataArray.length == 0) ? '选择文件' : '已选择' + dataArray.length + '个文件');
+                        },
+                        done: function (e, data) {
+                            //TODO 文件上传成功后的通知
+                            console.log(data);
                         }
                     });
                     break;
