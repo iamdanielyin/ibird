@@ -101,7 +101,7 @@ const AdminForm = React.createClass({
                 case 'boolean-checkbox':
                     if (!_.isArray(value)) return;
                     $('.' + identifier).each(function () {
-                        if ($(this).val() != value) return;
+                        if (value.indexOf($(this).val()) == -1) return;
                         $(this).iCheck('check');
                     });
                     break;

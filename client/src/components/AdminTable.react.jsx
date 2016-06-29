@@ -54,11 +54,27 @@ const AdminTable = React.createClass({
             self.fetchModelData();
         });
     },
-    componentDidMount(){
-        // console.log('AdminTable...');
-        const self = this;
+    componentDidUpdate: function (prevProps, prevState) {
+        if ($('.ibird-table-select-all').parent().is('th') == true) {
+            $('.ibird-table-select-all').iCheck({
+                checkboxClass: 'icheckbox_square-blue'
+            }).on('ifToggled', (function (e) {
+                console.log(e);
+                $('.ibird-table-select-item').iCheck(($('.ibird-table-select-all').is(':checked') == true) ? 'check' : 'uncheck');
+            }));
+        }
+        if ($('.ibird-table-select-item').parent().is('td') == true) {
+            $('.ibird-table-select-item').iCheck({
+                checkboxClass: 'icheckbox_square-blue'
+            });
+        }
+    },
+    componentWillMount(){
         this.createTableHeader();
         this.fetchModelData();
+    },
+    componentDidMount(){
+        // console.log('AdminTable...');
     },
     fetchModelData(){
         // console.log('fetchModelData...', this.state.moduleCode, this.state.modelCode);
@@ -88,6 +104,8 @@ const AdminTable = React.createClass({
         const dinfo = this.state.dinfo;
         const obj = schema.obj;
         const colsTh = [], colsOrder = [], columns = [];
+        colsTh.push(<th key={uuid.v4()}><input type="checkbox" className='ibird-table-select-all'
+                                               style={{opacity:'0'}}/></th>);
         Object.keys(obj).map(function (key) {
             if (!obj[key] || !obj[key].label || ['ref', 'refs', 'files', 'textarea', 'boolean-checkbox'].indexOf(obj[key].inputType) != -1) return;
             let sortIconDOM = null;
@@ -158,13 +176,15 @@ const AdminTable = React.createClass({
         if (!dinfo.data) return;
         dinfo.data.map(function (item) {
             const tds = [], row = {};
+            tds.push(<td key={uuid.v4()}><input type="checkbox" className='ibird-table-select-item'
+                                                style={{opacity:'0'}}/></td>);
             colsOrder.map(function (key) {
                 tds.push(<td key={uuid.v4()}>{item[key]}</td>);
                 row[key] = item[key] || '';
             });
             tds.push(
                 <td key={uuid.v4()}>
-                    <div className="btn-group">
+                    <div className="btn-group" style={{minWidth: '45px'}}>
                         <Link
                             to={{pathname:"/index/"+self.props.module+"/"+self.props.path,query:{m:self.props.model,f:uuid.v4(),i:item._id}}}
                             className="btn btn-primary btn-xs">
@@ -205,6 +225,11 @@ const AdminTable = React.createClass({
                                             to={{pathname:"/index/"+this.props.module+"/"+this.props.path,query:{m:this.props.model,f:uuid.v4()}}}
                                             className="btn btn-default">
                                             <i className="fa fa-plus"></i>
+                                        </Link>
+                                        <Link
+                                            to={{pathname:"/index/"+this.props.module+"/"+this.props.path,query:{m:this.props.model,f:uuid.v4()}}}
+                                            className="btn btn-default">
+                                            <i className="fa fa-minus"></i>
                                         </Link>
                                     </div>
                                 </div>
