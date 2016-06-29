@@ -35,7 +35,8 @@ const AdminTable = React.createClass({
             modelCode: this.props.model,
             colsTh: [],
             colsOrder: [],
-            trs: []
+            trs: [],
+            delIdArray: []
         };
         let token = localStorage.getItem('access_token');
         if (token) token = JSON.parse(token);
@@ -176,7 +177,7 @@ const AdminTable = React.createClass({
         if (!dinfo.data) return;
         dinfo.data.map(function (item) {
             const tds = [], row = {};
-            tds.push(<td key={uuid.v4()}><input type="checkbox" className='ibird-table-select-item'
+            tds.push(<td key={uuid.v4()}><input type="checkbox" className='ibird-table-select-item' id={item._id}
                                                 style={{opacity:'0'}}/></td>);
             colsOrder.map(function (key) {
                 tds.push(<td key={uuid.v4()}>{item[key]}</td>);
@@ -190,11 +191,9 @@ const AdminTable = React.createClass({
                             className="btn btn-primary btn-xs">
                             <i className="fa fa-edit"></i>
                         </Link>
-                        <Link
-                            to={{pathname:"/index/"+self.props.module+"/"+self.props.path,query:{m:self.props.model,f:uuid.v4(),i:item._id}}}
-                            className="btn btn-danger btn-xs">
+                        <button id={item._id} className="btn btn-danger btn-xs" onClick={self._deleteAction}>
                             <i className="fa fa-minus"></i>
-                        </Link>
+                        </button>
                     </div>
                 </td>
             );
@@ -202,6 +201,49 @@ const AdminTable = React.createClass({
             dataArray.push(row);
         });
         this.setState({trs: trs});
+    },
+    _batchDeleteAction(){
+        const delIdArray = [];
+        $('.ibird-table-select-item').each(function () {
+            if ($(this).is(':checked') != true || !$(this).attr('id')) return;
+            delIdArray.push($(this).attr('id'));
+        });
+        if (delIdArray.length == 0) return toastr.warning('请勾选需要删除的行', null, ToastrUtils.defaultOptions);
+        this.setState({delIdArray: delIdArray});
+        this.comfirmDelete();
+    },
+    _deleteAction(e){
+        const $target = $(e.target).is('button') ? $(e.target) : $(e.target).parent('button');
+        if (!$target.attr('id')) return toastr.error('操作异常，请重新刷新界面', null, ToastrUtils.defaultOptions);
+        this.setState({delIdArray: [$target.attr('id')]});
+        this.comfirmDelete();
+    },
+    comfirmDelete(){
+        const self = this;
+        toastr.warning('确认删除吗？<br/><br/><button type="button" class="btn btn-primary" id="ibird-table-delete-comfirm">确认</button>', null, {
+            progressBar: false,
+            closeButton: true,
+            timeOut: 0,
+            extendedTimeOut: 0,
+            preventDuplicates: true
+        });
+        $('#ibird-table-delete-comfirm').click(self.fetchDelete);
+    },
+    fetchDelete(){
+        const idArray = this.state.delIdArray;
+        fetch(RouteUtils.CUSTOM('/' + this.state.moduleCode + '/' + this.state.modelCode), {
+            method: 'DELETE',
+            body: JSON.stringify({_id: {$in: idArray}}),
+            headers: {
+                "Content-Type": "application/json",
+                "access_token": this.state.access_token
+            }
+        }).then(function (res) {
+            return res.json();
+        }).then(function (json) {
+            if (json.err) return toastr.error(json.err.message, null, ToastrUtils.defaultOptions);
+            toastr.info('删除成功，请重新刷新界面', null, ToastrUtils.defaultOptions);
+        });
     },
     render(){
         const self = this;
@@ -226,11 +268,9 @@ const AdminTable = React.createClass({
                                             className="btn btn-default">
                                             <i className="fa fa-plus"></i>
                                         </Link>
-                                        <Link
-                                            to={{pathname:"/index/"+this.props.module+"/"+this.props.path,query:{m:this.props.model,f:uuid.v4()}}}
-                                            className="btn btn-default">
+                                        <button className="btn btn-danger" onClick={self._batchDeleteAction}>
                                             <i className="fa fa-minus"></i>
-                                        </Link>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
