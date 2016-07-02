@@ -165,10 +165,10 @@ const AdminForm = React.createClass({
                     });
                     break;
                 case 'file':
-                    //TODO 上传文件
+                    //TODO 同步上传文件
                     break;
                 case 'files':
-                    //TODO 上传文件
+                    //TODO 同步上传文件
                     break;
                 default:
                     value = $('#' + identifier).val();
@@ -328,6 +328,7 @@ const AdminForm = React.createClass({
                         url: RouteUtils.CUSTOM('/upload'),
                         type: 'POST',
                         dataType: 'json',
+                        autoUpload:false,
                         add: function (e, data) {
                             self.setState({'system-commdl-file-data': data});
                             $('#' + identifier + '-text').text('已选择1个文件');
@@ -343,6 +344,7 @@ const AdminForm = React.createClass({
                         url: RouteUtils.CUSTOM('/upload'),
                         type: 'POST',
                         dataType: 'json',
+                        autoUpload:false,
                         add: function (e, data) {
                             const daKey = identifier + '-dataArray';
                             const dataArray = self.state[daKey] || [];
