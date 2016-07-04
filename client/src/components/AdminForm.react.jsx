@@ -163,12 +163,6 @@ const AdminForm = React.createClass({
                         value = $(this).val();
                     });
                     break;
-                case 'file':
-                    //TODO 同步上传文件
-                    break;
-                case 'files':
-                    //TODO 同步上传文件
-                    break;
                 default:
                     value = $('#' + identifier).val();
                     break;
