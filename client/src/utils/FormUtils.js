@@ -89,14 +89,12 @@ exports['boolean-checkbox'] = function (label, identifier, options) {
     });
     return <div className="form-group" key={uuid.v4()}><label>{label}</label><br/>{optionArray}</div>;
 };
-//TODO 引用采用select2实现
 exports.ref = function (label, identifier) {
     return <div className="form-group" key={uuid.v4()}>
         <label>{label}</label>
         <select className="form-control" style={{width: '100%'}} id={identifier}></select>
     </div>;
 };
-//TODO 引用采用select2实现
 exports.refs = function (label, identifier) {
     return <div className="form-group" key={uuid.v4()}>
         <label>{label}</label>
@@ -105,28 +103,41 @@ exports.refs = function (label, identifier) {
     </div>;
 };
 //TODO 未实现
+// exports.file = function (label, identifier) {
+//     return <div className="form-group" key={uuid.v4()}>
+//         <label>{label}</label>
+//         <div className="btn btn-default fileinput-button" style={{position:'relative',width:'100%'}}>
+//             <i className="glyphicon glyphicon-plus"></i>
+//             <span id={identifier+'-text'}>选择文件</span>
+//             <input type="file" className="form-control" id={identifier}
+//                    style={{opacity:'0',position:'absolute',left:'0px',top:'0px'}}/>
+//         </div>
+//         <img id={identifier+'-preview'} width="300px" style={{maxWidth:'100%'}}/>
+//     </div>;
+// };
 exports.file = function (label, identifier) {
     return <div className="form-group" key={uuid.v4()}>
         <label>{label}</label>
-        <div className="btn btn-default fileinput-button" style={{position:'relative',width:'100%'}}>
-            <i className="glyphicon glyphicon-plus"></i>
-            <span id={identifier+'-text'}>选择文件</span>
-            <input type="file" className="form-control" id={identifier}
-                   style={{opacity:'0',position:'absolute',left:'0px',top:'0px'}}/>
-        </div>
-        <img id={identifier+'-preview'} width="300px" style={{maxWidth:'100%'}}/>
+        <input type="text" className="form-control" id={identifier} placeholder={label}/>
     </div>;
 };
 //TODO 未实现
+// exports.files = function (label, identifier) {
+//     return <div className="form-group" key={uuid.v4()}>
+//         <label>{label}</label>
+//         <div className="btn btn-default fileinput-button" style={{position:'relative',width:'100%'}}>
+//             <i className="glyphicon glyphicon-plus"></i>
+//             <span id={identifier+'-text'}>选择文件</span>
+//             <input type="file" className="form-control" id={identifier} multiple
+//                    style={{opacity:'0',position:'absolute',left:'0px',top:'0px'}}/>
+//         </div>
+//         <div id={identifier+'-previews'} style={{textAlign:'left'}}></div>
+//     </div>;
+// };
 exports.files = function (label, identifier) {
     return <div className="form-group" key={uuid.v4()}>
         <label>{label}</label>
-        <div className="btn btn-default fileinput-button" style={{position:'relative',width:'100%'}}>
-            <i className="glyphicon glyphicon-plus"></i>
-            <span id={identifier+'-text'}>选择文件</span>
-            <input type="file" className="form-control" id={identifier} multiple
-                   style={{opacity:'0',position:'absolute',left:'0px',top:'0px'}}/>
-        </div>
-        <div id={identifier+'-previews'} style={{textAlign:'left'}}></div>
+        <input type="text" className="form-control" id={identifier} placeholder={label}/>
     </div>;
+    ;
 };

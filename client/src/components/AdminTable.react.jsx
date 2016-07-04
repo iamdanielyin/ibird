@@ -60,7 +60,6 @@ const AdminTable = React.createClass({
             $('.ibird-table-select-all').iCheck({
                 checkboxClass: 'icheckbox_square-blue'
             }).on('ifToggled', (function (e) {
-                console.log(e);
                 $('.ibird-table-select-item').iCheck(($('.ibird-table-select-all').is(':checked') == true) ? 'check' : 'uncheck');
             }));
         }
@@ -75,10 +74,8 @@ const AdminTable = React.createClass({
         this.fetchModelData();
     },
     componentDidMount(){
-        // console.log('AdminTable...');
     },
     fetchModelData(){
-        // console.log('fetchModelData...', this.state.moduleCode, this.state.modelCode);
         const self = this;
         const dinfo = this.state.dinfo;
         const query = qs.stringify({
@@ -126,7 +123,6 @@ const AdminTable = React.createClass({
     },
     _onSortAction(e){
         const code = e.target.getAttribute('data-code');
-        console.log(code);
         if (!code) return;
         const dinfo = this.state.dinfo;
         dinfo.sort = (dinfo.sort != code) ? code : '-' + code;
@@ -138,27 +134,23 @@ const AdminTable = React.createClass({
     },
     _onSizeChange(e){
         if (!e.target.value) return;
-        console.log(e.target.value);
         const dinfo = this.state.dinfo;
         dinfo.size = e.target.value;
         this.setState({dinfo: dinfo}, () => setTimeout(() => this.fetchModelData()));
     },
     _onPageChange(e){
         if (!e.target.value) return;
-        console.log(e.target.value);
         const dinfo = this.state.dinfo;
         dinfo.page = e.target.value;
         this.setState({dinfo: dinfo}, () => setTimeout(() => this.fetchModelData()));
     },
     _onPreviousAction(e){
-        console.log('_onPreviousAction...');
         const dinfo = this.state.dinfo;
         if (dinfo.page <= 1) return toastr.info((dinfo.totalpages == 1) ? '只有一页' : '已是第一页', null, ToastrUtils.defaultOptions);
         dinfo.page--;
         this.setState({dinfo: dinfo}, () =>this.fetchModelData());
     },
     _onNextAction(e){
-        console.log('_onNextAction...');
         const dinfo = this.state.dinfo;
         if (dinfo.page >= dinfo.totalpages) return toastr.info((dinfo.totalpages == 1) ? '只有一页' : '已是最后一页', null, ToastrUtils.defaultOptions);
         dinfo.page++;

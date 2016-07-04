@@ -43,7 +43,6 @@ const AdminForm = React.createClass({
         }).then(function (res) {
             return res.json();
         }).then(function (json) {
-            console.log(json);
             if (json.err) return toastr.error(json.err.message, null, ToastrUtils.defaultOptions);
             self.setState({data: json}, () => self.setValue());
         });
@@ -194,7 +193,7 @@ const AdminForm = React.createClass({
         messageArray.map((message) => (toastr.error(message, null, ToastrUtils.defaultOptions)));
         return false;
     },
-    _onSaveAction(){
+    _onSaveAction(e){
         const self = this;
         const data = this.getValue();
         if (this.validate(data) != true) return;
@@ -324,44 +323,138 @@ const AdminForm = React.createClass({
                     });
                     break;
                 case 'file':
-                    $('#' + identifier).fileupload({
-                        url: RouteUtils.CUSTOM('/upload'),
-                        type: 'POST',
-                        dataType: 'json',
-                        autoUpload:false,
-                        add: function (e, data) {
-                            self.setState({'system-commdl-file-data': data});
-                            $('#' + identifier + '-text').text('已选择1个文件');
-                        },
-                        done: function (e, data) {
-                            //TODO 文件上传成功后的通知
-                            console.log(data);
-                        }
+                    $('#' + identifier).popover({
+                        title: item.label,
+                        html: true,
+                        content: '<div class="btn-group" style="max-height:35px; height:35px;">' +
+                        '<div class="btn btn-default btn-sm fileinput-button" style="position:relative;">' +
+                        '<i class="glyphicon glyphicon-plus"></i>' +
+                        '<span id="' + identifier + '-text">选择文件</span>' +
+                        '<input type="file" id="' + identifier + '-file" class="form-control" style="opacity:0;position:absolute;left:0px;top:0px"/>' +
+                        '</div>' +
+                        '<span id="' + identifier + '-upload" class="btn btn-primary btn-sm fa fa-cloud-upload" aria-hidden="true" style="line-height:18px; cursor: pointer;"></span>' +
+                        '<span id="' + identifier + '-clear" class="btn btn-danger btn-sm fa fa-times" aria-hidden="true" style="line-height:18px; cursor: pointer;"></span>' +
+                        '</div>' +
+                        '<div style="width:100%;"><img id="' + identifier + '-preview" class="img-responsive img-thumbnail" width="150" style="display: none;"/></div>',
+                        placement: 'auto top'
+                    });
+                    $('#' + identifier).on('shown.bs.popover', function (e) {
+                        $('#' + identifier + '-file').fileupload({
+                            url: RouteUtils.CUSTOM('/upload'),
+                            type: 'POST',
+                            dataType: 'json',
+                            autoUpload: false,
+                            add: function (e, data) {
+                                const object = {};
+                                object[identifier + '-data'] = data;
+                                self.setState(object);
+                                $('#' + identifier + '-text').text('已选择1个文件');
+                            },
+                            done: function (e, data) {
+                                //文件上传成功后的通知
+                                const result = data ? data.result : null;
+                                if (!result || result.length < 1) return toastr.error('上传失败', null, ToastrUtils.defaultOptions);
+                                $('#' + identifier + '-preview').attr('src', result[0]).css('display', 'block');
+                            }
+                        });
+
+                        $('#' + identifier + '-upload').click(function (e) {
+                            //执行上传
+                            const data = self.state[identifier + '-data'];
+                            if (!data) return toastr.warning('请先选择文件', null, ToastrUtils.defaultOptions);
+                            data.submit();
+                        });
+                        $('#' + identifier + '-clear').click(function () {
+                            //执行清除
+                            const object = {};
+                            object[identifier + '-data'] = null;
+                            self.setState(object);
+                            $('#' + identifier + '-text').text('选择文件');
+                        });
+                    });
+                    $('#' + identifier).on('hide.bs.popover', function (e) {
+                        const val = $('#' + identifier + '-preview').attr('src');
+                        if (val) $(e.target).val(val);
                     });
                     break;
                 case 'files':
-                    $('#' + identifier).fileupload({
-                        url: RouteUtils.CUSTOM('/upload'),
-                        type: 'POST',
-                        dataType: 'json',
-                        autoUpload:false,
-                        add: function (e, data) {
-                            const daKey = identifier + '-dataArray';
-                            const dataArray = self.state[daKey] || [];
+                    $('#' + identifier).popover({
+                        title: item.label,
+                        html: true,
+                        content: '<div class="btn-group" style="max-height:35px; height:35px;">' +
+                        '<div class="btn btn-default btn-sm fileinput-button" style="position:relative;">' +
+                        '<i class="glyphicon glyphicon-plus"></i>' +
+                        '<span id="' + identifier + '-text">选择文件</span>' +
+                        '<input type="file" id="' + identifier + '-file" class="form-control" style="opacity:0;position:absolute;left:0px;top:0px" multiple/>' +
+                        '</div>' +
+                        '<span id="' + identifier + '-upload" class="btn btn-primary btn-sm fa fa-cloud-upload" aria-hidden="true" style="line-height:18px; cursor: pointer;"></span>' +
+                        '<span id="' + identifier + '-clear" class="btn btn-danger btn-sm fa fa-times" aria-hidden="true" style="line-height:18px; cursor: pointer;"></span>' +
+                        '</div>' +
+                        '<div style="width:100%; max-height:200px;" id="' + identifier + '-preview" class="scrollbar"></div>',
+                        placement: 'auto top'
+                    });
+                    $('#' + identifier).on('shown.bs.popover', function (e) {
+                        $('#' + identifier + '-file').fileupload({
+                            url: RouteUtils.CUSTOM('/upload'),
+                            type: 'POST',
+                            singleFileUploads: false,
+                            limitMultiFileUploads: 10,
+                            limitMultiFileUploadSize: 524288000,//500M
+                            dataType: 'json',
+                            autoUpload: false,
+                            add: function (e, data) {
+                                const array = self.state[identifier + '-datas'] || [];
+                                const object = {};
+                                let length = 0;
+                                array.push(data);
+                                object[identifier + '-datas'] = array;
+                                self.setState(object);
+                                array.map(function (item) {
+                                    length += item.files.length;
+                                });
+                                $('#' + identifier + '-text').text('已选择' + length + '个文件');
+                            },
+                            done: function (e, data) {
+                                //文件上传成功后的通知
+                                const result = data ? data.result : null;
+                                if (!result || result.length < 1) return toastr.error('上传失败', null, ToastrUtils.defaultOptions);
+                                result.map(function (url) {
+                                    const $img = $('<img src="' + url + '" class="img-responsive img-thumbnail" width="150" style="display: inline-block; margin: 3px;"/>');
+                                    $('#' + identifier + '-preview').append($img);
+                                });
+                            }
+                        });
+
+                        $('#' + identifier + '-upload').click(function (e) {
+                            //执行上传
+                            const datas = self.state[identifier + '-datas'];
+                            if (!datas || datas.length == 0) return toastr.warning('请先选择文件', null, ToastrUtils.defaultOptions);
+                            datas.map(function (data) {
+                                if (!data) return;
+                                data.submit();
+                            });
+                        });
+                        $('#' + identifier + '-clear').click(function () {
+                            //执行清除
                             const object = {};
-                            dataArray.push(data);
-                            object[daKey] = dataArray;
+                            object[identifier + '-datas'] = [];
                             self.setState(object);
-                            $('#' + identifier + '-text').text((!dataArray || dataArray.length == 0) ? '选择文件' : '已选择' + dataArray.length + '个文件');
-                        },
-                        done: function (e, data) {
-                            //TODO 文件上传成功后的通知
-                            console.log(data);
-                        }
+                            $('#' + identifier + '-text').text('选择文件');
+                        });
+                    });
+                    $('#' + identifier).on('hide.bs.popover', function (e) {
+                        let val = '';
+                        $('#' + identifier + '-preview > img').each(function () {
+                            val += $(this).attr('src') + ',';
+                        });
+                        val = val.lastIndexOf(',') != -1 ? val.substring(0, val.length - 1) : val;
+                        if (val) $(e.target).val(val);
                     });
                     break;
             }
         });
+
+
     },
     render(){
         const formGroupArray = this.state.form;
@@ -382,6 +475,7 @@ const AdminForm = React.createClass({
                             <div className="box-footer">
                                 <span className="btn btn-primary" onClick={this._onSaveAction}
                                       style={{cursor:'pointer'}}>保存</span>
+                                <span className="btn btn-default" style={{cursor:'pointer'}} id="ibird-files-center">文件管理</span>
                             </div>
                         </form>
                     </div>

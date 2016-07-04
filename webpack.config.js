@@ -91,6 +91,8 @@ module.exports = {
     resolve: {
         extensions: ['', '.js', '.jsx'],
         alias: {
+            bootstrap: path.resolve(__dirname, 'client/src/publics/lib/bootstrap/js/bootstrap.js'),
+            adminlte: path.resolve(__dirname, 'client/src/publics/lib/adminlte/js/AdminLTE.js'),
             toastr: path.resolve(__dirname, 'client/src/publics/plugins/toastr/toastr.min.js'),
             icheck: path.resolve(__dirname, 'client/src/publics/plugins/iCheck/icheck.js'),
             datetimepicker: path.resolve(__dirname, 'client/src/publics/plugins/datetimepicker/js/bootstrap-datetimepicker.min.js'),

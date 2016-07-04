@@ -53,7 +53,6 @@ module.exports = function (inputType, label, identifier, data) {
             break;
         case 'refs':
             //多引用
-            console.log('refs...');
             formGroup = FormUtils.refs(label, identifier);
             break;
         case 'file':

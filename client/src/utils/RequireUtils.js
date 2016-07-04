@@ -1,5 +1,5 @@
 /**
- * 自动require所有依赖
+ * 手动require所有依赖
  * 包括：
  *  publics/css
  *  publics/fonts
@@ -13,14 +13,14 @@ require('../publics/lib/bootstrap/css/bootstrap.css');
 require('../publics/lib/adminlte/css/AdminLTE.css');
 require('../publics/lib/adminlte/css/AdminLTE-skins.css');
 require('../publics/lib/font-awesome/font-awesome.css');
-require('../publics/lib/bootstrap/js/bootstrap');
-require('../publics/lib/adminlte/js/AdminLTE');
 require('../publics/css/index.less');
 require('../publics/plugins/iCheck/all.css');
 require('../publics/plugins/toastr/toastr.css');
 require('../publics/plugins/datetimepicker/css/bootstrap-datetimepicker.min.css');
 require('../publics/plugins/select2/select2.min.css');
 
+require('bootstrap');
+require('adminlte');
 require('whatwg-fetch');
 require('jquery-slimscroll');
 require('icheck');
