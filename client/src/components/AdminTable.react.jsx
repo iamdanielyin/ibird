@@ -119,7 +119,15 @@ const AdminTable = React.createClass({
             columns.push({data: key});
         });
         colsTh.push(<th key={uuid.v4()}>操作</th>);
-        this.setState({colsTh: colsTh, colsOrder: colsOrder, columns: columns});
+        this.setState({
+            colsTh: colsTh,
+            colsOrder: colsOrder,
+            columns: columns,
+            trs: [<tr key={uuid.v4()}>
+                <td colSpan={colsOrder.length+2}>加载中，请稍候...</td>
+            </tr>]
+        });
+
     },
     _onSortAction(e){
         const code = e.target.getAttribute('data-code');
@@ -192,6 +200,10 @@ const AdminTable = React.createClass({
             trs.push(<tr key={uuid.v4()}>{tds}</tr>);
             dataArray.push(row);
         });
+        if (trs.length == 0) trs.push(<tr key={uuid.v4()}>
+            <td colSpan={colsOrder.length+2}>暂无记录</td>
+        </tr>);
+        console.log(trs);
         this.setState({trs: trs});
     },
     _batchDeleteAction(){
