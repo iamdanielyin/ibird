@@ -469,7 +469,6 @@ const AdminForm = React.createClass({
                             <div className="box-footer">
                                 <span className="btn btn-primary" onClick={this._onSaveAction}
                                       style={{cursor:'pointer'}}>保存</span>
-                                <span className="btn btn-default" style={{cursor:'pointer'}} id="ibird-files-center">文件管理</span>
                             </div>
                         </form>
                     </div>

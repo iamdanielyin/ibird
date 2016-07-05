@@ -5,7 +5,7 @@
 
 'use strict';
 
-const server = require('./index.js');
+const ibird = require('./index.js');
 const uuid = require('node-uuid');
 const path = require('path');
 const _ = require('underscore');
@@ -15,12 +15,16 @@ moment.locale('zh-cn');
 //导入模块
 const system = require('./lib/modules/system');// 导入系统模块
 
-server.initialize({
+const config = {
     "name": "ibird",
     "route": "/admin",
     "middlewares": function (app) {
         //挂载express中间件
     },
+    "routes": {
+        //全局路由配置
+    },
+    "menu": [/*全局菜单配置*/],
     "config": {
         "mongodb": "mongodb://master:!QAZ2wsx@ds034279.mlab.com:34279/ibird-test",
         "redis": "",
@@ -37,7 +41,7 @@ server.initialize({
         "yinfxs"
     ],
     "modules": [
-        system(server),
+        system(ibird),
         {
             "label": "业务模块",
             "code": "business",//模块编码不能重复
@@ -165,10 +169,11 @@ server.initialize({
             }
         }
     ]
-});
+};
 
-server.app.get('/', function (req, res) {
+
+ibird.initialize(config);
+ibird.app.get('/', function (req, res) {
     res.end('Hello ibird!');
 });
-
-server.start();
+ibird.start();

@@ -37,19 +37,14 @@ const RouteCatcher = React.createClass({
         return schema;
     },
     render(){
-        const props = this.props;
-        const module = props.params.module;
-        const path = props.params.path;
-        const query = props.location.query;
+        const module = this.props.params.module;
+        const path = this.props.params.path, query = this.props.location.query;
         const schema = this.getSchemaByCode(module, query.m);
-        const f = query.f;
-        const i = query.i;
-        return (
-            !f ? <AdminTable module={module} path={path} model={query.m} schema={schema}/> :
-                <AdminForm module={module} path={path} model={query.m} schema={schema} i={i}/>
-        );
+        const f = query.f, i = query.i;
+        const content = !f ? <AdminTable module={module} path={path} model={query.m} schema={schema}/> :
+            <AdminForm module={module} path={path} model={query.m} schema={schema} i={i}/>;
+        return content;
     }
 });
-
 
 module.exports = RouteCatcher;
