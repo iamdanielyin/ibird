@@ -203,7 +203,6 @@ const AdminTable = React.createClass({
         if (trs.length == 0) trs.push(<tr key={uuid.v4()}>
             <td colSpan={colsOrder.length+2}>暂无记录</td>
         </tr>);
-        console.log(trs);
         this.setState({trs: trs});
     },
     _batchDeleteAction(){

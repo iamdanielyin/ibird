@@ -34,6 +34,18 @@ if (isProduction) plugins.push(new webpack.optimize.UglifyJsPlugin({
     }
 }));
 
+let resolveAlias = {
+    'bootstrap': path.resolve(__dirname, 'client/src/publics/lib/bootstrap/js/bootstrap.js'),
+    'adminlte': path.resolve(__dirname, 'client/src/publics/lib/adminlte/js/AdminLTE.js'),
+    'toastr': path.resolve(__dirname, 'client/src/publics/plugins/toastr/toastr.min.js'),
+    'icheck': path.resolve(__dirname, 'client/src/publics/plugins/iCheck/icheck.js'),
+    'datetimepicker': path.resolve(__dirname, 'client/src/publics/plugins/datetimepicker/js/bootstrap-datetimepicker.min.js'),
+    'select2': path.resolve(__dirname, 'client/src/publics/plugins/select2/select2.full.js'),
+    'jquery.fileupload': path.resolve(__dirname, 'client/src/publics/plugins/jqueryFileUpload/jquery.fileupload.js'),
+    'jquery.iframe-transport': path.resolve(__dirname, 'client/src/publics/plugins/jqueryFileUpload/jquery.iframe-transport.js'),
+    'jquery.ui.widget': path.resolve(__dirname, 'client/src/publics/plugins/jqueryFileUpload/jquery.ui.widget.js')
+};
+
 
 module.exports = {
     entry: {
@@ -91,16 +103,6 @@ module.exports = {
     plugins: plugins,
     resolve: {
         extensions: ['', '.js', '.jsx'],
-        alias: {
-            'bootstrap': path.resolve(__dirname, 'client/src/publics/lib/bootstrap/js/bootstrap.js'),
-            'adminlte': path.resolve(__dirname, 'client/src/publics/lib/adminlte/js/AdminLTE.js'),
-            'toastr': path.resolve(__dirname, 'client/src/publics/plugins/toastr/toastr.min.js'),
-            'icheck': path.resolve(__dirname, 'client/src/publics/plugins/iCheck/icheck.js'),
-            'datetimepicker': path.resolve(__dirname, 'client/src/publics/plugins/datetimepicker/js/bootstrap-datetimepicker.min.js'),
-            'select2': path.resolve(__dirname, 'client/src/publics/plugins/select2/select2.full.js'),
-            'jquery.fileupload': path.resolve(__dirname, 'client/src/publics/plugins/jqueryFileUpload/jquery.fileupload.js'),
-            'jquery.iframe-transport': path.resolve(__dirname, 'client/src/publics/plugins/jqueryFileUpload/jquery.iframe-transport.js'),
-            'jquery.ui.widget': path.resolve(__dirname, 'client/src/publics/plugins/jqueryFileUpload/jquery.ui.widget.js')
-        }
+        alias: resolveAlias
     }
 };
