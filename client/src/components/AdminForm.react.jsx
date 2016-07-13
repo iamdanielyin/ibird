@@ -9,6 +9,7 @@
 'use strict';
 
 const React = require('react');
+const Link = require('react-router').Link;
 const RouteUtils = require('../utils/RouteUtils');
 const ToastrUtils = require('../utils/ToastrUtils');
 const FormFactory = require('../utils/FormFactory');
@@ -447,8 +448,6 @@ const AdminForm = React.createClass({
                     break;
             }
         });
-
-
     },
     render(){
         const formGroupArray = this.state.form;
@@ -468,7 +467,9 @@ const AdminForm = React.createClass({
                             </div>
                             <div className="box-footer">
                                 <span className="btn btn-primary" onClick={this._onSaveAction}
-                                      style={{cursor:'pointer'}}>保存</span>
+                                      style={{cursor:'pointer',margin:'0px 5px'}}>保存</span>
+
+                                <Link className="btn btn-default" to={{pathname:"/index/"+this.props.module+"/"+this.props.path,query:{m:this.props.model}}}>返回</Link>
                             </div>
                         </form>
                     </div>
