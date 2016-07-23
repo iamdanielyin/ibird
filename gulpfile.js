@@ -33,34 +33,40 @@ gulp.task('server:index', function () {
 
 // 服务端构建任务
 gulp.task('server:others', function () {
-    return gulp.src(['package.json'/*,'usage.js'*/])      //引入所有需处理的JS
+    return gulp.src(['package.json', 'webpack.config.js' /*,'usage.js'*/])      //引入所有需处理的JS
         .pipe(gulp.dest('./dist/'));        //构建后输出
 });
 
-// 前端图片处理任务
-gulp.task('client:images', function () {
-    return gulp.src('client/dist/**/*.(png|jpg|jpeg)')        //引入所有需处理的图片文件
-        .pipe(imagemin({optimizationLevel: 3, progressive: true, interlaced: true}))      //压缩图片
-        .pipe(gulp.dest('./dist/client/')); //输出压缩后的图片
+// 服务端构建任务
+gulp.task('server:bin', function () {
+    return gulp.src(['bin/*'])      //引入所有需处理的JS
+        .pipe(gulp.dest('./dist/bin'));        //构建后输出
 });
 
-// 前端模块处理任务
-gulp.task('client:scripts', function () {
-    return gulp.src('client/dist/**/*.+(js|jsx)')      //引入所有需处理的JS和JSX文件
-        .pipe(gulp.dest('./dist/client/'));        //输出压缩后的文件
+// 前端编译文件复制
+gulp.task('client:dist', function () {
+    return gulp.src('client/dist/**/*')        //引入所有需处理的文件
+        .pipe(gulp.dest('./dist/client/dist/')); //构建后输出
+});
+
+// 前端源码文件复制
+gulp.task('client:src', function () {
+    return gulp.src('client/src/**/*')        //引入所有需处理的文件
+        .pipe(gulp.dest('./dist/client/src/')); //构建后输出
+});
+
+// 前端图片处理任务
+gulp.task('client:dist:images', function () {
+    return gulp.src('client/dist/**/*.(png|jpg|jpeg)')        //引入所有需处理的图片文件
+        .pipe(imagemin({optimizationLevel: 3, progressive: true, interlaced: true}))      //压缩图片
+        .pipe(gulp.dest('./dist/client/dist/')); //输出压缩后的图片
 });
 
 // 前端网页压缩处理任务
-gulp.task('client:htmls', function () {
+gulp.task('client:dist:htmls', function () {
     return gulp.src('client/dist/*.html')    //引入所有前端网页文件
         .pipe(htmlmin({collapseWhitespace: true}))           //压缩网页文件
-        .pipe(gulp.dest('./dist/client/'));      //输出压缩后的文件
-});
-
-// 前端模块处理任务
-gulp.task('client:others', function () {
-    return gulp.src('client/dist/**/*')      //引入所有需处理的JS和JSX文件
-        .pipe(gulp.dest('./dist/client/'));        //输出压缩后的文件
+        .pipe(gulp.dest('./dist/client/dist/'));      //输出压缩后的文件
 });
 
 // 输出目录清理任务
@@ -77,7 +83,7 @@ gulp.task('clean:client', function () {
 
 // 注册编译任务
 gulp.task('build', function () {
-    runSequence('server', 'server:index', 'server:others', 'client:others', 'client:images', 'client:scripts', 'client:htmls');
+    runSequence('server', 'server:index', 'server:others', 'server:bin', 'client:src', 'client:dist', 'client:dist:images', 'client:dist:htmls');
 });
 
 // 注册默认任务

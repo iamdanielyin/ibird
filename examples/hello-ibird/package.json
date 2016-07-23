@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "ibird": "ibird",
+    "start": "NODE_ENV=production node index.js"
   },
   "keywords": [
     "hello",
@@ -13,8 +14,10 @@
   "author": "yinfxs",
   "license": "MIT",
   "dependencies": {
+    "ibird": "^0.1.0",
     "moment": "^2.14.1",
     "node-uuid": "^1.4.7",
+    "react": "^15.2.1",
     "underscore": "^1.8.3"
   }
 }

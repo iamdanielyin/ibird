@@ -8,7 +8,7 @@
 const React = require('react');
 const moment = require('moment');
 const Link = require('react-router').Link;
-const avatar = require('../publics/images/avatar.jpg');
+const avatar = require('../public/images/avatar.jpg');
 const AdminIndex = require('./AdminIndex.react');
 const RouteUtils = require('../utils/RouteUtils');
 const CodeUtils = require('../utils/CodeUtils');
@@ -87,7 +87,7 @@ const Admin = React.createClass({
                             return (
                                 <li key={"/"+moduleCode+"/"+item.code}>
                                     <Link
-                                        to={{pathname:"/index/"+moduleCode+"/"+item.code,query:{m:item.model}}}>
+                                        to={{pathname:"/index/"+moduleCode+"/"+item.code,query:{m:item.model,com:item.component}}}>
                                         <i className={"fa fa-"+item.icon}></i>
                                         <span>{item.label}</span>
                                     </Link>

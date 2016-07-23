@@ -1,6 +1,6 @@
 {
   "name": "ibird",
-  "version": "0.1.0",
+  "version": "0.1.4",
   "description": "A General Background Solution",
   "main": "index.js",
   "scripts": {
@@ -11,6 +11,9 @@
     "deploy": "gulp",
     "clean": "gulp clean",
     "clean-client": "gulp clean:client"
+  },
+  "bin": {
+    "ibird": "./bin/ibird.js"
   },
   "repository": {
     "type": "git",
@@ -53,6 +56,7 @@
     "morgan": "^1.7.0",
     "node-uuid": "^1.4.7",
     "underscore": "^1.8.3",
+    "webpack": "^1.13.1",
     "winston": "^2.2.0"
   },
   "devDependencies": {
@@ -76,6 +80,7 @@
     "json-loader": "^0.5.4",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",
+    "optimist": "^0.6.1",
     "qs": "^6.2.0",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
@@ -83,7 +88,6 @@
     "run-sequence": "^1.2.1",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
-    "webpack": "^1.13.1",
     "webpack-dev-middleware": "^1.6.1",
     "whatwg-fetch": "^1.0.0"
   },

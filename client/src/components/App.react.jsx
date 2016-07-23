@@ -16,7 +16,6 @@ const App = React.createClass({
     contextTypes: {
         router: React.PropTypes.object
     },
-    
     componentDidMount() {
         const self = this;
         const currPathname = self.props.location.pathname;

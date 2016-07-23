@@ -34,19 +34,6 @@ if (isProduction) plugins.push(new webpack.optimize.UglifyJsPlugin({
     }
 }));
 
-let resolveAlias = {
-    'bootstrap': path.resolve(__dirname, 'client/src/publics/lib/bootstrap/js/bootstrap.js'),
-    'adminlte': path.resolve(__dirname, 'client/src/publics/lib/adminlte/js/AdminLTE.js'),
-    'toastr': path.resolve(__dirname, 'client/src/publics/plugins/toastr/toastr.min.js'),
-    'icheck': path.resolve(__dirname, 'client/src/publics/plugins/iCheck/icheck.js'),
-    'datetimepicker': path.resolve(__dirname, 'client/src/publics/plugins/datetimepicker/js/bootstrap-datetimepicker.min.js'),
-    'select2': path.resolve(__dirname, 'client/src/publics/plugins/select2/select2.full.js'),
-    'jquery.fileupload': path.resolve(__dirname, 'client/src/publics/plugins/jqueryFileUpload/jquery.fileupload.js'),
-    'jquery.iframe-transport': path.resolve(__dirname, 'client/src/publics/plugins/jqueryFileUpload/jquery.iframe-transport.js'),
-    'jquery.ui.widget': path.resolve(__dirname, 'client/src/publics/plugins/jqueryFileUpload/jquery.ui.widget.js')
-};
-
-
 module.exports = {
     entry: {
         app: ['whatwg-fetch', path.resolve(__dirname, 'client/src/index.jsx')],
@@ -61,16 +48,14 @@ module.exports = {
         loaders: [
             {
                 test: /\.(jsx|js)?$/,
-                include: SOURCEDIR,
-                exclude: /node_modules/,
                 loader: 'babel',
                 query: {
                     presets: ['es2015', 'react', 'stage-3'],
                     compact: false
                 }
             },
-            {test: /\.json$/, include: SOURCEDIR, exclude: /node_modules/, loader: 'json'},
-            {test: /\.(less|css)$/, include: SOURCEDIR, exclude: /node_modules/, loaders: ['style', 'css', 'less']},
+            {test: /\.json$/, include: SOURCEDIR, loader: 'json'},
+            {test: /\.(less|css)$/, include: SOURCEDIR, loaders: ['style', 'css', 'less']},
             // {
             //     test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
             //     include: SOURCEDIR, exclude: /node_modules/,
@@ -83,19 +68,17 @@ module.exports = {
             {
                 test: /\.(ttf|eot|svg|woff|woff2)?(\?\S*)?$/,
                 include: SOURCEDIR,
-                exclude: /node_modules/,
                 loader: "file"
             },
             // {
             //     test: /\.(jpg|png|jpeg)$/,
             //     include: SOURCEDIR,
-            //     exclude: [path.resolve(__dirname, 'node_modules'), path.resolve(__dirname, 'client/src/publics/plugins')],
+            //     exclude: [path.resolve(__dirname, 'node_modules'), path.resolve(__dirname, 'client/src/public/plugins')],
             //     loader: "url?limit=8192"
             // },
             {
                 test: /\.(jpg|jpeg|png|gif)$/,
                 include: SOURCEDIR,
-                exclude: /node_modules/,
                 loader: 'file'
             }
         ]
@@ -103,6 +86,16 @@ module.exports = {
     plugins: plugins,
     resolve: {
         extensions: ['', '.js', '.jsx'],
-        alias: resolveAlias
+        alias: {
+            'bootstrap': path.resolve(__dirname, 'client/src/public/lib/bootstrap/js/bootstrap.js'),
+            'adminlte': path.resolve(__dirname, 'client/src/public/lib/adminlte/js/AdminLTE.js'),
+            'toastr': path.resolve(__dirname, 'client/src/public/plugins/toastr/toastr.min.js'),
+            'icheck': path.resolve(__dirname, 'client/src/public/plugins/iCheck/icheck.js'),
+            'datetimepicker': path.resolve(__dirname, 'client/src/public/plugins/datetimepicker/js/bootstrap-datetimepicker.min.js'),
+            'select2': path.resolve(__dirname, 'client/src/public/plugins/select2/select2.full.js'),
+            'jquery.fileupload': path.resolve(__dirname, 'client/src/public/plugins/jqueryFileUpload/jquery.fileupload.js'),
+            'jquery.iframe-transport': path.resolve(__dirname, 'client/src/public/plugins/jqueryFileUpload/jquery.iframe-transport.js'),
+            'jquery.ui.widget': path.resolve(__dirname, 'client/src/public/plugins/jqueryFileUpload/jquery.ui.widget.js')
+        }
     }
 };
