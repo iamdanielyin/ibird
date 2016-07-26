@@ -43,7 +43,7 @@ function replaceRouteCatcher(components) {
         `;
     });
     //替换RouteCatcher.react.jsx
-    const tplpath = path.resolve(__dirname, '../client/src/components/RouteCatcher.react.jsx.example');
+    const tplpath = path.resolve(__dirname, '../client/src/components/RouteCatcher.react.example');
     const destpath = path.resolve(__dirname, '../client/src/components/RouteCatcher.react.jsx');
     fileTemplateReplace(tplpath, destpath, {'#requires': $requires, '#cases': $cases});
 }
