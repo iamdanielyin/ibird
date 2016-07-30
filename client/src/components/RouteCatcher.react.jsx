@@ -41,13 +41,16 @@ const RouteCatcher = React.createClass({
         const path = this.props.params.path, query = this.props.location.query;
         const schema = this.getSchemaByCode(module, query.m);
         const f = query.f, i = query.i, com = query.com;
-        const content = !f ? <AdminTable module={module} path={path} model={query.m} schema={schema}/> :
-            <AdminForm module={module} path={path} model={query.m} schema={schema} i={i}/>;
-        console.log(query.com);
-        if (com) {
-            const Component = require(com);
-            console.log('com=' + com, 'Component=' + Component);
-            return <Component module={module} path={path} model={query.m} schema={schema} i={i}/>
+
+        let content;
+        switch (com) {
+            default:
+                if (f) {
+                    content = <AdminForm module={module} path={path} model={query.m} schema={schema} i={i}/>;
+                } else {
+                    content = <AdminTable module={module} path={path} model={query.m} schema={schema}/>;
+                }
+                break;
         }
         return content;
     }
