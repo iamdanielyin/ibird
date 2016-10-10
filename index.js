@@ -5,4 +5,4 @@
 
 'use strict';
 
-module.exports = require('./lib/ibird-server');
+module.exports = require('./lib/server');
