@@ -39,8 +39,8 @@ module.exports = {
         "mongodb": "mongodb://ibird:!QAZ2wsx@127.0.0.1:27017/ibird",//"mongodb://master:!QAZ2wsx@ds034279.mlab.com:34279/ibird-test",
         "mssql": {
             user: 'sa',
-            password: 'wosoft!Admin',
-            server: '121.41.46.25',
+            password: '!QAZ2wsx',
+            server: '127.0.0.1',
             database: 'ibird',
             pool: {
                 max: 10,
