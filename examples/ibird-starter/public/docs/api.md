@@ -510,7 +510,7 @@ JSON
   "booleanRadios": "String,单选",
   "booleanCheckbox": "String,多选",
   "number": "Number,数字",
-  "textarea": "String,编辑器",
+  "textarea": "String,大文本",
   "ref": "String,单引用",
   "refs": "String,多引用",
   "refs2": "String,多引用2",
@@ -532,7 +532,7 @@ JSON
   "booleanRadios": "String,单选",
   "booleanCheckbox": "String,多选",
   "number": "Number,数字",
-  "textarea": "String,编辑器",
+  "textarea": "String,大文本",
   "ref": "String,单引用",
   "refs": "String,多引用",
   "refs2": "String,多引用2",
@@ -557,7 +557,7 @@ curl -X POST -H "Cache-Control: no-cache" -H "Content-Type: application/x-www-fo
   "booleanRadios": "String,单选",
   "booleanCheckbox": "String,多选",
   "number": "Number,数字",
-  "textarea": "String,编辑器",
+  "textarea": "String,大文本",
   "ref": "String,单引用",
   "refs": "String,多引用",
   "refs2": "String,多引用2",
@@ -591,7 +591,7 @@ JSON
     "booleanRadios": "String,单选",
     "booleanCheckbox": "String,多选",
     "number": "Number,数字",
-    "textarea": "String,编辑器",
+    "textarea": "String,大文本",
     "ref": "String,单引用",
     "refs": "String,多引用",
     "refs2": "String,多引用2",
@@ -612,7 +612,7 @@ JSON
 #### 调用示例
 ``` javascript
 curl -X PUT -H "Content-Type: application/json" -H "access_token: 84edff70-8014-11e6-9a22-ef95cc3c1a5b"
- -H "Cache-Control: no-cache" -d '{"cond":{"_id":"57e2a90469e9d9d5524778c8"},"doc":{"*text":"String,文本框","*password":"String,密码","date":"String,日期","time":"String,时间","datetime":"String,日期时间","ts":"String,时间戳","booleanRadios":"String,单选","booleanCheckbox":"String,多选","number":"Number,数字","textarea":"String,编辑器","ref":"String,单引用","refs":"String,多引用","refs2":"String,多引用2","refs3":"String,多引用3","file":"String,单文件/图片","files":"String,多文件/图片"}}' "http://localhost:3000/preset/commdl"
+ -H "Cache-Control: no-cache" -d '{"cond":{"_id":"57e2a90469e9d9d5524778c8"},"doc":{"*text":"String,文本框","*password":"String,密码","date":"String,日期","time":"String,时间","datetime":"String,日期时间","ts":"String,时间戳","booleanRadios":"String,单选","booleanCheckbox":"String,多选","number":"Number,数字","textarea":"String,大文本","ref":"String,单引用","refs":"String,多引用","refs2":"String,多引用2","refs3":"String,多引用3","file":"String,单文件/图片","files":"String,多文件/图片"}}' "http://localhost:3000/preset/commdl"
 ————————————————————————————————————————————————————————————————————————————
 {
   "ok": 1,
@@ -686,7 +686,7 @@ JSON
       "booleanRadios": "String,单选",
       "booleanCheckbox": "String,多选",
       "number": "Number,数字",
-      "textarea": "String,编辑器",
+      "textarea": "String,大文本",
       "ref": "String,单引用",
       "refs": "String,多引用",
       "refs2": "String,多引用2",
@@ -723,7 +723,7 @@ curl -X GET -H "Content-Type: application/json" -H "access_token: 84edff70-8014-
       "booleanRadios": "String,单选",
       "booleanCheckbox": "String,多选",
       "number": "Number,数字",
-      "textarea": "String,编辑器",
+      "textarea": "String,大文本",
       "ref": "String,单引用",
       "refs": "String,多引用",
       "refs2": "String,多引用2",
@@ -768,7 +768,7 @@ JSON
   "booleanRadios": "String,单选",
   "booleanCheckbox": "String,多选",
   "number": "Number,数字",
-  "textarea": "String,编辑器",
+  "textarea": "String,大文本",
   "ref": "String,单引用",
   "refs": "String,多引用",
   "refs2": "String,多引用2",
@@ -793,7 +793,7 @@ curl -X GET -H "Content-Type: application/json" -H "access_token: 84edff70-8014-
   "booleanRadios": "String,单选",
   "booleanCheckbox": "String,多选",
   "number": "Number,数字",
-  "textarea": "String,编辑器",
+  "textarea": "String,大文本",
   "ref": "String,单引用",
   "refs": "String,多引用",
   "refs2": "String,多引用2",

@@ -57,10 +57,10 @@ This document assumes that you already have some knowledge of [Backbone.js][bb],
 | time | 时间 | String | time | false | false | false | 暂无 | 暂无 | 暂无 | 暂无 | 暂无 |
 | datetime | 日期时间 | String | datetime | false | false | false | 暂无 | 暂无 | 暂无 | 暂无 | 暂无 |
 | ts | 时间戳 | String | string | false | false | false | 暂无 | 暂无 | 暂无 | 暂无 | 暂无 |
-| booleanRadios | 单选 | String | boolean-radios | false | false | false | a | {"a":"A-01","b":"B-02"} | 暂无 | 暂无 | 暂无 |
-| booleanCheckbox | 多选 | String | boolean-checkbox | false | false | false | b,c | {"a":"A-01","b":"B-02","c":"C-03"} | 暂无 | 暂无 | 暂无 |
+| booleanRadios | 单选 | String | boolean-radios | false | false | false | a | 暂无 | 暂无 | 暂无 | 暂无 |
+| booleanCheckbox | 多选 | String | boolean-checkbox | false | false | false | b,c | 暂无 | 暂无 | 暂无 | 暂无 |
 | number | 数字 | Number | number | false | false | false | 暂无 | 暂无 | 暂无 | 暂无 | 暂无 |
-| textarea | 编辑器 | String | textarea | false | false | false | 暂无 | 暂无 | 暂无 | 暂无 | 暂无 |
+| textarea | 大文本 | String | textarea | false | false | false | 暂无 | 暂无 | 暂无 | 暂无 | 暂无 |
 | ref | 单引用 | String | ref | false | false | false | 暂无 | 暂无 | preset-user | code | \_id |
 | refs | 多引用 | String | refs | false | false | false | 暂无 | 暂无 | preset-user | code | \_id |
 | refs2 | 多引用2 | String | refs | false | false | false | 暂无 | 暂无 | preset-user | code | \_id |

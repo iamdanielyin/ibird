@@ -149,6 +149,10 @@ module.exports = function (ibird) {
             {
                 "code": "param",
                 "label": "系统参数",
+                "query": {
+                    show: false,
+                    fast: 'code,name'
+                },
                 "fields": {
                     code: {
                         type: String,
@@ -212,6 +216,9 @@ module.exports = function (ibird) {
             {
                 "code": "commdl",
                 "label": "测试模型",
+                "query": {
+                    fast: 'text,ts'
+                },
                 "fields": {
                     text: {
                         type: String,
@@ -247,11 +254,14 @@ module.exports = function (ibird) {
                         type: String,
                         label: "日期时间",
                         ctrltype: 'datetime',
+                        // format:'yyyy-mm-dd hh:ii:ss',//TODO 时间类型的格式化字符串yyyy-mm-dd hh:ii:ss
                         default: function () {
                             let datetime = moment().format('llll');
                             // let time = moment().format('YYYY-MM-DD HH:mm:ss.SSS');
                             return datetime;
-                        }
+                        },
+                        format: 'yyyy.mm.dd',
+                        options: {}
                     },
                     ts: {
                         type: String,
@@ -265,8 +275,16 @@ module.exports = function (ibird) {
                         type: String,
                         label: "单选",
                         ctrltype: 'boolean-radios',
-                        items: {
-                            a: 'A-01', b: 'B-02'
+                        // items: {
+                        //     a: 'A-01', b: 'B-02'
+                        // },
+                        ajax: {
+                            ref: 'preset-user',
+                            url: '',
+                            value: '_id',
+                            display: 'code',
+                            size: 2,
+                            flag: 1//0分页，1全部
                         },
                         default: 'a'
                     },
@@ -274,8 +292,16 @@ module.exports = function (ibird) {
                         type: [String],
                         label: "多选",
                         ctrltype: 'boolean-checkbox',
-                        items: {
-                            a: 'A-01', b: 'B-02', c: 'C-03'
+                        // items: {
+                        //     a: 'A-01', b: 'B-02', c: 'C-03'
+                        // },
+                        ajax: {
+                            ref: 'preset-user',
+                            url: '',
+                            value: '_id',
+                            display: 'code',
+                            size: 3,
+                            flag: 0//0分页，1全部
                         },
                         default: 'b,c',
                         display: {
@@ -290,7 +316,7 @@ module.exports = function (ibird) {
                     },
                     textarea: {
                         type: String,
-                        label: "编辑器",
+                        label: "大文本",
                         ctrltype: 'textarea'
                     },
                     ref: {

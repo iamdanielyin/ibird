@@ -35,15 +35,15 @@ module.exports = {
     },
     "menu": menu,
     "config": {
-        "port": 3001,
+        "port": 3000,
         "route": "/admin",
         "client": path.resolve(__dirname, '/home/yinfx/WebstormProjects/ibird-client/build'),
         "ds": "mssql",//全局数据源设置：mongodb、mssql、mysql
         "mongodb": "mongodb://ibird:!QAZ2wsx@127.0.0.1:27017/ibird",//"mongodb://master:!QAZ2wsx@ds034279.mlab.com:34279/ibird-test",
         "mssql": {
             user: 'sa',
-            password: 'wosoft!Admin',
-            server: '121.41.46.25',
+            password: '!QAZ2wsx',
+            server: '127.0.0.1',
             database: 'ibird',
             pool: {
                 max: 10,
