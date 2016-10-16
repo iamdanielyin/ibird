@@ -42,7 +42,7 @@ module.exports = {
         "mongodb": "mongodb://ibird:!QAZ2wsx@127.0.0.1:27017/ibird",//"mongodb://master:!QAZ2wsx@ds034279.mlab.com:34279/ibird-test",
         "mssql": {
             user: 'sa',
-            password: '!QAZ2wsx',
+            password: 'admin123',
             server: '127.0.0.1',
             database: 'ibird',
             pool: {
