@@ -22,6 +22,467 @@ This document assumes that you already have some knowledge of [Backbone.js][bb],
 [jq]: http://jquery.com/
 
 
+业务模块 business
+======
+/api/business/dept | POST
+---------------
+[部门] 模型默认新增接口
+
+#### 支持格式
+JSON
+#### 备注
+其他
+#### 请求参数
+``` javascript
+{
+  "*code": "String,编码",
+  "*name": "String,名称",
+  "remark": "String,备注",
+  "ts": "String,时间戳",
+  "dr": "String,删除标记"
+}
+```
+#### 响应参数
+``` javascript
+{
+  "_id": "57e2ac2e471795945455cc9d",
+  "*code": "String,编码",
+  "*name": "String,名称",
+  "remark": "String,备注",
+  "ts": "String,时间戳",
+  "dr": "String,删除标记"
+}
+```
+#### 调用示例
+``` javascript
+curl -X POST -H "Cache-Control: no-cache" -H "Content-Type: application/x-www-form-urlencoded"
+ -d 'code=yinfxs&password=111&email=yinfxs@gmail.com' "http://localhost:3000/business/dept"
+————————————————————————————————————————————————————————————————————————————
+{
+  "_id": "57e2ac2e471795945455cc9d",
+  "*code": "String,编码",
+  "*name": "String,名称",
+  "remark": "String,备注",
+  "ts": "String,时间戳",
+  "dr": "String,删除标记"
+}
+```
+
+/api/business/dept | PUT
+---------------
+部门模型默认修改接口
+
+#### 支持格式
+JSON
+#### 备注
+其他
+#### 请求参数
+``` javascript
+{
+  "cond": {
+    "_id": "57e2a90469e9d9d5524778c8"
+  },
+  "doc": {
+    "*code": "String,编码",
+    "*name": "String,名称",
+    "remark": "String,备注",
+    "ts": "String,时间戳",
+    "dr": "String,删除标记"
+  }
+}
+```
+#### 响应参数
+``` javascript
+{
+  "ok": 1,
+  "nModified": 0,
+  "n": 0
+}
+```
+#### 调用示例
+``` javascript
+curl -X PUT -H "Content-Type: application/json" -H "access_token: 84edff70-8014-11e6-9a22-ef95cc3c1a5b"
+ -H "Cache-Control: no-cache" -d '{"cond":{"_id":"57e2a90469e9d9d5524778c8"},"doc":{"*code":"String,编码","*name":"String,名称","remark":"String,备注","ts":"String,时间戳","dr":"String,删除标记"}}' "http://localhost:3000/business/dept"
+————————————————————————————————————————————————————————————————————————————
+{
+  "ok": 1,
+  "nModified": 0,
+  "n": 0
+}
+```
+
+/api/business/dept | DELETE
+---------------
+部门模型默认删除接口
+
+#### 支持格式
+JSON
+#### 备注
+其他
+#### 请求参数
+``` javascript
+{
+  "_id": "57e2a90469e9d9d5524778c8"
+}
+```
+#### 响应参数
+``` javascript
+{
+  "ok": 1,
+  "n": 1
+}
+```
+#### 调用示例
+``` javascript
+curl -X DELETE -H "Content-Type: application/json" -H "access_token: 84edff70-8014-11e6-9a22-ef95cc3c1a5b"
+ -H "Cache-Control: no-cache" -d '{"_id":"57e2a90469e9d9d5524778c8"}' "http://localhost:3000/business/dept"
+————————————————————————————————————————————————————————————————————————————
+{
+  "ok": 1,
+  "n": 1
+}
+```
+
+/api/business/dept | GET
+---------------
+部门模型默认列表查询接口
+
+#### 支持格式
+JSON
+#### 备注
+其他
+#### 请求参数
+``` javascript
+{
+  "keyword": "查询关键字(模糊匹配所有字符串字段)",
+  "flag": "0(分页查询，为默认值)|1(全部查询)",
+  "page": "1(页码，从1开始)",
+  "size": "20(每页记录数)",
+  "sort": "-code(排序字段编码，减号表示逆序，无符号表示升序)"
+}
+```
+#### 响应参数
+``` javascript
+{
+  "data": [
+    {
+      "_id": "57e2ac2e471795945455cc9d",
+      "*code": "String,编码",
+      "*name": "String,名称",
+      "remark": "String,备注",
+      "ts": "String,时间戳",
+      "dr": "String,删除标记"
+    }
+  ],
+  "totalelements": "4(总记录数)",
+  "flag": "0(是否分页，与传入参数一致)",
+  "keyword": "当前查询关键字",
+  "start": "1(开始记录数)",
+  "end": "4(结束记录数)",
+  "page": "1(当前页码)",
+  "size": "20(当前每页条数)",
+  "totalpages": "1(总页数)"
+}
+```
+#### 调用示例
+``` javascript
+curl -X GET -H "Content-Type: application/json" -H "access_token: 84edff70-8014-11e6-9a22-ef95cc3c1a5b"
+ -H "Cache-Control: no-cache" "http://localhost:3000/business/dept"
+————————————————————————————————————————————————————————————————————————————
+{
+  "data": [
+    {
+      "_id": "57e2ac2e471795945455cc9d",
+      "*code": "String,编码",
+      "*name": "String,名称",
+      "remark": "String,备注",
+      "ts": "String,时间戳",
+      "dr": "String,删除标记"
+    }
+  ],
+  "totalelements": "4(总记录数)",
+  "flag": "0(是否分页，与传入参数一致)",
+  "keyword": "当前查询关键字",
+  "start": "1(开始记录数)",
+  "end": "4(结束记录数)",
+  "page": "1(当前页码)",
+  "size": "20(当前每页条数)",
+  "totalpages": "1(总页数)"
+}
+```
+
+/api/business/dept/:id | GET
+---------------
+部门模型默认详情查询接口
+
+#### 支持格式
+JSON
+#### 备注
+其他
+#### 请求参数
+``` javascript
+{}
+```
+#### 响应参数
+``` javascript
+{
+  "_id": "57e2ac2e471795945455cc9d",
+  "*code": "String,编码",
+  "*name": "String,名称",
+  "remark": "String,备注",
+  "ts": "String,时间戳",
+  "dr": "String,删除标记"
+}
+```
+#### 调用示例
+``` javascript
+curl -X GET -H "Content-Type: application/json" -H "access_token: 84edff70-8014-11e6-9a22-ef95cc3c1a5b"
+ -H "Cache-Control: no-cache" "http://localhost:3000/business/dept/57e2ae8db9a9f22d56f45cdf"
+————————————————————————————————————————————————————————————————————————————
+{
+  "_id": "57e2ac2e471795945455cc9d",
+  "*code": "String,编码",
+  "*name": "String,名称",
+  "remark": "String,备注",
+  "ts": "String,时间戳",
+  "dr": "String,删除标记"
+}
+```
+
+/api/business/param | POST
+---------------
+[业务参数] 模型默认新增接口
+
+#### 支持格式
+JSON
+#### 备注
+其他
+#### 请求参数
+``` javascript
+{
+  "*code": "String,参数编码",
+  "*name": "String,参数名称",
+  "*value": "String,参数值",
+  "remark": "String,备注",
+  "ts": "String,时间戳",
+  "dr": "String,删除标记"
+}
+```
+#### 响应参数
+``` javascript
+{
+  "_id": "57e2ac2e471795945455cc9d",
+  "*code": "String,参数编码",
+  "*name": "String,参数名称",
+  "*value": "String,参数值",
+  "remark": "String,备注",
+  "ts": "String,时间戳",
+  "dr": "String,删除标记"
+}
+```
+#### 调用示例
+``` javascript
+curl -X POST -H "Cache-Control: no-cache" -H "Content-Type: application/x-www-form-urlencoded"
+ -d 'code=yinfxs&password=111&email=yinfxs@gmail.com' "http://localhost:3000/business/param"
+————————————————————————————————————————————————————————————————————————————
+{
+  "_id": "57e2ac2e471795945455cc9d",
+  "*code": "String,参数编码",
+  "*name": "String,参数名称",
+  "*value": "String,参数值",
+  "remark": "String,备注",
+  "ts": "String,时间戳",
+  "dr": "String,删除标记"
+}
+```
+
+/api/business/param | PUT
+---------------
+业务参数模型默认修改接口
+
+#### 支持格式
+JSON
+#### 备注
+其他
+#### 请求参数
+``` javascript
+{
+  "cond": {
+    "_id": "57e2a90469e9d9d5524778c8"
+  },
+  "doc": {
+    "*code": "String,参数编码",
+    "*name": "String,参数名称",
+    "*value": "String,参数值",
+    "remark": "String,备注",
+    "ts": "String,时间戳",
+    "dr": "String,删除标记"
+  }
+}
+```
+#### 响应参数
+``` javascript
+{
+  "ok": 1,
+  "nModified": 0,
+  "n": 0
+}
+```
+#### 调用示例
+``` javascript
+curl -X PUT -H "Content-Type: application/json" -H "access_token: 84edff70-8014-11e6-9a22-ef95cc3c1a5b"
+ -H "Cache-Control: no-cache" -d '{"cond":{"_id":"57e2a90469e9d9d5524778c8"},"doc":{"*code":"String,参数编码","*name":"String,参数名称","*value":"String,参数值","remark":"String,备注","ts":"String,时间戳","dr":"String,删除标记"}}' "http://localhost:3000/business/param"
+————————————————————————————————————————————————————————————————————————————
+{
+  "ok": 1,
+  "nModified": 0,
+  "n": 0
+}
+```
+
+/api/business/param | DELETE
+---------------
+业务参数模型默认删除接口
+
+#### 支持格式
+JSON
+#### 备注
+其他
+#### 请求参数
+``` javascript
+{
+  "_id": "57e2a90469e9d9d5524778c8"
+}
+```
+#### 响应参数
+``` javascript
+{
+  "ok": 1,
+  "n": 1
+}
+```
+#### 调用示例
+``` javascript
+curl -X DELETE -H "Content-Type: application/json" -H "access_token: 84edff70-8014-11e6-9a22-ef95cc3c1a5b"
+ -H "Cache-Control: no-cache" -d '{"_id":"57e2a90469e9d9d5524778c8"}' "http://localhost:3000/business/param"
+————————————————————————————————————————————————————————————————————————————
+{
+  "ok": 1,
+  "n": 1
+}
+```
+
+/api/business/param | GET
+---------------
+业务参数模型默认列表查询接口
+
+#### 支持格式
+JSON
+#### 备注
+其他
+#### 请求参数
+``` javascript
+{
+  "keyword": "查询关键字(模糊匹配所有字符串字段)",
+  "flag": "0(分页查询，为默认值)|1(全部查询)",
+  "page": "1(页码，从1开始)",
+  "size": "20(每页记录数)",
+  "sort": "-code(排序字段编码，减号表示逆序，无符号表示升序)"
+}
+```
+#### 响应参数
+``` javascript
+{
+  "data": [
+    {
+      "_id": "57e2ac2e471795945455cc9d",
+      "*code": "String,参数编码",
+      "*name": "String,参数名称",
+      "*value": "String,参数值",
+      "remark": "String,备注",
+      "ts": "String,时间戳",
+      "dr": "String,删除标记"
+    }
+  ],
+  "totalelements": "4(总记录数)",
+  "flag": "0(是否分页，与传入参数一致)",
+  "keyword": "当前查询关键字",
+  "start": "1(开始记录数)",
+  "end": "4(结束记录数)",
+  "page": "1(当前页码)",
+  "size": "20(当前每页条数)",
+  "totalpages": "1(总页数)"
+}
+```
+#### 调用示例
+``` javascript
+curl -X GET -H "Content-Type: application/json" -H "access_token: 84edff70-8014-11e6-9a22-ef95cc3c1a5b"
+ -H "Cache-Control: no-cache" "http://localhost:3000/business/param"
+————————————————————————————————————————————————————————————————————————————
+{
+  "data": [
+    {
+      "_id": "57e2ac2e471795945455cc9d",
+      "*code": "String,参数编码",
+      "*name": "String,参数名称",
+      "*value": "String,参数值",
+      "remark": "String,备注",
+      "ts": "String,时间戳",
+      "dr": "String,删除标记"
+    }
+  ],
+  "totalelements": "4(总记录数)",
+  "flag": "0(是否分页，与传入参数一致)",
+  "keyword": "当前查询关键字",
+  "start": "1(开始记录数)",
+  "end": "4(结束记录数)",
+  "page": "1(当前页码)",
+  "size": "20(当前每页条数)",
+  "totalpages": "1(总页数)"
+}
+```
+
+/api/business/param/:id | GET
+---------------
+业务参数模型默认详情查询接口
+
+#### 支持格式
+JSON
+#### 备注
+其他
+#### 请求参数
+``` javascript
+{}
+```
+#### 响应参数
+``` javascript
+{
+  "_id": "57e2ac2e471795945455cc9d",
+  "*code": "String,参数编码",
+  "*name": "String,参数名称",
+  "*value": "String,参数值",
+  "remark": "String,备注",
+  "ts": "String,时间戳",
+  "dr": "String,删除标记"
+}
+```
+#### 调用示例
+``` javascript
+curl -X GET -H "Content-Type: application/json" -H "access_token: 84edff70-8014-11e6-9a22-ef95cc3c1a5b"
+ -H "Cache-Control: no-cache" "http://localhost:3000/business/param/57e2ae8db9a9f22d56f45cdf"
+————————————————————————————————————————————————————————————————————————————
+{
+  "_id": "57e2ac2e471795945455cc9d",
+  "*code": "String,参数编码",
+  "*name": "String,参数名称",
+  "*value": "String,参数值",
+  "remark": "String,备注",
+  "ts": "String,时间戳",
+  "dr": "String,删除标记"
+}
+```
+
+
 预置模块 preset
 ======
 /api/preset/user | POST
@@ -843,466 +1304,5 @@ curl -X POST -H "Cache-Control: no-cache" -H "Content-Type: application/x-www-fo
     "refresh_token": 0
   },
   "_id": "57e2ae8db9a9f22d56f45cdf"
-}
-```
-
-
-业务模块 business
-======
-/api/business/dept | POST
----------------
-[部门] 模型默认新增接口
-
-#### 支持格式
-JSON
-#### 备注
-其他
-#### 请求参数
-``` javascript
-{
-  "*code": "String,编码",
-  "*name": "String,名称",
-  "remark": "String,备注",
-  "ts": "String,时间戳",
-  "dr": "String,删除标记"
-}
-```
-#### 响应参数
-``` javascript
-{
-  "_id": "57e2ac2e471795945455cc9d",
-  "*code": "String,编码",
-  "*name": "String,名称",
-  "remark": "String,备注",
-  "ts": "String,时间戳",
-  "dr": "String,删除标记"
-}
-```
-#### 调用示例
-``` javascript
-curl -X POST -H "Cache-Control: no-cache" -H "Content-Type: application/x-www-form-urlencoded"
- -d 'code=yinfxs&password=111&email=yinfxs@gmail.com' "http://localhost:3000/business/dept"
-————————————————————————————————————————————————————————————————————————————
-{
-  "_id": "57e2ac2e471795945455cc9d",
-  "*code": "String,编码",
-  "*name": "String,名称",
-  "remark": "String,备注",
-  "ts": "String,时间戳",
-  "dr": "String,删除标记"
-}
-```
-
-/api/business/dept | PUT
----------------
-部门模型默认修改接口
-
-#### 支持格式
-JSON
-#### 备注
-其他
-#### 请求参数
-``` javascript
-{
-  "cond": {
-    "_id": "57e2a90469e9d9d5524778c8"
-  },
-  "doc": {
-    "*code": "String,编码",
-    "*name": "String,名称",
-    "remark": "String,备注",
-    "ts": "String,时间戳",
-    "dr": "String,删除标记"
-  }
-}
-```
-#### 响应参数
-``` javascript
-{
-  "ok": 1,
-  "nModified": 0,
-  "n": 0
-}
-```
-#### 调用示例
-``` javascript
-curl -X PUT -H "Content-Type: application/json" -H "access_token: 84edff70-8014-11e6-9a22-ef95cc3c1a5b"
- -H "Cache-Control: no-cache" -d '{"cond":{"_id":"57e2a90469e9d9d5524778c8"},"doc":{"*code":"String,编码","*name":"String,名称","remark":"String,备注","ts":"String,时间戳","dr":"String,删除标记"}}' "http://localhost:3000/business/dept"
-————————————————————————————————————————————————————————————————————————————
-{
-  "ok": 1,
-  "nModified": 0,
-  "n": 0
-}
-```
-
-/api/business/dept | DELETE
----------------
-部门模型默认删除接口
-
-#### 支持格式
-JSON
-#### 备注
-其他
-#### 请求参数
-``` javascript
-{
-  "_id": "57e2a90469e9d9d5524778c8"
-}
-```
-#### 响应参数
-``` javascript
-{
-  "ok": 1,
-  "n": 1
-}
-```
-#### 调用示例
-``` javascript
-curl -X DELETE -H "Content-Type: application/json" -H "access_token: 84edff70-8014-11e6-9a22-ef95cc3c1a5b"
- -H "Cache-Control: no-cache" -d '{"_id":"57e2a90469e9d9d5524778c8"}' "http://localhost:3000/business/dept"
-————————————————————————————————————————————————————————————————————————————
-{
-  "ok": 1,
-  "n": 1
-}
-```
-
-/api/business/dept | GET
----------------
-部门模型默认列表查询接口
-
-#### 支持格式
-JSON
-#### 备注
-其他
-#### 请求参数
-``` javascript
-{
-  "keyword": "查询关键字(模糊匹配所有字符串字段)",
-  "flag": "0(分页查询，为默认值)|1(全部查询)",
-  "page": "1(页码，从1开始)",
-  "size": "20(每页记录数)",
-  "sort": "-code(排序字段编码，减号表示逆序，无符号表示升序)"
-}
-```
-#### 响应参数
-``` javascript
-{
-  "data": [
-    {
-      "_id": "57e2ac2e471795945455cc9d",
-      "*code": "String,编码",
-      "*name": "String,名称",
-      "remark": "String,备注",
-      "ts": "String,时间戳",
-      "dr": "String,删除标记"
-    }
-  ],
-  "totalelements": "4(总记录数)",
-  "flag": "0(是否分页，与传入参数一致)",
-  "keyword": "当前查询关键字",
-  "start": "1(开始记录数)",
-  "end": "4(结束记录数)",
-  "page": "1(当前页码)",
-  "size": "20(当前每页条数)",
-  "totalpages": "1(总页数)"
-}
-```
-#### 调用示例
-``` javascript
-curl -X GET -H "Content-Type: application/json" -H "access_token: 84edff70-8014-11e6-9a22-ef95cc3c1a5b"
- -H "Cache-Control: no-cache" "http://localhost:3000/business/dept"
-————————————————————————————————————————————————————————————————————————————
-{
-  "data": [
-    {
-      "_id": "57e2ac2e471795945455cc9d",
-      "*code": "String,编码",
-      "*name": "String,名称",
-      "remark": "String,备注",
-      "ts": "String,时间戳",
-      "dr": "String,删除标记"
-    }
-  ],
-  "totalelements": "4(总记录数)",
-  "flag": "0(是否分页，与传入参数一致)",
-  "keyword": "当前查询关键字",
-  "start": "1(开始记录数)",
-  "end": "4(结束记录数)",
-  "page": "1(当前页码)",
-  "size": "20(当前每页条数)",
-  "totalpages": "1(总页数)"
-}
-```
-
-/api/business/dept/:id | GET
----------------
-部门模型默认详情查询接口
-
-#### 支持格式
-JSON
-#### 备注
-其他
-#### 请求参数
-``` javascript
-{}
-```
-#### 响应参数
-``` javascript
-{
-  "_id": "57e2ac2e471795945455cc9d",
-  "*code": "String,编码",
-  "*name": "String,名称",
-  "remark": "String,备注",
-  "ts": "String,时间戳",
-  "dr": "String,删除标记"
-}
-```
-#### 调用示例
-``` javascript
-curl -X GET -H "Content-Type: application/json" -H "access_token: 84edff70-8014-11e6-9a22-ef95cc3c1a5b"
- -H "Cache-Control: no-cache" "http://localhost:3000/business/dept/57e2ae8db9a9f22d56f45cdf"
-————————————————————————————————————————————————————————————————————————————
-{
-  "_id": "57e2ac2e471795945455cc9d",
-  "*code": "String,编码",
-  "*name": "String,名称",
-  "remark": "String,备注",
-  "ts": "String,时间戳",
-  "dr": "String,删除标记"
-}
-```
-
-/api/business/param | POST
----------------
-[业务参数] 模型默认新增接口
-
-#### 支持格式
-JSON
-#### 备注
-其他
-#### 请求参数
-``` javascript
-{
-  "*code": "String,参数编码",
-  "*name": "String,参数名称",
-  "*value": "String,参数值",
-  "remark": "String,备注",
-  "ts": "String,时间戳",
-  "dr": "String,删除标记"
-}
-```
-#### 响应参数
-``` javascript
-{
-  "_id": "57e2ac2e471795945455cc9d",
-  "*code": "String,参数编码",
-  "*name": "String,参数名称",
-  "*value": "String,参数值",
-  "remark": "String,备注",
-  "ts": "String,时间戳",
-  "dr": "String,删除标记"
-}
-```
-#### 调用示例
-``` javascript
-curl -X POST -H "Cache-Control: no-cache" -H "Content-Type: application/x-www-form-urlencoded"
- -d 'code=yinfxs&password=111&email=yinfxs@gmail.com' "http://localhost:3000/business/param"
-————————————————————————————————————————————————————————————————————————————
-{
-  "_id": "57e2ac2e471795945455cc9d",
-  "*code": "String,参数编码",
-  "*name": "String,参数名称",
-  "*value": "String,参数值",
-  "remark": "String,备注",
-  "ts": "String,时间戳",
-  "dr": "String,删除标记"
-}
-```
-
-/api/business/param | PUT
----------------
-业务参数模型默认修改接口
-
-#### 支持格式
-JSON
-#### 备注
-其他
-#### 请求参数
-``` javascript
-{
-  "cond": {
-    "_id": "57e2a90469e9d9d5524778c8"
-  },
-  "doc": {
-    "*code": "String,参数编码",
-    "*name": "String,参数名称",
-    "*value": "String,参数值",
-    "remark": "String,备注",
-    "ts": "String,时间戳",
-    "dr": "String,删除标记"
-  }
-}
-```
-#### 响应参数
-``` javascript
-{
-  "ok": 1,
-  "nModified": 0,
-  "n": 0
-}
-```
-#### 调用示例
-``` javascript
-curl -X PUT -H "Content-Type: application/json" -H "access_token: 84edff70-8014-11e6-9a22-ef95cc3c1a5b"
- -H "Cache-Control: no-cache" -d '{"cond":{"_id":"57e2a90469e9d9d5524778c8"},"doc":{"*code":"String,参数编码","*name":"String,参数名称","*value":"String,参数值","remark":"String,备注","ts":"String,时间戳","dr":"String,删除标记"}}' "http://localhost:3000/business/param"
-————————————————————————————————————————————————————————————————————————————
-{
-  "ok": 1,
-  "nModified": 0,
-  "n": 0
-}
-```
-
-/api/business/param | DELETE
----------------
-业务参数模型默认删除接口
-
-#### 支持格式
-JSON
-#### 备注
-其他
-#### 请求参数
-``` javascript
-{
-  "_id": "57e2a90469e9d9d5524778c8"
-}
-```
-#### 响应参数
-``` javascript
-{
-  "ok": 1,
-  "n": 1
-}
-```
-#### 调用示例
-``` javascript
-curl -X DELETE -H "Content-Type: application/json" -H "access_token: 84edff70-8014-11e6-9a22-ef95cc3c1a5b"
- -H "Cache-Control: no-cache" -d '{"_id":"57e2a90469e9d9d5524778c8"}' "http://localhost:3000/business/param"
-————————————————————————————————————————————————————————————————————————————
-{
-  "ok": 1,
-  "n": 1
-}
-```
-
-/api/business/param | GET
----------------
-业务参数模型默认列表查询接口
-
-#### 支持格式
-JSON
-#### 备注
-其他
-#### 请求参数
-``` javascript
-{
-  "keyword": "查询关键字(模糊匹配所有字符串字段)",
-  "flag": "0(分页查询，为默认值)|1(全部查询)",
-  "page": "1(页码，从1开始)",
-  "size": "20(每页记录数)",
-  "sort": "-code(排序字段编码，减号表示逆序，无符号表示升序)"
-}
-```
-#### 响应参数
-``` javascript
-{
-  "data": [
-    {
-      "_id": "57e2ac2e471795945455cc9d",
-      "*code": "String,参数编码",
-      "*name": "String,参数名称",
-      "*value": "String,参数值",
-      "remark": "String,备注",
-      "ts": "String,时间戳",
-      "dr": "String,删除标记"
-    }
-  ],
-  "totalelements": "4(总记录数)",
-  "flag": "0(是否分页，与传入参数一致)",
-  "keyword": "当前查询关键字",
-  "start": "1(开始记录数)",
-  "end": "4(结束记录数)",
-  "page": "1(当前页码)",
-  "size": "20(当前每页条数)",
-  "totalpages": "1(总页数)"
-}
-```
-#### 调用示例
-``` javascript
-curl -X GET -H "Content-Type: application/json" -H "access_token: 84edff70-8014-11e6-9a22-ef95cc3c1a5b"
- -H "Cache-Control: no-cache" "http://localhost:3000/business/param"
-————————————————————————————————————————————————————————————————————————————
-{
-  "data": [
-    {
-      "_id": "57e2ac2e471795945455cc9d",
-      "*code": "String,参数编码",
-      "*name": "String,参数名称",
-      "*value": "String,参数值",
-      "remark": "String,备注",
-      "ts": "String,时间戳",
-      "dr": "String,删除标记"
-    }
-  ],
-  "totalelements": "4(总记录数)",
-  "flag": "0(是否分页，与传入参数一致)",
-  "keyword": "当前查询关键字",
-  "start": "1(开始记录数)",
-  "end": "4(结束记录数)",
-  "page": "1(当前页码)",
-  "size": "20(当前每页条数)",
-  "totalpages": "1(总页数)"
-}
-```
-
-/api/business/param/:id | GET
----------------
-业务参数模型默认详情查询接口
-
-#### 支持格式
-JSON
-#### 备注
-其他
-#### 请求参数
-``` javascript
-{}
-```
-#### 响应参数
-``` javascript
-{
-  "_id": "57e2ac2e471795945455cc9d",
-  "*code": "String,参数编码",
-  "*name": "String,参数名称",
-  "*value": "String,参数值",
-  "remark": "String,备注",
-  "ts": "String,时间戳",
-  "dr": "String,删除标记"
-}
-```
-#### 调用示例
-``` javascript
-curl -X GET -H "Content-Type: application/json" -H "access_token: 84edff70-8014-11e6-9a22-ef95cc3c1a5b"
- -H "Cache-Control: no-cache" "http://localhost:3000/business/param/57e2ae8db9a9f22d56f45cdf"
-————————————————————————————————————————————————————————————————————————————
-{
-  "_id": "57e2ac2e471795945455cc9d",
-  "*code": "String,参数编码",
-  "*name": "String,参数名称",
-  "*value": "String,参数值",
-  "remark": "String,备注",
-  "ts": "String,时间戳",
-  "dr": "String,删除标记"
 }
 ```

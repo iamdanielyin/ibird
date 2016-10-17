@@ -13,7 +13,6 @@ const moment = require('moment');
 moment.locale('zh-cn');
 
 //导入模块
-const preset = require('./modules/preset');// 导入预置模块
 const business = require('./modules/business');// 导入业务模块
 
 //导入菜单
@@ -37,13 +36,13 @@ module.exports = {
     "config": {
         "port": 3000,
         "route": "/admin",
-        "client": path.resolve(__dirname, '/home/yinfx/ibird-client/build'),
+        "client": path.resolve(__dirname, '/home/yinfx/WebstormProjects/ibird-client/build'),
         "ds": "mssql",//全局数据源设置：mongodb、mssql、mysql
         "mongodb": "mongodb://ibird:!QAZ2wsx@127.0.0.1:27017/ibird",//"mongodb://master:!QAZ2wsx@ds034279.mlab.com:34279/ibird-test",
         "mssql": {
             user: 'sa',
-            password: '!QAZ2wsx',
-            server: '127.0.0.1',
+            password: 'wosoft!Admin',
+            server: '121.41.46.25',
             database: 'ibird',
             pool: {
                 max: 10,
@@ -75,7 +74,7 @@ module.exports = {
         "yinfxs"
     ],
     "modules": [
-        preset(ibird),
+        // preset(ibird),
         business(ibird)
     ],
     "hooks": {
