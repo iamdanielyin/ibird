@@ -1,6 +1,6 @@
 {
   "name": "ibird",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "description": "A General Background Solution",
   "main": "index.js",
   "scripts": {
@@ -30,9 +30,6 @@
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/yinfxs/ibird/issues"
-  },
-  "bin": {
-    "ibird": "./bin/ibird.js"
   },
   "homepage": "https://github.com/yinfxs/ibird#readme",
   "dependencies": {
