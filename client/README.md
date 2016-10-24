@@ -1,1 +1,0 @@
-# ibird-client
