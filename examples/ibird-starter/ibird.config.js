@@ -8,7 +8,7 @@
 const ibird = require('../../index.js');
 const uuid = require('node-uuid');
 const path = require('path');
-const _ = require('underscore');
+const _ = require('lodash');
 const moment = require('moment');
 moment.locale('zh-cn');
 
@@ -32,11 +32,11 @@ module.exports = {
     "routes": {
         //全局路由配置
     },
-    "menu": menu,
+    // "menu": menu,
     "config": {
         "port": 3000,
-        "route": "/admin",
-        "client": path.resolve(__dirname, '/home/yinfx/WebstormProjects/ibird-client/build'),
+        // "route": "/admin",
+        // "client": path.resolve(__dirname, '/home/yinfx/WebstormProjects/ibird-client/build'),
         "ds": "mssql",//全局数据源设置：mongodb、mssql、mysql
         "mongodb": "mongodb://ibird:!QAZ2wsx@127.0.0.1:27017/ibird",//"mongodb://master:!QAZ2wsx@ds034279.mlab.com:34279/ibird-test",
         "mssql": {
@@ -57,10 +57,10 @@ module.exports = {
             password: 'admin123',
             database: 'ibird'
         },
-        "redis": "",
+        // "redis": "127.0.0.1:6379",
         "logpath": path.resolve(__dirname, "logs"),
         "ruprefix": '/api',
-        "auth": {
+        "token": {
             "expires_in": {
                 "access_token": 7 * 24 * 60 * 60,//access_token过期时间，单位秒，0表示永久不过起
                 "refresh_token": 0//refresh_token过期时间，单位秒，0表示永久不过起

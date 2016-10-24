@@ -22,31 +22,6 @@ This document assumes that you already have some knowledge of [Backbone.js][bb],
 [jq]: http://jquery.com/
 
 
-业务模块 business
-======
-
-部门 dept
----------------
-| 字段编码 | 字段名称 | 字段类型 | 控件类型 | 是否必须 | 是否唯一 | 是否索引 | 默认值 | 可选项 | 引用模型 | 引用显示值 | 引用隐藏值 |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| code | 编码 | String | string | true | true | true | 暂无 | 暂无 | 暂无 | 暂无 | 暂无 |
-| name | 名称 | String | string | true | false | false | 暂无 | 暂无 | 暂无 | 暂无 | 暂无 |
-| remark | 备注 | String | string | false | false | false | 暂无 | 暂无 | 暂无 | 暂无 | 暂无 |
-| ts | 时间戳 | String | string | false | false | false | 暂无 | 暂无 | 暂无 | 暂无 | 暂无 |
-| dr | 删除标记 | String | boolean-radios | false | false | false | 0 | {"0":"否","1":"是"} | 暂无 | 暂无 | 暂无 |
-
-业务参数 param
----------------
-| 字段编码 | 字段名称 | 字段类型 | 控件类型 | 是否必须 | 是否唯一 | 是否索引 | 默认值 | 可选项 | 引用模型 | 引用显示值 | 引用隐藏值 |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| code | 参数编码 | String | string | true | true | true | 暂无 | 暂无 | 暂无 | 暂无 | 暂无 |
-| name | 参数名称 | String | string | true | false | false | 暂无 | 暂无 | 暂无 | 暂无 | 暂无 |
-| value | 参数值 | String | string | true | false | false | 暂无 | 暂无 | 暂无 | 暂无 | 暂无 |
-| remark | 备注 | String | string | false | false | false | 暂无 | 暂无 | 暂无 | 暂无 | 暂无 |
-| ts | 时间戳 | String | string | false | false | false | 暂无 | 暂无 | 暂无 | 暂无 | 暂无 |
-| dr | 删除标记 | String | boolean-radios | false | false | false | 0 | {"0":"否","1":"是"} | 暂无 | 暂无 | 暂无 |
-
-
 预置模块 preset
 ======
 
@@ -72,6 +47,19 @@ This document assumes that you already have some knowledge of [Backbone.js][bb],
 | ts | 时间戳 | String | string | false | false | false | 暂无 | 暂无 | 暂无 | 暂无 | 暂无 |
 | dr | 删除标记 | String | boolean-radios | false | false | false | 0 | {"0":"否","1":"是"} | 暂无 | 暂无 | 暂无 |
 
+令牌管理 token
+---------------
+| 字段编码 | 字段名称 | 字段类型 | 控件类型 | 是否必须 | 是否唯一 | 是否索引 | 默认值 | 可选项 | 引用模型 | 引用显示值 | 引用隐藏值 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| access_token | 访问token | String | string | true | true | true | 暂无 | 暂无 | 暂无 | 暂无 | 暂无 |
+| refresh_token | 更新token | String | string | true | true | true | 暂无 | 暂无 | 暂无 | 暂无 | 暂无 |
+| expires_in_access | 访问token有效秒数 | Number | string | true | false | false | 暂无 | 暂无 | 暂无 | 暂无 | 暂无 |
+| expires_in_refresh | 刷新token有效秒数 | Number | string | true | false | false | 暂无 | 暂无 | 暂无 | 暂无 | 暂无 |
+| data | 额外数据 | String | string | false | false | false | 暂无 | 暂无 | 暂无 | 暂无 | 暂无 |
+| ts | 时间戳 | String | string | false | false | false | 暂无 | 暂无 | 暂无 | 暂无 | 暂无 |
+| update_ts | 更新时间 | String | string | false | false | false | 暂无 | 暂无 | 暂无 | 暂无 | 暂无 |
+| dr | 删除标记 | String | boolean-radios | false | false | false | 0 | {"0":"否","1":"是"} | 暂无 | 暂无 | 暂无 |
+
 测试模型 commdl
 ---------------
 | 字段编码 | 字段名称 | 字段类型 | 控件类型 | 是否必须 | 是否唯一 | 是否索引 | 默认值 | 可选项 | 引用模型 | 引用显示值 | 引用隐藏值 |
@@ -92,3 +80,28 @@ This document assumes that you already have some knowledge of [Backbone.js][bb],
 | refs3 | 多引用3 | String | refs | false | false | false | 暂无 | 暂无 | preset-user | code | \_id |
 | file | 单文件/图片 | String | file | false | false | false | 暂无 | 暂无 | 暂无 | 暂无 | 暂无 |
 | files | 多文件/图片 | String | files | false | false | false | 暂无 | 暂无 | 暂无 | 暂无 | 暂无 |
+
+
+业务模块 business
+======
+
+部门 dept
+---------------
+| 字段编码 | 字段名称 | 字段类型 | 控件类型 | 是否必须 | 是否唯一 | 是否索引 | 默认值 | 可选项 | 引用模型 | 引用显示值 | 引用隐藏值 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| code | 编码 | String | string | true | true | true | 暂无 | 暂无 | 暂无 | 暂无 | 暂无 |
+| name | 名称 | String | string | true | false | false | 暂无 | 暂无 | 暂无 | 暂无 | 暂无 |
+| remark | 备注 | String | string | false | false | false | 暂无 | 暂无 | 暂无 | 暂无 | 暂无 |
+| ts | 时间戳 | String | string | false | false | false | 暂无 | 暂无 | 暂无 | 暂无 | 暂无 |
+| dr | 删除标记 | String | boolean-radios | false | false | false | 0 | {"0":"否","1":"是"} | 暂无 | 暂无 | 暂无 |
+
+业务参数 param
+---------------
+| 字段编码 | 字段名称 | 字段类型 | 控件类型 | 是否必须 | 是否唯一 | 是否索引 | 默认值 | 可选项 | 引用模型 | 引用显示值 | 引用隐藏值 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| code | 参数编码 | String | string | true | true | true | 暂无 | 暂无 | 暂无 | 暂无 | 暂无 |
+| name | 参数名称 | String | string | true | false | false | 暂无 | 暂无 | 暂无 | 暂无 | 暂无 |
+| value | 参数值 | String | string | true | false | false | 暂无 | 暂无 | 暂无 | 暂无 | 暂无 |
+| remark | 备注 | String | string | false | false | false | 暂无 | 暂无 | 暂无 | 暂无 | 暂无 |
+| ts | 时间戳 | String | string | false | false | false | 暂无 | 暂无 | 暂无 | 暂无 | 暂无 |
+| dr | 删除标记 | String | boolean-radios | false | false | false | 0 | {"0":"否","1":"是"} | 暂无 | 暂无 | 暂无 |

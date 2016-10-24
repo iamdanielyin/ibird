@@ -1,0 +1,81 @@
+/**
+ * 路由捕手组件
+ * 捕获所有界面上的路由响应
+ * Created by yinfxs on 16-6-21.
+ */
+
+'use strict';
+
+const React = require('react');
+const AdminIndex = require('./AdminIndex.react');
+const AdminTable = require('./AdminTable.react');
+const AdminForm = require('./AdminForm.react');
+const AdminLink = require('./AdminLink.react');
+const CodeUtils = require('../utils/CodeUtils');
+
+${requires}
+
+var cv = JSON.parse(CodeUtils.decodeBase64(localStorage.getItem('C_V'), 5)) || [];
+
+const RouteCatcher = React.createClass({
+    contextTypes: {
+        router: React.PropTypes.object
+    },
+    getInitialState(){
+        return {}
+    },
+    componentWillMount(){
+        console.log('componentWillMount');
+        cv = JSON.parse(CodeUtils.decodeBase64(localStorage.getItem('C_V'), 5)) || [];
+    },
+    componentDidMount(){
+        console.log('componentDidMount');
+    },
+    getSchemaByCode(moduleCode, modelCode){
+        let schema = {};
+        const modules = cv.modules || [];
+        modules.map(function (module) {
+            if (!module || module.code != moduleCode) return;
+            const schemas = module.schemas || [];
+            schemas.map(function (item) {
+                if (!item || item.code != modelCode) return;
+                schema = item;
+            });
+        });
+        return schema;
+    },
+    render(){
+        const location = this.props.location || {};
+        const query = location.query || {};
+        const state = location.state || {};
+        const params = this.props.params || {};
+        const module = params.module;
+        const path = params.path;
+        const item = state.item || {};
+
+        const schema = this.getSchemaByCode(module, path);
+        const f = query.f, i = query.i;
+        if (item.out) return window.open(item.uri);
+
+        let com = state.com, content;
+
+        if(item.list) com = item.list;
+        if(i && item.form) com = item.form;
+        switch (com) {
+            ${cases}
+            case 'link':
+                content = <AdminLink module={module} path={path} model={path} schema={schema} item={item}/>;
+                break;
+            default:
+                if (f) {
+                    content = <AdminForm module={module} path={path} model={path} schema={schema} item={item} i={i}/>;
+                } else {
+                    content = <AdminTable module={module} path={path} model={path} schema={schema} item={item}/>;
+                }
+                break;
+        }
+        return content;
+    }
+});
+
+module.exports = RouteCatcher;

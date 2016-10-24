@@ -3,7 +3,7 @@
  * Created by yinfxs on 16-8-6.
  */
 const uuid = require('node-uuid');
-const _ = require('underscore');
+const _ = require('lodash');
 const moment = require('moment');
 moment.locale('zh-cn');
 
