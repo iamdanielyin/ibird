@@ -19,6 +19,7 @@ const business = require('./modules/business');// 导入业务模块
 const menu = require('./menu');
 module.exports = {
     "name": "${name}",
+    "version": "1.0.1",
     "public": path.resolve(__dirname, './public'),
     "middlewares": function (app) {
         //挂载express中间件
@@ -110,79 +111,79 @@ module.exports = {
             // console.log("应用启动后", data.i);
         }
     },
-    "tasks": {
-        "*/2 * * * * *": [function (data, callback) {
-            console.log('开始前延迟2秒');
-            data.i = 221;
-            setTimeout(function () {
-                callback(data);
-            }, 2000);
-        }, function (data) {
-            console.log('2秒执行一次', data);
-        }, function (data) {
-            data.i++;
-            console.log('2秒任务初始化完成', data);
-        }],
-        "*/5 * * * * *": [function (data, callback) {
-            console.log('开始前延迟5秒');
-            data.i = 554;
-            setTimeout(function () {
-                callback(data);
-            }, 5000);
-        }, function (data) {
-            console.log('5秒执行一次', data);
-        }, function (data) {
-            data.i++;
-            console.log('5秒任务初始化完成', data);
-        }],
-        "*/1 * * * * *": [function (data, callback) {
-            console.log('重复的1秒任务：开始前延迟1秒');
-            data.i = 11111111111111111111;
-            setTimeout(function () {
-                callback(data);
-            }, 1000);
-        }, function (data) {
-            console.log('重复的1秒任务：1秒执行一次', data);
-        }, function (data) {
-            data.i++;
-            console.log('重复的1秒任务：1秒任务初始化完成', data);
-        }],
-        "custom": [
-            {
-                name: "def_task_1",
-                spec: "*/1 * * * * *",
-                pre: function (data, callback) {
-                    data.i = 110;
-                    console.log('1秒任务初始化开始：延迟1秒，每1秒执行一次', data);
-                    setTimeout(function () {
-                        callback(data);
-                    }, 1000);
-                },
-                method: function (data) {
-                    console.log('1秒执行一次', data);
-                },
-                post: function (data) {
-                    console.log('1秒任务初始化完成！', data);
-                }
-            },
-            {
-                name: "def_task_3",
-                spec: "*/3 * * * * *",
-                pre: function (data, callback) {
-                    data.i = 330;
-                    console.log('3秒任务初始化开始：延迟3秒，每3秒执行一次', data);
-                    setTimeout(function () {
-                        callback(data);
-                    }, 3000);
-                },
-                method: function (data) {
-                    data.j = 3000;
-                    console.log('3秒执行一次', data);
-                },
-                post: function (data) {
-                    console.log('3秒任务初始化完成！', data);
-                }
-            }
-        ]
-    }
+    // "tasks": {
+    //     "*/2 * * * * *": [function (data, callback) {
+    //         console.log('开始前延迟2秒');
+    //         data.i = 221;
+    //         setTimeout(function () {
+    //             callback(data);
+    //         }, 2000);
+    //     }, function (data) {
+    //         console.log('2秒执行一次', data);
+    //     }, function (data) {
+    //         data.i++;
+    //         console.log('2秒任务初始化完成', data);
+    //     }],
+    //     "*/5 * * * * *": [function (data, callback) {
+    //         console.log('开始前延迟5秒');
+    //         data.i = 554;
+    //         setTimeout(function () {
+    //             callback(data);
+    //         }, 5000);
+    //     }, function (data) {
+    //         console.log('5秒执行一次', data);
+    //     }, function (data) {
+    //         data.i++;
+    //         console.log('5秒任务初始化完成', data);
+    //     }],
+    //     "*/1 * * * * *": [function (data, callback) {
+    //         console.log('重复的1秒任务：开始前延迟1秒');
+    //         data.i = 11111111111111111111;
+    //         setTimeout(function () {
+    //             callback(data);
+    //         }, 1000);
+    //     }, function (data) {
+    //         console.log('重复的1秒任务：1秒执行一次', data);
+    //     }, function (data) {
+    //         data.i++;
+    //         console.log('重复的1秒任务：1秒任务初始化完成', data);
+    //     }],
+    //     "custom": [
+    //         {
+    //             name: "def_task_1",
+    //             spec: "*/1 * * * * *",
+    //             pre: function (data, callback) {
+    //                 data.i = 110;
+    //                 console.log('1秒任务初始化开始：延迟1秒，每1秒执行一次', data);
+    //                 setTimeout(function () {
+    //                     callback(data);
+    //                 }, 1000);
+    //             },
+    //             method: function (data) {
+    //                 console.log('1秒执行一次', data);
+    //             },
+    //             post: function (data) {
+    //                 console.log('1秒任务初始化完成！', data);
+    //             }
+    //         },
+    //         {
+    //             name: "def_task_3",
+    //             spec: "*/3 * * * * *",
+    //             pre: function (data, callback) {
+    //                 data.i = 330;
+    //                 console.log('3秒任务初始化开始：延迟3秒，每3秒执行一次', data);
+    //                 setTimeout(function () {
+    //                     callback(data);
+    //                 }, 3000);
+    //             },
+    //             method: function (data) {
+    //                 data.j = 3000;
+    //                 console.log('3秒执行一次', data);
+    //             },
+    //             post: function (data) {
+    //                 console.log('3秒任务初始化完成！', data);
+    //             }
+    //         }
+    //     ]
+    // }
 };
