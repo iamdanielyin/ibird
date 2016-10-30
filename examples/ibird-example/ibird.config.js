@@ -37,7 +37,7 @@ module.exports = {
     "config": {
         "port": 3000,
         // "clients": {},
-        "ds": "mssql",//全局数据源设置：mongodb、mssql、mysql
+        // "ds": "mssql",//全局数据源设置：mongodb、mssql、mysql
         "mongodb": "mongodb://ibird:!QAZ2wsx@127.0.0.1:27017/ibird",//"mongodb://master:!QAZ2wsx@ds034279.mlab.com:34279/ibird-test",
         "mssql": {
             user: 'sa',
