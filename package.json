@@ -1,6 +1,6 @@
 {
   "name": "ibird",
-  "version": "0.1.25",
+  "version": "0.1.26",
   "description": "A General Background Solution",
   "main": "index.js",
   "scripts": {
@@ -41,7 +41,6 @@
     "fs-extra": "^0.30.0",
     "ioredis": "^2.0.0",
     "lodash": "^4.16.4",
-    "markdown": "^0.5.0",
     "moment": "^2.13.0",
     "mongoose": "^4.4.19",
     "morgan": "^1.7.0",
@@ -49,9 +48,8 @@
     "mysql": "^2.11.1",
     "node-schedule": "^1.1.1",
     "node-uuid": "^1.4.7",
+    "node-xlsx": "^0.7.4",
     "object-assign": "^4.1.0",
-    "officegen": "^0.4.0",
-    "pdfkit": "^0.7.2",
     "qs": "^6.2.0",
     "run-sequence": "^1.2.1",
     "winston": "^2.2.0"
