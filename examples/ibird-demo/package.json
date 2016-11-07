@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "ibird": "^0.1.27"
+    "ibird": "^0.1.29"
   },
   "devDependencies": {
-    "ibird-client": "^0.1.18"
+    "ibird-client": "^0.1.19"
   },
   "scripts": {
     "hot": "ibird hot",
