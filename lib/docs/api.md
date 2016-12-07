@@ -1,24 +1,10 @@
 # 文档介绍
 
-Backbone.js gives structure to web applications by providing models with 
-key-value binding and custom events, collections with a rich API of enumerable 
-functions, views with declarative event handling, and connects it all to your 
-existing API over a RESTful JSON interface.
+为了快速实现系统的开放式对接，降低应用与外部系统对接的成本，提高工作效率，现将系统内的API文档开放如下。
+该文档按模块列举了系统内开放的接口，并对每个接口的调用进行了详细地说明。
+具体包括每个接口的接口地址、接口描述、数据格式、请求方式、请求参数、响应参数和调用示例等。
+接口统一为RESTful接口，UTF-8编码，请求参数按请求方式的不同可设置到请求体或查询参数中。
 
-The project is hosted on GitHub, and the annotated source code is available, as well as an online test suite, an example application, a list of tutorials and a long list of real-world projects that use Backbone. Backbone is available for use under the MIT software license.
-
-You can report bugs and discuss features on the GitHub issues page, on Freenode IRC in the #documentcloud channel, post questions to the Google Group, add pages to the wiki or send tweets to @documentcloud.
-
-Backbone is an open-source component of DocumentCloud.
-
-Here, I try to document the good practices that our team has learned along the
-way building [Backbone][bb] applications.
-
-This document assumes that you already have some knowledge of [Backbone.js][bb],
-[jQuery][jq], and of course, JavaScript itself.
-
-[rsc]: http://ricostacruz.com/
-[bb]: http://documentcloud.github.com/backbone/
-[jq]: http://jquery.com/
+备注：该文档内并不包含接口的访问域名（或IP）和端口信息，如有需要，请联系系统管理员。
 
 ${content}
