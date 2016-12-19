@@ -17,14 +17,32 @@ module.exports = [
                 "items": [
                     {
                         "code": "user",
-                        "label": "${menu_user}",
+                        "label": "用户档案",
                         "icon": "user",
                         "uri": "/preset/user"
                     },
                     {
+                        "code": "org",
+                        "label": "机构档案",
+                        "icon": "sitemap",
+                        "uri": "/preset/org"
+                    },
+                    {
+                        "code": "role",
+                        "label": "角色档案",
+                        "icon": "users",
+                        "uri": "/preset/role"
+                    },
+                    {
+                        "code": "resource",
+                        "label": "资源列表",
+                        "icon": "suitcase",
+                        "uri": "/preset/resource"
+                    },
+                    {
                         "code": "param",
                         "label": "${menu_param}",
-                        "icon": "internet-explorer",
+                        "icon": "bars",
                         "uri": "/preset/param"
                     }
                 ]

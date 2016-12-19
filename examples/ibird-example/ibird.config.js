@@ -33,7 +33,7 @@ module.exports = {
     "routes": {
         //全局路由配置
     },
-    "menu": menu,
+    // "menu": menu,
     "config": {
         "port": 3000,
         // "clients": {},
@@ -57,7 +57,7 @@ module.exports = {
             password: 'admin123',
             database: 'ibird'
         },
-        // "redis": "127.0.0.1:6379",
+        "redis": "127.0.0.1:6379",
         "logpath": path.resolve(__dirname, "logs"),
         "ruprefix": '/api',
         "token": {
