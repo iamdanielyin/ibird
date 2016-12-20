@@ -15,6 +15,7 @@ module.exports = function (ibird) {
             {
                 "code": "dept",
                 "label": "部门",
+                "partsauth": true,
                 "fields": {
                     code: {
                         type: String,
