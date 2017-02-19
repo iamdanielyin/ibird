@@ -1,6 +1,6 @@
 {
   "name": "ibird",
-  "version": "0.1.79",
+  "version": "0.1.80",
   "description": "A General Background Solution",
   "main": "index.js",
   "scripts": {
