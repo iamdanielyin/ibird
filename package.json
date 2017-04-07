@@ -1,6 +1,6 @@
 {
   "name": "ibird",
-  "version": "0.1.81",
+  "version": "0.1.82",
   "description": "A General Background Solution",
   "main": "index.js",
   "scripts": {
@@ -33,10 +33,10 @@
   },
   "homepage": "https://github.com/yinfxs/ibird#readme",
   "dependencies": {
-    "body-parser": "^1.15.1",
+    "body-parser": "^1.17.1",
     "connect-multiparty": "^2.0.0",
     "cookie-parser": "^1.4.3",
-    "express": "^4.13.4",
+    "express": "^4.15.2",
     "file-stream-rotator": "0.0.6",
     "fs-extra": "^0.30.0",
     "ioredis": "^2.0.0",

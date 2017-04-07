@@ -37,26 +37,7 @@ module.exports = {
     "config": {
         "port": 3000,
         // "clients": {},
-        // "ds": "mssql",//全局数据源设置：mongodb、mssql、mysql
-        "mongodb": "mongodb://ibird:!QAZ2wsx@127.0.0.1:27017/ibird",//"mongodb://master:!QAZ2wsx@ds034279.mlab.com:34279/ibird-test",
-        "mssql": {
-            user: 'sa',
-            password: '!QAZ2wsx',
-            server: '127.0.0.1',
-            database: 'ibird',
-            pool: {
-                max: 10,
-                min: 0,
-                idleTimeoutMillis: 30000
-            }
-        },
-        "mysql": {
-            connectionLimit: 10,
-            host: '127.0.0.1',
-            user: 'root',
-            password: 'admin123',
-            database: 'ibird'
-        },
+        "mongodb": "mongodb://127.0.0.1:27017/ibird",//"mongodb://master:!QAZ2wsx@ds034279.mlab.com:34279/ibird-test",
         "redis": "127.0.0.1:6379",
         "logpath": path.resolve(__dirname, "logs"),
         "ruprefix": '/api',
