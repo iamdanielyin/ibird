@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon index.js",
     "ibird": "ibird",
-    "start": "NODE_ENV=production node index.js"
+    "build": "NODE_ENV=production node index.js"
   },
   "keywords": [
     "hello",
@@ -14,8 +15,9 @@
   "author": "yinfxs",
   "license": "MIT",
   "dependencies": {
+    "lodash": "^4.16.4",
     "moment": "^2.14.1",
     "node-uuid": "^1.4.7",
-    "lodash": "^4.16.4"
+    "nodemon": "^1.11.0"
   }
 }
