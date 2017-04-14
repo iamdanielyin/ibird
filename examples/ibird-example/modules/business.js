@@ -2,7 +2,7 @@
  * 业务模块
  * Created by yinfxs on 16-8-6.
  */
-const uuid = require('node-uuid');
+const uuid = require('uuid');
 const _ = require('lodash');
 const moment = require('moment');
 moment.locale('zh-cn');
