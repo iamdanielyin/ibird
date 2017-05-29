@@ -5,8 +5,7 @@ build
 logs
 *.log
 log
-*test.js
-test
+logs
 public
 
 
