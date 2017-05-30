@@ -8,7 +8,7 @@
 const token = require('../index');
 
 token.config({
-    redis:'redis://:ibird123@127.0.0.1:6012/0',
+    redis: 'redis://:ibird123@127.0.0.1:6012/0',
     expires_in: {
         access_token: 5,
         refresh_token: 10

@@ -1,11 +1,11 @@
 {
   "name": "ibird-patch",
-  "version": "0.9.8",
+  "version": "0.9.9",
   "description": "The code-patch tool of ibird.",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yinfxs/ibird-patch.git"
+    "url": "git+https://github.com/yinfxs/ibird.git"
   },
   "keywords": [
     "ibird",
@@ -24,9 +24,9 @@
   "author": "yinfxs",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/yinfxs/ibird-patch/issues"
+    "url": "https://github.com/yinfxs/ibird/issues"
   },
-  "homepage": "https://github.com/yinfxs/ibird-patch#readme",
+  "homepage": "https://github.com/yinfxs/ibird#readme",
   "dependencies": {
     "archiver": "^1.3.0",
     "fs-extra": "^2.1.2"

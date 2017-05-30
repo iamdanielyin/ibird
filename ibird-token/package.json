@@ -1,11 +1,11 @@
 {
   "name": "ibird-token",
-  "version": "0.9.26",
+  "version": "0.9.27",
   "description": "The token manager of ibird.",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yinfxs/ibird-token.git"
+    "url": "git+https://github.com/yinfxs/ibird.git"
   },
   "keywords": [
     "ibird",
@@ -23,9 +23,9 @@
   "author": "yinfxs",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/yinfxs/ibird-token/issues"
+    "url": "https://github.com/yinfxs/ibird/issues"
   },
-  "homepage": "https://github.com/yinfxs/ibird-token#readme",
+  "homepage": "https://github.com/yinfxs/ibird#readme",
   "dependencies": {
     "fs-extra": "^2.1.2",
     "ibird-utils": "^0.9.1",

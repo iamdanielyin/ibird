@@ -111,7 +111,7 @@ function batchAuth(unionid, permissions) {
  * @param app
  */
 app.middleware = (app) => {
-    app.use(require('./middleware/auth'));
+    require('./middleware/auth')(app);
 };
 
 /**
@@ -119,6 +119,6 @@ app.middleware = (app) => {
  * @param app
  */
 app.route = (router) => {
-    router.get('/permissions', require('./route/authentication'));
-    router.post('/authentication', require('./route/permissions'));
+    require('./route/authentication')(router);
+    require('./route/permissions')(router);
 };

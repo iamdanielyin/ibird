@@ -1,11 +1,11 @@
 {
   "name": "ibird-utils",
-  "version": "0.9.7",
+  "version": "0.9.8",
   "description": "The utility module of ibird.",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yinfxs/ibird-utils.git"
+    "url": "git+https://github.com/yinfxs/ibird.git"
   },
   "keywords": [
     "ibird",
@@ -23,9 +23,9 @@
   "utilsor": "yinfxs",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/yinfxs/ibird-utils/issues"
+    "url": "https://github.com/yinfxs/ibird/issues"
   },
-  "homepage": "https://github.com/yinfxs/ibird-utils#readme",
+  "homepage": "https://github.com/yinfxs/ibird#readme",
   "dependencies": {
   },
   "engines": {

@@ -1,11 +1,11 @@
 {
   "name": "ibird-raml",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "description": "The RAML module of ibird.",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yinfxs/ibird-raml.git"
+    "url": "git+https://github.com/yinfxs/ibird.git"
   },
   "keywords": [
     "ibird",
@@ -24,9 +24,9 @@
   "author": "yinfxs",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/yinfxs/ibird-raml/issues"
+    "url": "https://github.com/yinfxs/ibird/issues"
   },
-  "homepage": "https://github.com/yinfxs/ibird-raml#readme",
+  "homepage": "https://github.com/yinfxs/ibird#readme",
   "dependencies": {
   },
   "engines": {

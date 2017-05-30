@@ -306,7 +306,7 @@ app.config();
  * @param app
  */
 app.middleware = (app) => {
-    app.use(require('./middleware/token'));
+    require('./middleware/token')(app);
 };
 
 /**
@@ -314,8 +314,8 @@ app.middleware = (app) => {
  * @param app
  */
 app.route = (router) => {
-    router.post('/refresh', require('./route/refresh'));
-    router.post('/signin', require('./route/signin'));
-    router.post('/signout', require('./route/signout'));
-    router.post('/validity', require('./route/validity'));
+    require('./route/refresh')(router);
+    require('./route/signin')(router);
+    require('./route/signout')(router);
+    require('./route/validity')(router);
 };

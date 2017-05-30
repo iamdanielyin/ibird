@@ -1,11 +1,11 @@
 {
   "name": "ibird-log",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "description": "The logger module of ibird.",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yinfxs/ibird-log.git"
+    "url": "git+https://github.com/yinfxs/ibird.git"
   },
   "keywords": [
     "ibird",
@@ -24,9 +24,9 @@
   "author": "yinfxs",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/yinfxs/ibird-log/issues"
+    "url": "https://github.com/yinfxs/ibird/issues"
   },
-  "homepage": "https://github.com/yinfxs/ibird-log#readme",
+  "homepage": "https://github.com/yinfxs/ibird#readme",
   "dependencies": {
     "bunyan": "^1.8.10",
     "fs-extra": "^2.1.2"

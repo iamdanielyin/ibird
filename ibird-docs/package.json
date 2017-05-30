@@ -1,11 +1,11 @@
 {
   "name": "ibird-docs",
-  "version": "0.9.11",
+  "version": "0.9.12",
   "description": "The docs module of ibird.",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yinfxs/ibird-docs.git"
+    "url": "git+https://github.com/yinfxs/ibird.git"
   },
   "keywords": [
     "ibird",
@@ -24,9 +24,9 @@
   "author": "yinfxs",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/yinfxs/ibird-docs/issues"
+    "url": "https://github.com/yinfxs/ibird/issues"
   },
-  "homepage": "https://github.com/yinfxs/ibird-docs#readme",
+  "homepage": "https://github.com/yinfxs/ibird#readme",
   "dependencies": {
     "ibird-raml": "latest",
     "js-yaml": "^3.8.3",
