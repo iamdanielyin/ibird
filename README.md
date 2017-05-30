@@ -1,2 +1,2 @@
 # ibird
-Please click me[ibird :)](https://yinfxs.github.io/ibird)
+Please [click me](https://yinfxs.github.io/ibird)
