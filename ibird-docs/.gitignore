@@ -1,0 +1,11 @@
+.idea
+node_modules
+dist
+build
+logs
+*.log
+log
+logs
+public
+
+

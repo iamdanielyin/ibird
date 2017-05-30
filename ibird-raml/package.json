@@ -1,0 +1,36 @@
+{
+  "name": "ibird-raml",
+  "version": "0.9.1",
+  "description": "The RAML module of ibird.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yinfxs/ibird-raml.git"
+  },
+  "keywords": [
+    "ibird",
+    "node",
+    "mongodb",
+    "redis",
+    "koa",
+    "mongoosejs",
+    "web",
+    "app",
+    "http",
+    "application",
+    "framework",
+    "raml"
+  ],
+  "author": "yinfxs",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/yinfxs/ibird-raml/issues"
+  },
+  "homepage": "https://github.com/yinfxs/ibird-raml#readme",
+  "dependencies": {
+  },
+  "engines": {
+    "node": ">= 7.6.0"
+  },
+  "devDependencies": {}
+}

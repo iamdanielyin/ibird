@@ -1,0 +1,29 @@
+{
+  "name": "ibird-task",
+  "version": "0.9.0",
+  "description": "The schedule module of ibird.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yinfxs/ibird-task.git"
+  },
+  "keywords": [
+    "ibird",
+    "task",
+    "job",
+    "cron"
+  ],
+  "taskor": "yinfxs",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/yinfxs/ibird-task/issues"
+  },
+  "homepage": "https://github.com/yinfxs/ibird-task#readme",
+  "dependencies": {
+    "node-schedule": "^1.2.1"
+  },
+  "engines": {
+    "node": ">= 7.6.0"
+  },
+  "devDependencies": {}
+}

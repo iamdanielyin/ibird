@@ -1,0 +1,41 @@
+{
+  "name": "ibird-log",
+  "version": "0.9.3",
+  "description": "The logger module of ibird.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yinfxs/ibird-log.git"
+  },
+  "keywords": [
+    "ibird",
+    "node",
+    "mongodb",
+    "redis",
+    "koa",
+    "mongoosejs",
+    "web",
+    "app",
+    "http",
+    "application",
+    "framework",
+    "log"
+  ],
+  "author": "yinfxs",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/yinfxs/ibird-log/issues"
+  },
+  "homepage": "https://github.com/yinfxs/ibird-log#readme",
+  "dependencies": {
+    "bunyan": "^1.8.10",
+    "fs-extra": "^2.1.2"
+  },
+  "engines": {
+    "node": ">= 7.6.0"
+  },
+  "devDependencies": {
+    "mocha": "^3.2.0",
+    "should": "^11.2.1"
+  }
+}

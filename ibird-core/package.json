@@ -1,0 +1,50 @@
+{
+  "name": "ibird-core",
+  "version": "0.9.36",
+  "description": "The core module of ibird.",
+  "main": "lib/app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yinfxs/ibird-core.git"
+  },
+  "keywords": [
+    "ibird",
+    "node",
+    "mongodb",
+    "redis",
+    "koa",
+    "mongoosejs",
+    "web",
+    "app",
+    "http",
+    "application",
+    "framework"
+  ],
+  "author": "yinfxs",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/yinfxs/ibird-core/issues"
+  },
+  "homepage": "https://github.com/yinfxs/ibird-core#readme",
+  "dependencies": {
+    "fs-extra": "^3.0.1",
+    "ibird-i18n": "^0.9.2",
+    "ibird-utils": "latest",
+    "koa": "^2.2.0",
+    "koa-body": "^2.0.1",
+    "koa-mount": "^3.0.0",
+    "koa-router": "^7.2.0",
+    "koa-static": "^3.0.0",
+    "moment": "^2.18.1",
+    "mongoose": "^4.10.3",
+    "qs": "^6.4.0",
+    "uuid": "^3.0.1"
+  },
+  "engines": {
+    "node": ">= 7.6.0"
+  },
+  "files": [
+    "lib"
+  ],
+  "devDependencies": {}
+}

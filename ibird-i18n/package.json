@@ -1,0 +1,39 @@
+{
+  "name": "ibird-i18n",
+  "version": "0.9.2",
+  "description": "The i18n module of ibird.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yinfxs/ibird-i18n.git"
+  },
+  "keywords": [
+    "ibird",
+    "node",
+    "mongodb",
+    "redis",
+    "koa",
+    "mongoosejs",
+    "web",
+    "app",
+    "http",
+    "application",
+    "framework",
+    "i18n"
+  ],
+  "author": "yinfxs",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/yinfxs/ibird-i18n/issues"
+  },
+  "homepage": "https://github.com/yinfxs/ibird-i18n#readme",
+  "dependencies": {
+  },
+  "engines": {
+    "node": ">= 7.6.0"
+  },
+  "devDependencies": {
+    "mocha": "^3.2.0",
+    "should": "^11.2.1"
+  }
+}

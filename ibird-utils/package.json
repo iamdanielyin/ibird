@@ -1,0 +1,36 @@
+{
+  "name": "ibird-utils",
+  "version": "0.9.7",
+  "description": "The utility module of ibird.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yinfxs/ibird-utils.git"
+  },
+  "keywords": [
+    "ibird",
+    "node",
+    "mongodb",
+    "redis",
+    "koa",
+    "mongoosejs",
+    "web",
+    "app",
+    "http",
+    "application",
+    "utility"
+  ],
+  "utilsor": "yinfxs",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/yinfxs/ibird-utils/issues"
+  },
+  "homepage": "https://github.com/yinfxs/ibird-utils#readme",
+  "dependencies": {
+  },
+  "engines": {
+    "node": ">= 7.6.0"
+  },
+  "devDependencies": {
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "name": "ibird-auth",
+  "version": "0.9.12",
+  "description": "The permission module of ibird.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yinfxs/ibird-auth.git"
+  },
+  "keywords": [
+    "ibird",
+    "node",
+    "mongodb",
+    "redis",
+    "koa",
+    "mongoosejs",
+    "web",
+    "app",
+    "http",
+    "application",
+    "framework"
+  ],
+  "author": "yinfxs",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/yinfxs/ibird-auth/issues"
+  },
+  "homepage": "https://github.com/yinfxs/ibird-auth#readme",
+  "dependencies": {
+    "ibird-utils": "^0.9.2"
+  },
+  "engines": {
+    "node": ">= 7.6.0"
+  },
+  "devDependencies": {}
+}

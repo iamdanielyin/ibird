@@ -1,0 +1,39 @@
+{
+  "name": "ibird-patch",
+  "version": "0.9.8",
+  "description": "The code-patch tool of ibird.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yinfxs/ibird-patch.git"
+  },
+  "keywords": [
+    "ibird",
+    "node",
+    "mongodb",
+    "redis",
+    "koa",
+    "mongoosejs",
+    "web",
+    "app",
+    "http",
+    "application",
+    "framework",
+    "patch"
+  ],
+  "author": "yinfxs",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/yinfxs/ibird-patch/issues"
+  },
+  "homepage": "https://github.com/yinfxs/ibird-patch#readme",
+  "dependencies": {
+    "archiver": "^1.3.0",
+    "fs-extra": "^2.1.2"
+  },
+  "engines": {
+    "node": ">= 6.0.0"
+  },
+  "devDependencies": {
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "name": "ibird-docs",
+  "version": "0.9.11",
+  "description": "The docs module of ibird.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yinfxs/ibird-docs.git"
+  },
+  "keywords": [
+    "ibird",
+    "node",
+    "mongodb",
+    "redis",
+    "koa",
+    "mongoosejs",
+    "web",
+    "app",
+    "http",
+    "application",
+    "framework",
+    "docs"
+  ],
+  "author": "yinfxs",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/yinfxs/ibird-docs/issues"
+  },
+  "homepage": "https://github.com/yinfxs/ibird-docs#readme",
+  "dependencies": {
+    "ibird-raml": "latest",
+    "js-yaml": "^3.8.3",
+    "raml2htmlfix": "^6.3.1"
+  },
+  "engines": {
+    "node": ">= 7.6.0"
+  },
+  "devDependencies": {}
+}
