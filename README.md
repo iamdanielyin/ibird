@@ -1,2 +1,2 @@
-# ibird-server
-Please access https://yinfxs.github.io/ibird
+# ibird
+Please click me[ibird :)](https://yinfxs.github.io/ibird)

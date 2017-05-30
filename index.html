@@ -1,78 +1,279 @@
-<!doctype html>
-<!--
-
-  Instructions:
-
-  - Save this file.
-  - Replace "USER" with your GitHub username.
-  - Replace "REPO" with your GitHub repo name.
-  - Replace "Your Project" with your project name.
-  - Upload this file (or commit to GitHub Pages).
-
-  Customize as you see fit!
-
--->
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ibird | 基于Node的快速开发框架</title>
+    <meta name="description" content="基于Node的快速开发框架">
+    <meta name="keywords" content="ibird, node, mongodb, koa, koa2, mongoose, redis">
 
-    <title>ibird - ibird文档</title>
-
-    <!-- Flatdoc -->
-    <script src="js/jquery.min.js"></script>
-    <script src='js/legacy.js'></script>
-    <script src='js/flatdoc.js'></script>
-
-    <!-- Flatdoc theme -->
-    <link href='css/style.css' rel='stylesheet'>
-    <script src='js/script.js'></script>
-
-    <!-- Meta -->
-    <meta content="ibird" property="og:title">
-    <meta content="A General Background Solution." name="description">
-
-    <!-- Initializer -->
-    <script>
-        Flatdoc.run({
-            fetcher: Flatdoc.github('yinfxs/ibird', 'README.md')
-        });
-    </script>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway|Candal">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/app.css">
 </head>
-<body role='flatdoc' class="big-h3 no-literate large-brief">
-
-<div class='header'>
-    <div class='left'>
-        <h1>ibird</h1>
-        <ul>
-            <li><a href='https://github.com/yinfxs/ibird'>View on GitHub</a></li>
-            <li><a href='https://github.com/yinfxs/ibird/issues'>Issues</a></li>
-        </ul>
-    </div>
-    <div class='right'>
-        <!-- GitHub buttons: see http://ghbtns.com -->
-        <iframe src="https://ghbtns.com/github-btn.html?user=yinfxs&amp;repo=ibird&amp;type=watch&amp;count=true"
-                allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
-    </div>
-</div>
-
-<div class='content-root'>
-    <div class='menubar'>
-        <div class='section'>
-            <a class='big button' href='https://github.com/yinfxs/ibird' target='_blank'>ibird文档</a>
-            <!-- <a href='https://github.com/rstacruz/flatdoc' target='_blank'>View in GitHub</a> -->
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+<!--banner-->
+<section id="banner" class="banner" style="position: relative">
+    <div class="bg-color">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="col-md-12">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#"><span
+                                style="width: 140px; margin-top: -16px; color:#fff; font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, 'Open Sans', sans-serif;">i<b>bird</b></span></a>
+                    </div>
+                    <div class="collapse navbar-collapse navbar-right" id="myNavbar">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="#banner">简介</a></li>
+                            <li class=""><a href="#apps">应用列表</a></li>
+                            <li class=""><a href="https://yinfxs.gitbooks.io/ibird/content/index.html" target="_blank">文档</a>
+                            </li>
+                            <li class=""><a href="https://github.com/yinfxs/ibird" target="_blank">教程</a></li>
+                            <li class=""><a href="https://github.com/yinfxs/ibird" target="_blank">插件</a></li>
+                            <li class=""><a href="https://github.com/yinfxs/ibird/releases" target="_blank">版本日志</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="row">
+                <div class="banner-info">
+                    <div class="banner-text text-center">
+                        <h1 class="white">应用开发框架</h1>
+                    </div>
+                    <div class="banner-text text-center">
+                        <h2 class="white" style="text-transform: none;">Koa & Mongoose</h2>
+                        <p style="padding: 20px; font-size: 16px;">Node.js Web开发最佳实践</p>
+                        <a href="https://yinfxs.gitbooks.io/ibird/content/index.html" target="_blank"
+                           class="btn btn-appoint">查看文档</a>
+                    </div>
+                    <div class="banner-text text-center"
+                         style="position: absolute; bottom: 10px; width: 100%; text-align: center; left:0;">
+                        <a href="#service"><i class="fa fa-angle-down"
+                                              style="font-size: 40px; color: #fff; font-weight: bold;"></i></a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class='menu section' role='flatdoc-menu'></div>
-        <div class='bottom section'>
-            <iframe src='http://ghbtns.com/github-btn.html?user=yinfxs&amp;repo=ibird&amp;type=watch&amp;count=true'
-                    allowtransparency="true" frameborder="0" scrolling="0" width="170" height="20"></iframe>
-            <br>
-            <a href='https://github.com/yinfxs/ibird'>View on GitHub</a><br>
+    </div>
+</section>
+<!--/ banner-->
+<!--service-->
+<section id="service" class="section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-sm-4">
+                <h2 class="ser-title">框架简介</h2>
+                <hr class="botm-line">
+                <p>自动注册数据模型，自由挂载中间件和自定义路由，插件化扩展，更灵活地提供登录令牌、权限验证、日志服务、调度任务等功能，默认支持国际化。</p>
+            </div>
+            <div class="col-md-4 col-sm-4">
+                <div class="service-info">
+                    <div class="icon">
+                        <i class="fa fa-cube"></i>
+                    </div>
+                    <div class="icon-info">
+                        <h4>模型注册</h4>
+                        <p>可自由注册Mongoose的Schema，框架默认会为每个模型生成增删改查的接口，当然也可通过参数覆盖或不生成默认接口，也可以为每个接口定义前置或后置Hooks。</p>
+                    </div>
+                </div>
+                <div class="service-info">
+                    <div class="icon">
+                        <i class="fa fa-filter"></i>
+                    </div>
+                    <div class="icon-info">
+                        <h4>中间件挂载</h4>
+                        <p>中间件是Koa的核心，你可以自由挂载任何符合Koa规范的中间件，也可以非常直观地指定每个中间件的挂载顺序。</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4">
+                <div class="service-info">
+                    <div class="icon">
+                        <i class="fa fa-plug"></i>
+                    </div>
+                    <div class="icon-info">
+                        <h4>自定义路由</h4>
+                        <p>ibird采用应用广泛的koa-router来挂载应用路由，你可以完全按照koa-router的方式来定义路由。</p>
+                    </div>
+                </div>
+                <div class="service-info">
+                    <div class="icon">
+                        <i class="fa fa-puzzle-piece"></i>
+                    </div>
+                    <div class="icon-info">
+                        <h4>插件扩展</h4>
+                        <p>支持插件化扩展，默认提供登录令牌、权限验证、日志服务、调度任务、国际化等插件。</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div role='flatdoc-content' class='content'></div>
-</div>
+</section>
+<!--/ service-->
+<!--apps-->
+<section id="apps" class="section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="ser-title">应用列表</h2>
+                <hr class="botm-line">
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-6">
+                <div class="thumbnail">
+                    <img src="img/app.jpg" alt="..." class="team-img">
+                    <div class="caption">
+                        <h3>商城系统</h3>
+                        <p>微商城、B2C、分销系统等</p>
+                        <ul class="list-inline">
+                            <li><a href="#"><i class="fa fa-weixin"></i></a></li>
+                            <li><a href="#"><i class="fa fa-qq"></i></a></li>
+                            <li><a href="#"><i class="fa fa-weibo"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-6">
+                <div class="thumbnail">
+                    <img src="img/app.jpg" alt="..." class="team-img">
+                    <div class="caption">
+                        <h3>企业应用</h3>
+                        <p>企业应用定制开发</p>
+                        <ul class="list-inline">
+                            <li><a href="#"><i class="fa fa-weixin"></i></a></li>
+                            <li><a href="#"><i class="fa fa-qq"></i></a></li>
+                            <li><a href="#"><i class="fa fa-weibo"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-6">
+                <div class="thumbnail">
+                    <img src="img/app.jpg" alt="..." class="team-img">
+                    <div class="caption">
+                        <h3>点餐系统</h3>
+                        <p>O2O在线点餐系统</p>
+                        <ul class="list-inline">
+                            <li><a href="#"><i class="fa fa-weixin"></i></a></li>
+                            <li><a href="#"><i class="fa fa-qq"></i></a></li>
+                            <li><a href="#"><i class="fa fa-weibo"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-6">
+                <div class="thumbnail">
+                    <img src="img/app.jpg" alt="..." class="team-img">
+                    <div class="caption">
+                        <h3>公众平台</h3>
+                        <p>公众号、订阅号内容平台</p>
+                        <ul class="list-inline">
+                            <li><a href="#"><i class="fa fa-weixin"></i></a></li>
+                            <li><a href="#"><i class="fa fa-qq"></i></a></li>
+                            <li><a href="#"><i class="fa fa-weibo"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/ apps-->
+<!-- buy -->
+<section id="buy" class="section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <h2 class="ser-title">购买方式</h2>
+                <hr class="botm-line">
+                <section id="cta-1" style="padding-bottom: 10px; ">
+                    <div class="container">
+                        <div class="row">
+                            <div class="schedule-tab">
+                                <div class="col-md-4 col-sm-4 bor-left">
+                                    <div class="mt-boxy-color"></div>
+                                    <div class="medi-info">
+                                        <h3>购买服务</h3>
+                                        <p>一键部署，立即运行！价格优惠，并提供长期的系统维护！需自备服务器环境，仅支持作为一个项目的正常运行，不提供源码。</p>
+                                        <a href="http://7xlhoa.com1.z0.glb.clouddn.com/qrcode.jpg" target="_blank"
+                                           class="medi-info-btn">了解更多</a>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                    <div class="medi-info">
+                                        <h3>购买源码</h3>
+                                        <p>提供所购买项目的所有源码，其中包括详细的代码注释及系统开发手册。</p>
+                                        <a href="http://7xlhoa.com1.z0.glb.clouddn.com/qrcode.jpg" target="_blank"
+                                           class="medi-info-btn">了解更多</a>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                    <div class="medi-info">
+                                        <h3>二次开发</h3>
+                                        <p>支持在现有系统上，根据需求自定义扩展新的功能，该项费用按项目情况计算。</p>
+                                        <a href="http://7xlhoa.com1.z0.glb.clouddn.com/qrcode.jpg" target="_blank"
+                                           class="medi-info-btn">了解更多</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/ buy -->
+<!--footer-->
+<footer id="footer">
+    <div class="top-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-sm-4 marb20">
+                    <div class="ftr-tle">
+                        <h4 class="white no-padding">关于ibird</h4>
+                    </div>
+                    <div class="info-sec">
+                        <p>我们希望通过不断优化开发体验，<br/>来缩短项目周期，进一步降低开发成本，<br/>提交项目质量。</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4 marb20">
+                    <div class="ftr-tle">
+                        <h4 class="white no-padding">加入开发者讨论群</h4>
+                    </div>
+                    <div class="info-sec">
+                        <img src="img/qrcode.jpg" style="width: 150px;"/>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4 marb20">
+                    <div class="ftr-tle">
+                        <h4 class="white no-padding">关注我们</h4>
+                    </div>
+                    <div class="info-sec">
+                        <iframe src="https://ghbtns.com/github-btn.html?user=yinfxs&amp;repo=ibird&amp;type=star&amp;count=true"
+                                frameborder="0" scrolling="0" width="150px" height="20px"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!--/ footer-->
+
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.easing.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/custom.js"></script>
+<script src="js/app.js"></script>
 
 </body>
 </html>
