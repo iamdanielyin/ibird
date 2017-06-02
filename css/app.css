@@ -1,3 +1,18 @@
 .app-item-img {
     height: 167px;
 }
+
+a, a:visited, a:hover {
+    text-decoration: none;
+}
+
+.ibird-focus span {
+    cursor: pointer;
+    display: inline-block;
+    padding: 6px 8px;
+    background: #fff;
+}
+
+.ibird-focus a {
+    cursor: pointer;
+}
