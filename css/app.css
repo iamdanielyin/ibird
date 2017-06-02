@@ -9,10 +9,10 @@ a, a:visited, a:hover {
 .ibird-focus span {
     cursor: pointer;
     display: inline-block;
-    padding: 6px 8px;
-    background: #fff;
+    margin: 0 5px;
 }
 
-.ibird-focus a {
+.ibird-focus span a {
     cursor: pointer;
+    color: #fff;
 }
