@@ -12,6 +12,7 @@ const fs = require('fs-extra');
 const Koa = require('koa');
 const Router = require('koa-router');
 const koaBody = require('koa-body');
+const cors = require('koa-cors');
 const serve = require('koa-static');
 const mount = require('koa-mount');
 const config = require('./config');
@@ -65,19 +66,9 @@ app.run = async () => {
     }
 
     //检测是否存在跨域配置
-    config.cross = (typeof config.cross === 'boolean') || (typeof config.cross === 'function') ? config.cross : false;
-    if (config.cross !== false) {
-        if (config.cross === true) {
-            app.use((ctx, next) => {
-                ctx.set('Access-Control-Allow-Origin', '*');
-                ctx.set('Access-Control-Allow-Credentials', 'true');
-                ctx.set('Access-Control-Allow-Methods', 'GET,PUT,POST,PATCH,DELETE');
-                ctx.set('Access-Control-Allow-Headers', 'Content-Type,Accept');
-                next();
-            });
-        } else {
-            app.use(config.cross);
-        }
+    if (config.cross) {
+        const cors_options = (typeof config.cross === 'object') ? config.cross : {};
+        app.use(cors(cors_options));
     }
 
     //挂载注入的中间件
