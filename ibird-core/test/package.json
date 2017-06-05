@@ -4,6 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "prestart": "npm i",
     "start": "node app.js"
   },
   "author": "",
