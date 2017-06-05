@@ -1,6 +1,6 @@
 {
   "name": "ibird-docs",
-  "version": "0.9.13",
+  "version": "0.9.14",
   "description": "The docs module of ibird.",
   "main": "index.js",
   "repository": {

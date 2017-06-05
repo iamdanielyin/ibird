@@ -56,7 +56,6 @@ app.gen = (config, ramlpath) => {
     };
     if (config.version) doc.version = config.version;
     raml.modelApis(doc, config);
-    raml.routeApis(doc, config);
 
     const result = app.build(doc, ramlpath);
     return result;

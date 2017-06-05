@@ -1,6 +1,6 @@
 {
   "name": "ibird-raml",
-  "version": "0.9.2",
+  "version": "0.9.3",
   "description": "The RAML module of ibird.",
   "main": "index.js",
   "repository": {

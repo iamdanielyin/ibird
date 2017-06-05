@@ -132,27 +132,6 @@ app.modelApi = (doc, conf, prefix) => {
 };
 
 /**
- * 根据ibird的配置对象生成RAML文档的自定义路由API部分
- * @param doc
- * @param config
- * @returns {{}}
- */
-app.routeApis = (doc, config) => {
-    if (doc && !config) {
-        config = doc;
-        doc = {};
-    } else if (!doc && config) {
-        doc = {};
-    }
-    for (const r of config.route) {
-        if (typeof r !== 'object') continue;
-        if (r.doc === null || typeof r.doc !== 'object') continue;
-        Object.assign(doc, r.doc);
-    }
-    return doc;
-};
-
-/**
  * 生成模型的列表查询接口
  * @param name 模型名称
  * @param displayName 显示名
@@ -204,7 +183,7 @@ app.modelListApi = (name, displayName) => {
                 type: 'string',
                 required: false,
                 default: '{}',
-                example: `{"code":"A101","name":"商品名称"}`
+                example: `{}`
             }
         },
         responses: {
@@ -347,7 +326,7 @@ app.modelOneApi = (name, displayName) => {
                 type: 'string',
                 required: false,
                 default: '{}',
-                example: `{"code":"A101","name":"商品名称"}`
+                example: `{}`
             }
         },
         responses: {
