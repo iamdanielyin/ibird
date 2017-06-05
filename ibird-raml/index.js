@@ -87,9 +87,10 @@ app.modelTypes = (config) => {
  * 根据ibird的配置对象生成RAML文档的模型默认API部分
  * @param doc
  * @param config
+ * @param filters
  * @returns {{}}
  */
-app.modelApis = (doc, config) => {
+app.modelApis = (doc, config, filters = {}) => {
     if (doc && !config) {
         config = doc;
         doc = {};
@@ -100,34 +101,57 @@ app.modelApis = (doc, config) => {
         if (!code) continue;
         let s = config.schema[code];
         if (s === null || (typeof s !== 'object')) continue;
-        app.modelApi(doc, s, config.prefix);
+        app.modelApi(doc, s, config.prefix, Array.isArray(filters) ? filters : filters.code);
     }
     return doc;
 };
+
+/**
+ * 获取对象中的指定值
+ * @param object
+ * @param filters
+ */
+function pick(object, filters) {
+    if (typeof object !== 'object' || !Array.isArray(filters)) return {};
+    const result = {};
+    for (const key in object) {
+        if (filters.indexOf(key) < 0) continue;
+        Object.assign(result, object[key]);
+    }
+    return result;
+}
 
 /**
  * 根据ibird的配置对象生成单个数据模型的默认API部分
  * @param doc 文档对象
  * @param conf 单个数据模型的配置部分
  * @param prefix 接口全局前缀
+ * @param filters 指定需要生成的接口['list', 'one', 'id', 'create', 'delete', 'update']
  * @returns {*}
  */
-app.modelApi = (doc, conf, prefix) => {
+app.modelApi = (doc, conf, prefix, filters = ['list', 'one', 'id', 'create', 'delete', 'update']) => {
     const { name, displayName } = conf;
     let key = prefix ? `${prefix}/${name.toLowerCase()}` : name.toLowerCase();
     key = key.startsWith('/') ? key : `/${key}`;
-    doc[`${key}`] = {
-        get: app.modelListApi(name, displayName),
-        post: app.modelCreateApi(name, displayName),
-        put: app.modelUpdateApi(name, displayName),
-        delete: app.modelRemoveApi(name, displayName)
+
+    const object = {
+        list: { get: app.modelListApi(name, displayName) },
+        create: { post: app.modelCreateApi(name, displayName) },
+        update: { put: app.modelUpdateApi(name, displayName) },
+        delete: { delete: app.modelRemoveApi(name, displayName) }
     };
-    doc[`${key}/one`] = {
-        get: app.modelOneApi(name, displayName)
-    };
-    doc[`${key}/{id}`] = {
-        get: app.modelIdApi(name, displayName)
-    };
+    doc[`${key}`] = pick(object, filters);
+
+    if (filters.indexOf('one') >= 0) {
+        doc[`${key}/one`] = {
+            get: app.modelOneApi(name, displayName)
+        };
+    }
+    if (filters.indexOf('id') >= 0) {
+        doc[`${key}/{id}`] = {
+            get: app.modelIdApi(name, displayName)
+        };
+    }
     return doc;
 };
 
@@ -282,9 +306,9 @@ app.modelListApi = (name, displayName) => {
                                     type: 'object',
                                     required: true,
                                     default: {},
-                                    example: { "code": "A101", "name": "商品名称" }
+                                    example: { 'code': 'A101', 'name': '商品名称' }
                                 }
-                            },
+                            }
                         },
                         errmsg: {
                             displayName: '错误信息',
@@ -306,7 +330,7 @@ app.modelListApi = (name, displayName) => {
                 }
             }
         }
-    }
+    };
 };
 
 /**
@@ -337,7 +361,7 @@ app.modelOneApi = (name, displayName) => {
                         data: {
                             displayName: '返回数据',
                             description: '接口返回的数据部分',
-                            type: `${name}`,
+                            type: `${name}`
                         },
                         errmsg: {
                             displayName: '错误信息',
@@ -359,7 +383,7 @@ app.modelOneApi = (name, displayName) => {
                 }
             }
         }
-    }
+    };
 };
 
 /**
@@ -380,7 +404,7 @@ app.modelIdApi = (name, displayName) => {
                         data: {
                             displayName: '返回数据',
                             description: '接口返回的数据部分',
-                            type: `${name}`,
+                            type: `${name}`
                         },
                         errmsg: {
                             displayName: '错误信息',
@@ -402,7 +426,7 @@ app.modelIdApi = (name, displayName) => {
                 }
             }
         }
-    }
+    };
 };
 
 /**
@@ -468,7 +492,7 @@ app.modelCreateApi = (name, displayName) => {
                 }
             }
         }
-    }
+    };
 };
 
 /**
@@ -551,7 +575,7 @@ app.modelUpdateApi = (name, displayName) => {
                 }
             }
         }
-    }
+    };
 };
 
 /**
@@ -621,5 +645,5 @@ app.modelRemoveApi = (name, displayName) => {
                 }
             }
         }
-    }
+    };
 };
