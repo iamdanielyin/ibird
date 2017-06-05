@@ -97,6 +97,7 @@ app.config = (obj = {}) => {
     app.mode = cache.mode;
     app.user = obj.user;
     app.ignoreURLs = obj.ignoreURLs;
+    app.fakeTokens = obj.fakeTokens;
 };
 
 /**

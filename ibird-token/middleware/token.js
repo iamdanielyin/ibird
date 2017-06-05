@@ -8,7 +8,8 @@ const token = require('../index');
 
 module.exports = (app) => {
     app.use(async (ctx, next) => {
-        const _ignoreURLs = Array.isArray(token.ignoreURLs) ? token.ignoreURLs : [];
+        const _ignoreURLs = token.ignoreURLs && Array.isArray(token.ignoreURLs) ? token.ignoreURLs : [];
+        const _fakeTokens = token.fakeTokens && Array.isArray(token.fakeTokens) ? token.fakeTokens : [];
         const _pathname = ctx.req._parsedUrl.pathname;
         const _method = ctx.req.method;
 
@@ -37,8 +38,24 @@ module.exports = (app) => {
         const _body = ctx.request.body || {};
         const _reponse = { data: {}, errmsg: null, errcode: null };
 
-        const access_token = _cookies.get(token.COOKIETOKEN) || _query[token.TOKENKEY] || _body[token.TOKENKEY];
+        let access_token = _cookies.get(token.COOKIETOKEN) || _query[token.TOKENKEY] || _body[token.TOKENKEY];
+        if (!access_token) {
+            if (ctx.get('Authorization')) {
+                const _authorization = ctx.get('Authorization');
+                const _split = _authorization.split(' ');
+                if (_split.length >= 1) access_token = _split[1];
+            } else if (ctx.get(token.TOKENKEY)) {
+                access_token = ctx.get(token.TOKENKEY);
+            } else if (ctx.get(token.TOKENKEY.toUpperCase())) {
+                access_token = ctx.get(token.TOKENKEY.toUpperCase());
+            }
+        }
+
         try {
+            if (access_token && _fakeTokens.indexOf(access_token) >= 0) {
+                ctx._token = {};
+                return await next();
+            }
             const _token = await token.authentication(access_token);
             ctx._token = _token;
             await next();
