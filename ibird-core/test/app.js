@@ -6,8 +6,8 @@
  */
 
 const path = require('path');
-const app = require('../lib/app');
-const docs = require('../../ibird-docs/index');
+const app = require('ibird-core');
+const docs = require('ibird-docs');
 
 // 注册项测试
 app.config({
@@ -15,13 +15,8 @@ app.config({
     port: 3001,
     mongo: 'mongodb://127.0.0.1:27017/ibird',
     static: {
-        '/public': path.resolve(process.cwd(), 'public'),
-        '/image': path.resolve(process.cwd(), 'assets')
-    },
-    multipart: true,
-    uploadPath: path.resolve(process.cwd(), 'assets/upload'),
-    prefix: '',
-    cross: false
+        '/public': path.resolve(process.cwd(), 'public')
+    }
 });
 
 // 事件监听测试
@@ -117,45 +112,17 @@ app.model({ name: 'User', schema: userSchema, displayName: '用户' });
 app.model({ name: 'Blog', schema: blogSchema, displayName: '博客' });
 
 // 挂载自定义接口
-app.mount({
-    path: '/test/api',
-    middleware: (ctx) => {
+app.mount((router) => {
+    router.get('/test/api', (ctx) => {
         ctx.body = '测试自定义接口';
-    },
-    doc: {
-        '/test/api': {
-            get: {
-                displayName: '自定义查询接口',
-                queryParameters: {
-                    param1: {
-                        displayName: '参数1',
-                        type: 'string'
-                    },
-                    param2: {
-                        displayName: '参数2',
-                        type: 'string'
-                    }
-                },
-                responses: {
-                    200: {
-                        body: {
-                            type: 'string',
-                            displayName: '响应体'
-                        }
-                    }
-                }
-            }
-        }
-    }
+    });
 });
 
-// 生成接口文档
-docs.gen(app.config(), path.resolve(process.cwd(), 'public/api.raml'));
-// 获取服务接口列表
-// console.log(JSON.stringify(docs.services(app.config()), null, 2));
-
 // 应用启动测试
-app.start();
+app.start().then(() => {
+    // 生成接口文档
+    docs.gen(app.config(), path.resolve(process.cwd(), 'public/api.raml'));
+});
 
 
 
