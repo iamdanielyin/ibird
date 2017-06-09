@@ -95,7 +95,7 @@ app.config = (obj = {}) => {
             cache.refresh = obj.refresh;
             break;
     }
-    object.assign(app, {
+    Object.assign(app, {
         mode: cache.mode,
         condition: obj.condition || false,
         ignoreURLs: obj.ignoreURLs || [/signin/, /token/],
@@ -110,10 +110,12 @@ app.config = (obj = {}) => {
  * @param condition
  */
 app.authorization = async (condition) => {
-    if ((typeof condition !== 'function') && (typeof condition !== 'boolean')) throw Error(`授权条件必须是函数或布尔类型`);
+    if (!(condition instanceof Promise) && (typeof condition !== 'function') && (typeof condition !== 'boolean')) throw Error(`授权条件必须是函数或布尔类型`);
     try {
         let data = null;
-        if (typeof condition === 'function') {
+        if (condition instanceof Promise) {
+            data = await condition;
+        } else if (typeof condition === 'function') {
             data = await condition();
         } else {
             if (!condition) throw new Error('未满足授权条件');

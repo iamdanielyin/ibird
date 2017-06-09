@@ -55,7 +55,7 @@ app.gen = (config, ramlpath, _default) => {
             oauth_2_0: {
                 type: 'OAuth 2.0',
                 settings: {
-                    accessTokenUri: `{baseUri}${config.prefix}/token`,
+                    accessTokenUri: `${config.baseUri}${config.prefix}/token`,
                     authorizationGrants: ['password']
                 }
             }

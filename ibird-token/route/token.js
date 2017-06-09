@@ -33,11 +33,12 @@ module.exports = (router) => {
         if (authResult !== true) return ctx.throw(403, `Invalid client`);
         try {
             const _data = await token.condition(ctx);
+            if (!_data) throw new Error(`Does not meet the authorization conditions`);
             const _token = await token.authorization(Promise.resolve(_data));
 
             ctx.set('Cache-Control', 'no-cache');
             ctx.cookies.set(token.COOKIETOKEN, _token.access_token);
-            if (_data[token.useridKey]) {
+            if (_data && _data[token.useridKey]) {
                 ctx.cookies.set(token.COOKIEUSERID, _data[token.useridKey]);
             }
             ctx.body = _token;
