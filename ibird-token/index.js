@@ -15,7 +15,8 @@ moment.locale('zh-cn');
 
 const app = { mode: 1 };
 const cache = {
-    mode: 1, expires_in: {
+    mode: 1,
+    expires_in: {
         access_token: 86400, // 默认一天，1天
         refresh_token: 604800 // 默认一周，7天
     }
@@ -94,22 +95,26 @@ app.config = (obj = {}) => {
             cache.refresh = obj.refresh;
             break;
     }
-    app.mode = cache.mode;
-    app.user = obj.user;
-    app.ignoreURLs = obj.ignoreURLs;
-    app.fakeTokens = obj.fakeTokens;
+    object.assign(app, {
+        mode: cache.mode,
+        condition: obj.condition,
+        ignoreURLs: obj.ignoreURLs,
+        fakeTokens: obj.fakeTokens,
+        client: obj.client,
+        useridKey: obj.useridKey || 'userid'
+    });
 };
 
 /**
  * 授权
  * @param condition
- * @param [data]
  */
-app.authorization = async (condition, data) => {
+app.authorization = async (condition) => {
     if ((typeof condition !== 'function') && (typeof condition !== 'boolean')) throw Error(`授权条件必须是函数或布尔类型`);
     try {
+        let data = null;
         if (typeof condition === 'function') {
-            await condition();
+            data = await condition();
         } else {
             if (!condition) throw new Error('未满足授权条件');
         }
@@ -117,10 +122,7 @@ app.authorization = async (condition, data) => {
         const token = {
             access_token: uuid.v1().replace(/-/g, ''),
             refresh_token: new Buffer(uuid.v1()).toString('base64'),
-            expires_in: {
-                access_token: cache.expires_in.access_token,
-                refresh_token: cache.expires_in.refresh_token
-            },
+            expires_in: cache.expires_in.access_token,
             created: time,
             updated: time,
             data
@@ -132,8 +134,8 @@ app.authorization = async (condition, data) => {
                 break;
             case app.MODE_REDIS:
                 await app.redis.pipeline()
-                .set(token.access_token, JSON.stringify(token, null, 0), 'EX', token.expires_in.access_token)
-                .set(token.refresh_token, JSON.stringify(token, null, 0), 'EX', token.expires_in.refresh_token)
+                .set(token.access_token, JSON.stringify(token, null, 0), 'EX', cache.expires_in.access_token)
+                .set(token.refresh_token, JSON.stringify(token, null, 0), 'EX', cache.expires_in.refresh_token)
                 .exec();
                 break;
             case app.MODE_USER:
@@ -169,8 +171,7 @@ app.authentication = async (access_token) => {
             case app.MODE_USER:
                 token = await cache.get(access_token);
                 if (token) {
-                    const expires_in = token.expires_in;
-                    const access_expires = moment(token.created, 'X').add(expires_in.access_token, 's');
+                    const access_expires = moment(token.created, 'X').add(cache.expires_in.access_token, 's');
                     if (moment().isBefore(access_expires)) return token;
                 }
                 break;
@@ -215,8 +216,8 @@ app.refresh = async (refresh_token) => {
                 token.access_token = uuid.v1();
 
                 await app.redis.pipeline()
-                .set(token.access_token, JSON.stringify(token, null, 0), 'EX', token.expires_in.access_token)
-                .set(token.refresh_token, JSON.stringify(token, null, 0), 'EX', token.expires_in.refresh_token)
+                .set(token.access_token, JSON.stringify(token, null, 0), 'EX', cache.expires_in.access_token)
+                .set(token.refresh_token, JSON.stringify(token, null, 0), 'EX', cache.expires_in.refresh_token)
                 .exec();
                 break;
             case app.MODE_USER:
@@ -280,14 +281,14 @@ app.taskfn = () => {
 
             const token = _access[access_token] || {};
 
-            const access_expires = moment(token.updated, 'X').add(token.expires_in.access_token, 's');
+            const access_expires = moment(token.updated, 'X').add(cache.expires_in.access_token, 's');
             if (now.isBefore(access_expires)) access_cache[token.access_token] = token;
         }
         for (const refresh_token in _refresh) {
 
             const token = _refresh[refresh_token] || {};
 
-            const refresh_expires = moment(token.created, 'X').add(token.expires_in.refresh_token, 's');
+            const refresh_expires = moment(token.created, 'X').add(cache.expires_in.refresh_token, 's');
             if (now.isBefore(refresh_expires)) refresh_cache[token.refresh_token] = token;
         }
         cache.token = {
