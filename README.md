@@ -53,4 +53,4 @@ ibird的短期目标是通过改善开发体验来缩短项目周期，进一步
 
 ### 开发者讨论群
 
-![开发者讨论群](assets/ibird_weixin_qrcode.jpg)
+![开发者讨论群](assets/ibird_develop_group.jpg)
