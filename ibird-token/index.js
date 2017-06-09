@@ -97,11 +97,11 @@ app.config = (obj = {}) => {
     }
     object.assign(app, {
         mode: cache.mode,
-        condition: obj.condition,
-        ignoreURLs: obj.ignoreURLs,
-        fakeTokens: obj.fakeTokens,
-        client: obj.client,
-        useridKey: obj.useridKey || 'userid'
+        condition: obj.condition || false,
+        ignoreURLs: obj.ignoreURLs || [/signin/, /token/],
+        fakeTokens: obj.fakeTokens || [],
+        client: obj.client || {},
+        useridKey: obj.useridKey || '_id'
     });
 };
 
