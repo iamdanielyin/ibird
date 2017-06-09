@@ -37,7 +37,9 @@ module.exports = (router) => {
 
             ctx.set('Cache-Control', 'no-cache');
             ctx.cookies.set(token.COOKIETOKEN, _token.access_token);
-            ctx.cookies.set(token.COOKIEUSERID, _data[token.useridKey]);
+            if (_data[token.useridKey]) {
+                ctx.cookies.set(token.COOKIEUSERID, _data[token.useridKey]);
+            }
             ctx.body = _token;
         } catch (e) {
             ctx.throw(400, `Authorization failure: ${e.message}`);

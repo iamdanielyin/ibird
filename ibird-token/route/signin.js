@@ -17,7 +17,9 @@ module.exports = (router) => {
             Object.assign(_reponse, { data: _token });
             ctx.set('Cache-Control', 'no-cache');
             ctx.cookies.set(token.COOKIETOKEN, _token.access_token);
-            ctx.cookies.set(token.COOKIEUSERID, _data[token.useridKey]);
+            if (_data[token.useridKey]) {
+                ctx.cookies.set(token.COOKIEUSERID, _data[token.useridKey]);
+            }
         } catch (e) {
             Object.assign(_reponse, { errmsg: `登录接口异常：${e.message}`, errcode: '500' });
         }

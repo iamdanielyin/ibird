@@ -316,8 +316,9 @@ app.middleware = (app) => {
  * @param app
  */
 app.route = (router) => {
-    require('./route/refresh')(router);
+    require('./route/token')(router);
     require('./route/signin')(router);
     require('./route/signout')(router);
+    require('./route/refresh')(router);
     require('./route/validity')(router);
 };
