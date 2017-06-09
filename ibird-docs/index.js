@@ -35,7 +35,7 @@ app.parse = (path, flag) => {
  */
 app.build = (doc, file) => {
     if (typeof doc !== 'object') return '';
-    doc = yaml.safeDump(doc, {sortKeys: false, noCompatMode: true});
+    doc = yaml.safeDump(doc, { sortKeys: false, noCompatMode: true });
     if (!doc.startsWith('#%RAML 1.0')) doc = `#%RAML 1.0\n` + doc;
     if (file) fs.writeFileSync(file, doc);
     return doc;
@@ -45,15 +45,28 @@ app.build = (doc, file) => {
  * 根据ibird的配置对象生成相关文档
  * @param config ibird应用配置对象
  * @param [ramlpath] RAML文件保存路径，可选
+ * @param [_default] 默认配置对象
  */
-app.gen = (config, ramlpath) => {
+app.gen = (config, ramlpath, _default) => {
     if (!config) return;
-    const doc = {
+    _default = (typeof _default === 'object') ? _default : {
+        securedBy: ['oauth_2_0'],
+        securitySchemes: {
+            oauth_2_0: {
+                type: 'OAuth 2.0',
+                settings: {
+                    accessTokenUri: `{baseUri}${config.prefix}/token`,
+                    authorizationGrants: ['password']
+                }
+            }
+        }
+    };
+    const doc = Object.assign({
         title: config.name,
         baseUri: config.baseUri || `http://127.0.0.1:${config.port}`,
         mediaType: 'application/json',
         types: raml.modelTypes(config)
-    };
+    }, _default);
     if (config.version) doc.version = config.version;
     raml.modelApis(doc, config);
 
