@@ -5,6 +5,7 @@
  * Created by yinfxs on 2017/4/7.
  */
 
+const utility = require('ibird-utils');
 const schedule = require('node-schedule');
 const app = {jobs: {}};
 
@@ -91,3 +92,12 @@ function batchAdd(array) {
     }
     return result;
 }
+
+/**
+ * 挂载任务文件夹
+ * 将会递归挂载该文件夹下的所有文件
+ * @param dir
+ */
+app.addDir = (dir) => {
+    utility.recursiveDir(dir, app.add);
+};

@@ -1,6 +1,6 @@
 {
   "name": "ibird-task",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "description": "The schedule module of ibird.",
   "main": "index.js",
   "repository": {
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/yinfxs/ibird#readme",
   "dependencies": {
+    "ibird-utils": "latest",
     "node-schedule": "^1.2.1"
   },
   "engines": {

@@ -166,7 +166,7 @@ app.import = ({ model, middleware, route }) => {
  * @param dir
  */
 app.modelDir = (dir) => {
-    app.recursiveDir(dir, app.model);
+    utility.recursiveDir(dir, app.model);
 };
 
 /**
@@ -175,7 +175,7 @@ app.modelDir = (dir) => {
  * @param dir
  */
 app.mountDir = (dir) => {
-    app.recursiveDir(dir, app.mount);
+    utility.recursiveDir(dir, app.mount);
 };
 
 /**
@@ -184,30 +184,7 @@ app.mountDir = (dir) => {
  * @param dir
  */
 app.useDir = (dir) => {
-    app.recursiveDir(dir, app.use);
-};
-
-/**
- * 递归文件夹，并对所有js文件执行回调
- * @param dir
- * @param callback
- */
-app.recursiveDir = (dir, callback) => {
-    setTimeout(() => {
-        const files = fs.readdirSync(dir);
-        for (const file of files) {
-            const fullpath = path.resolve(dir, file);
-            const stat = fs.statSync(fullpath);
-            if (stat.isFile() === false && stat.isDirectory() === false) continue;
-            if (stat.isDirectory()) {
-                app.recursiveDir(fullpath, callback);
-                continue;
-            }
-            const parse = path.parse(fullpath);
-            if (!parse || parse.ext !== '.js') continue;
-            if (typeof callback === 'function') callback(require(fullpath));
-        }
-    }, 1);
+    utility.recursiveDir(dir, app.use);
 };
 
 /**
