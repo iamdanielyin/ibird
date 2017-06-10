@@ -5,6 +5,8 @@
  * Created by yinfxs on 2017/4/6.
  */
 
+const fs = require('fs');
+const path = require('path');
 const app = {};
 
 module.exports = app;
@@ -174,4 +176,27 @@ app.value = (object, ...keys) => {
         object = object[key] || null;
     }
     return object;
+};
+
+/**
+ * 递归文件夹，并对所有js文件执行回调
+ * @param dir
+ * @param callback
+ */
+app.recursiveDir = (dir, callback) => {
+    setTimeout(() => {
+        const files = fs.readdirSync(dir);
+        for (const file of files) {
+            const fullpath = path.resolve(dir, file);
+            const stat = fs.statSync(fullpath);
+            if (stat.isFile() === false && stat.isDirectory() === false) continue;
+            if (stat.isDirectory()) {
+                app.recursiveDir(fullpath, callback);
+                continue;
+            }
+            const parse = path.parse(fullpath);
+            if (!parse || parse.ext !== '.js') continue;
+            if (typeof callback === 'function') callback(require(fullpath));
+        }
+    });
 };
