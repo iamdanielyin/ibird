@@ -20,15 +20,13 @@ const route = require('./route');
 const utility = require('ibird-utils');
 const logger = require('./log')();
 
-const app = {};
-
-module.exports = app;
+module.exports = exports;
 
 /**
  * 启动应用
  * @returns {Promise.<void>}
  */
-app.run = async () => {
+exports.run = async () => {
     const app = new Koa();
     const router = new Router();
     config.router = router;
@@ -110,6 +108,8 @@ app.run = async () => {
     //初始化应用监听端口
     config.port = (typeof config.port === 'number' ) && !Number.isNaN(config.port) ? config.port : 3000;
     app.use(router.routes()).use(router.allowedMethods());
-    app.listen(config.port);
+    if (config.port) app.listen(config.port);
     config.trigger.emit('ibird_app_start_success', app);
+    exports.app = app;
+    return app;
 };

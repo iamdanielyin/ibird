@@ -193,5 +193,7 @@ app.useDir = (dir) => {
  */
 app.start = async () => {
     await mongo(config.mongo);
-    return koa.run();
+    const koaApp = koa.run();
+    Object.assign(app, { app: koaApp });
+    return koaApp;
 };
