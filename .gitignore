@@ -9,5 +9,4 @@ log
 test
 public/*
 examples/ibird-starter/public
-
-
+package-lock.json
