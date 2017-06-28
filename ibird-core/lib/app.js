@@ -72,6 +72,7 @@ app.model = (obj) => {
     config.schema = (typeof config.schema === 'object') && !Array.isArray(config.model) ? config.schema : {};
 
     if (typeof name === 'string' && !schema) return config.model[name];
+    config.trigger.emit('ibird_model_before', name, obj, config);
     const Model = mongoose.model(name, schema, collection, skipInit);
     config.model[name] = Model;
     config.schema[name] = obj;
