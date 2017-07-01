@@ -60,7 +60,7 @@ module.exports = (app) => {
             ctx._token = _token;
             await next();
         } catch (e) {
-            ctx.body = Object.assign(_reponse, { errmsg: `访问令牌验证失败：${e.message}`, errcode: '503' });
+            ctx.body = Object.assign(_reponse, { errmsg: `访问令牌验证失败：${e.message}`, errcode: '555' });
         }
     });
 };
