@@ -6,6 +6,7 @@
  */
 
 const raml = require('ibird-raml');
+const utility = require('ibird-utils');
 const yaml = require('js-yaml');
 const fs = require('fs');
 const path = require('path');
@@ -27,7 +28,6 @@ app.parse = (path, flag) => {
         return {};
     }
 };
-
 /**
  * 转换JavaScript对象为RAML内容
  * @param doc
@@ -39,6 +39,15 @@ app.build = (doc, file) => {
     if (!doc.startsWith('#%RAML 1.0')) doc = `#%RAML 1.0\n` + doc;
     if (file) fs.writeFileSync(file, doc);
     return doc;
+};
+
+/**
+ * 添加自定义的接口定义
+ * @param object 文档描述对象
+ */
+app.add = (object) => {
+    app.cache = app.cache || {};
+    utility.assign(app.cache, object);
 };
 
 /**
@@ -61,7 +70,7 @@ app.gen = (config, ramlpath, _default) => {
             }
         }
     };
-    const doc = Object.assign({
+    const doc = utility.assign({
         title: config.name,
         baseUri: config.baseUri || `http://127.0.0.1:${config.port}`,
         mediaType: 'application/json',
@@ -69,7 +78,7 @@ app.gen = (config, ramlpath, _default) => {
     }, _default);
     if (config.version) doc.version = config.version;
     raml.modelApis(doc, config);
-
+    utility.assign(doc, app.cache || {});
     const result = app.build(doc, ramlpath);
     return result;
 };
