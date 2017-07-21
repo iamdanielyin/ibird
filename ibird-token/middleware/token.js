@@ -52,15 +52,16 @@ module.exports = (app) => {
         }
 
         try {
-            if (access_token && _fakeTokens.indexOf(access_token) >= 0) {
-                ctx._token = {};
-                return await next();
-            }
             const _token = await token.authentication(access_token);
             ctx._token = _token;
-            await next();
         } catch (e) {
             ctx.body = Object.assign(_reponse, { errmsg: `访问令牌验证失败：${e.message}`, errcode: '555' });
         }
+
+        try {
+            await next();
+        } catch (e) {
+            ctx.body = Object.assign(_reponse, { errmsg: `数据服务异常：${e.message}`, errcode: '500' });
+        } 
     });
 };

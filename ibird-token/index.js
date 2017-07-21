@@ -136,9 +136,9 @@ app.authorization = async (condition) => {
                 break;
             case app.MODE_REDIS:
                 await app.redis.pipeline()
-                .set(token.access_token, JSON.stringify(token, null, 0), 'EX', cache.expires_in.access_token)
-                .set(token.refresh_token, JSON.stringify(token, null, 0), 'EX', cache.expires_in.refresh_token)
-                .exec();
+                    .set(token.access_token, JSON.stringify(token, null, 0), 'EX', cache.expires_in.access_token)
+                    .set(token.refresh_token, JSON.stringify(token, null, 0), 'EX', cache.expires_in.refresh_token)
+                    .exec();
                 break;
             case app.MODE_USER:
                 await cache.set(token);
@@ -156,6 +156,9 @@ app.authorization = async (condition) => {
  */
 app.authentication = async (access_token) => {
     let token = null;
+    if (Array.isArray(app.fakeTokens) && app.fakeTokens.length > 0) {
+        if (app.fakeTokens.indexOf(access_token) >= 0) return {};
+    }
     try {
         switch (cache.mode) {
             case app.MODE_MEMORY:
@@ -218,9 +221,9 @@ app.refresh = async (refresh_token) => {
                 token.access_token = uuid.v1();
 
                 await app.redis.pipeline()
-                .set(token.access_token, JSON.stringify(token, null, 0), 'EX', cache.expires_in.access_token)
-                .set(token.refresh_token, JSON.stringify(token, null, 0), 'EX', cache.expires_in.refresh_token)
-                .exec();
+                    .set(token.access_token, JSON.stringify(token, null, 0), 'EX', cache.expires_in.access_token)
+                    .set(token.refresh_token, JSON.stringify(token, null, 0), 'EX', cache.expires_in.refresh_token)
+                    .exec();
                 break;
             case app.MODE_USER:
                 token = await cache.refresh(refresh_token);
