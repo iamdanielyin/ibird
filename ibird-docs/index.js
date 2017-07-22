@@ -10,7 +10,7 @@ const utility = require('ibird-utils');
 const yaml = require('js-yaml');
 const fs = require('fs');
 const path = require('path');
-const app = {};
+const app = { cache: {} };
 
 module.exports = app;
 
@@ -46,8 +46,15 @@ app.build = (doc, file) => {
  * @param object 文档描述对象
  */
 app.add = (object) => {
-    app.cache = app.cache || {};
+    if (Array.isArray(object) && object.length > 0) {
+        for (const item of object) {
+            app.add(item);
+        }
+        return app.cache;
+    }
+    if (typeof object !== 'object' || Object.keys(object).length === 0) return app.cache;
     utility.assign(app.cache, object);
+    return app.cache;
 };
 
 /**
@@ -77,8 +84,8 @@ app.gen = (config, ramlpath, _default) => {
         types: raml.modelTypes(config)
     }, _default);
     if (config.version) doc.version = config.version;
+    utility.assign(doc, app.cache);
     raml.modelApis(doc, config);
-    utility.assign(doc, app.cache || {});
     const result = app.build(doc, ramlpath);
     return result;
 };
