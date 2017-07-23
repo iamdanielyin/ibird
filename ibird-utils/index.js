@@ -200,7 +200,7 @@ app.recursiveDir = (dir, callback) => {
                 if (typeof callback === 'function') callback(require(fullpath));
             }
         } catch (e) {
-            // console.error(e);
+            console.error(e);
         }
     });
 };
