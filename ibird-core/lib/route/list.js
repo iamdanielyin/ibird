@@ -25,7 +25,7 @@ module.exports = (name, pre, post) => {
         const _sort = utility.parse(_query.sort);
         const _range = ctx._range || {};
 
-        _query.sort = Object.keys(_sort) > 0 ? _sort : _query.sort;
+        _query.sort = Object.keys(_sort).length > 0 ? _sort : _query.sort;
         _query.cond = utility.parse(_query.cond);
         _query.page = !Number.isNaN(_query.page) && _query.page > 0 ? _query.page : 1;
         _query.size = !Number.isNaN(_query.size) && _query.size > 0 ? _query.size : 20;
