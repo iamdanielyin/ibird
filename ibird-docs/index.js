@@ -86,9 +86,9 @@ function ensureAssetsExists(filePath) {
  * @param [object] 文档配置对象
  * @param [ensureAssets] 检测api-console相关资源文件
  */
-app.gen = ({ config, raml, object, ensureAssets = false }) => {
+app.gen = ({ config, raml: ramlFile, object, ensureAssets = false }) => {
     if (!config) return;
-    if (ensureAssets) ensureAssetsExists(raml);
+    if (ensureAssets) ensureAssetsExists(ramlFile);
     object = (typeof object === 'object') ? object : {
         securedBy: ['oauth_2_0'],
         securitySchemes: {
@@ -110,6 +110,6 @@ app.gen = ({ config, raml, object, ensureAssets = false }) => {
     if (config.version) doc.version = config.version;
     utility.assign(doc, app.custom);
     raml.modelApis(doc, config);
-    const result = app.build(doc, ramlpath);
+    const result = app.build(doc, ramlFile);
     return result;
 };
