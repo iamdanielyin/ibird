@@ -205,9 +205,7 @@ app.modelListApi = (name, displayName) => {
                 displayName: '查询条件',
                 description: '用于指定查询条件，需为JSON的字符串格式。接口调用者需要先使用模型中定义的任意字段组成JSON对象，然后将此JSON格式化为字符串类型，再指定到该参数处，详见Mongoose的find查询条件',
                 type: 'string',
-                required: false,
-                default: '{}',
-                example: `{}`
+                required: false
             }
         },
         responses: {
@@ -224,26 +222,7 @@ app.modelListApi = (name, displayName) => {
                                     displayName: '列表数据',
                                     description: '返回查询出的列表数据',
                                     type: 'array',
-                                    items: {
-                                        type: `${name}`,
-                                        properties: {
-                                            __v: {
-                                                displayName: '版本',
-                                                description: '默认生成的版本字段',
-                                                type: 'integer',
-                                                required: true,
-                                                default: 0,
-                                                example: 0
-                                            },
-                                            _id: {
-                                                displayName: '数据ID',
-                                                description: '默认生成的ID字段',
-                                                type: 'string',
-                                                required: true,
-                                                example: '58ff71aeed56765aff6ea878'
-                                            }
-                                        }
-                                    },
+                                    items: `${name}`,
                                     required: true,
                                     default: []
                                 },
@@ -348,9 +327,7 @@ app.modelOneApi = (name, displayName) => {
                 displayName: '查询条件',
                 description: '用于指定查询条件，需为JSON的字符串格式。接口调用者需要先使用模型中定义的任意字段组成JSON对象，然后将此JSON格式化为字符串类型，再指定到该参数处，详见Mongoose的find查询条件',
                 type: 'string',
-                required: false,
-                default: '{}',
-                example: `{}`
+                required: false
             }
         },
         responses: {
@@ -451,26 +428,7 @@ app.modelCreateApi = (name, displayName) => {
                             displayName: '返回数据',
                             description: '接口返回的数据部分',
                             type: 'array',
-                            items: {
-                                type: `${name}`,
-                                properties: {
-                                    __v: {
-                                        displayName: '版本',
-                                        description: '默认生成的版本字段',
-                                        type: 'integer',
-                                        required: true,
-                                        default: 0,
-                                        example: 0
-                                    },
-                                    _id: {
-                                        displayName: '数据ID',
-                                        description: '默认生成的ID字段',
-                                        type: 'string',
-                                        required: true,
-                                        example: '58ff71aeed56765aff6ea878'
-                                    }
-                                }
-                            }
+                            items: `${name}`
                         },
                         errmsg: {
                             displayName: '错误信息',
