@@ -7,10 +7,11 @@
 
 const raml = require('ibird-raml');
 const utility = require('ibird-utils');
+const fsx = require('fs-extra');
 const yaml = require('js-yaml');
 const fs = require('fs');
 const path = require('path');
-const app = { cache: {} };
+const app = { custom: {} };
 
 module.exports = app;
 
@@ -50,22 +51,45 @@ app.add = (object) => {
         for (const item of object) {
             app.add(item);
         }
-        return app.cache;
+        return app.custom;
     }
-    if (typeof object !== 'object' || Object.keys(object).length === 0) return app.cache;
-    utility.assign(app.cache, object);
-    return app.cache;
+    if (typeof object !== 'object' || Object.keys(object).length === 0) return app.custom;
+    utility.assign(app.custom, object);
+    return app.custom;
 };
+
+/**
+ * 检测资源文件是否存在
+ * @param {*} filePath 
+ */
+function ensureAssetsExists(filePath) {
+    if (!filePath) return;
+    try {
+        const parse = path.parse(filePath);
+        if (!parse || !parse.dir) return;
+        const dirExists = fsx.existsSync(parse.dir);
+        if (!dirExists) {
+            return fsx.copySync(path.resolve(__dirname, 'assets'), parse.dir);
+        }
+        const fileExists = fsx.existsSync(path.join(parse.dir, 'index.html'));
+        if (fileExists) return;
+        fsx.copySync(path.resolve(__dirname, 'assets'), parse.dir);
+    } catch (error) {
+        return;
+    }
+}
 
 /**
  * 根据ibird的配置对象生成相关文档
  * @param config ibird应用配置对象
- * @param [ramlpath] RAML文件保存路径，可选
- * @param [_default] 默认配置对象
+ * @param [raml] RAML文件保存路径，可选
+ * @param [object] 文档配置对象
+ * @param [ensureAssets] 检测api-console相关资源文件
  */
-app.gen = (config, ramlpath, _default) => {
+app.gen = ({ config, raml, object, ensureAssets = false }) => {
     if (!config) return;
-    _default = (typeof _default === 'object') ? _default : {
+    if (ensureAssets) ensureAssetsExists(raml);
+    object = (typeof object === 'object') ? object : {
         securedBy: ['oauth_2_0'],
         securitySchemes: {
             oauth_2_0: {
@@ -82,9 +106,9 @@ app.gen = (config, ramlpath, _default) => {
         baseUri: config.baseUri || `http://127.0.0.1:${config.port}`,
         mediaType: 'application/json',
         types: raml.modelTypes(config)
-    }, _default);
+    }, object);
     if (config.version) doc.version = config.version;
-    utility.assign(doc, app.cache);
+    utility.assign(doc, app.custom);
     raml.modelApis(doc, config);
     const result = app.build(doc, ramlpath);
     return result;

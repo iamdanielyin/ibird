@@ -1,6 +1,6 @@
 {
   "name": "ibird-docs",
-  "version": "0.9.18",
+  "version": "0.9.19",
   "description": "The docs module of ibird.",
   "main": "index.js",
   "repository": {
@@ -28,7 +28,8 @@
   },
   "homepage": "https://github.com/yinfxs/ibird#readme",
   "dependencies": {
-    "ibird-raml": "latest",
+    "fs-extra": "^4.0.1",
+    "ibird-raml": "^0.9.5",
     "ibird-utils": "latest",
     "js-yaml": "^3.8.3"
   },
