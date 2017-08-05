@@ -8,4 +8,4 @@ log
 logs
 public
 package-lock.json
-
+.vscode
