@@ -111,7 +111,7 @@ app.count = async (name, conditions) => {
     if (!Model) return Promise.reject(new Error(i18n.get('api_model_nonexis', name)));
 
     try {
-        return Model.count();
+        return Model.count(conditions);
     } catch (e) {
         return Promise.reject(utility.errors(e, i18n.get('count_api_db_error')));
     }
