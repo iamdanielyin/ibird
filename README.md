@@ -1,5 +1,5 @@
 
-# 简单说明
+# 简单说明
 
 * ibird-server：服务端模块
 * ibird-client：客户端模块
