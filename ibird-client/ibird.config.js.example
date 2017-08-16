@@ -1,0 +1,182 @@
+/**
+ * ibird配置文件
+ * Created by yinfxs on 16-10-11.
+ */
+
+'use strict';
+
+const path = require('path');
+const React = require('react');
+
+module.exports = {
+    skin: 'skin-black',
+    less: path.resolve(__dirname, 'src/public/css/custom.less'),
+    models: {
+        'preset-commdl': {
+            'toolbar': [
+                {
+                    render: function (ctx) {
+                        return <button className="btn btn-default btn-sm"
+                                       onClick={ctx.action}>工具栏按钮1</button>;
+                    },
+                    action: function (ctx) {
+                        console.log(ctx.data);
+                        alert('工具栏按钮1');
+                    }
+                },
+                {
+                    render: function (ctx) {
+                        return <button className="btn btn-default btn-sm"
+                                       onClick={ctx.action}>工具栏按钮2</button>;
+                    },
+                    action: function (ctx) {
+                        console.log(ctx.data);
+                        alert('工具栏按钮2');
+                    }
+                },
+                {
+                    render: function (ctx) {
+                        return <button className="btn btn-default btn-sm"
+                                       onClick={ctx.action}>工具栏按钮1</button>;
+                    },
+                    action: function (ctx) {
+                        console.log(ctx.data);
+                        alert('工具栏按钮1');
+                    }
+                },
+                {
+                    render: function (ctx) {
+                        return <button className="btn btn-default btn-sm"
+                                       onClick={ctx.action}>工具栏按钮2</button>;
+                    },
+                    action: function (ctx) {
+                        console.log(ctx.data);
+                        alert('工具栏按钮2');
+                    }
+                },
+                {
+                    render: function (ctx) {
+                        return <button className="btn btn-default btn-sm"
+                                       onClick={ctx.action}>工具栏按钮1</button>;
+                    },
+                    action: function (ctx) {
+                        console.log(ctx.data);
+                        alert('工具栏按钮1');
+                    }
+                },
+                {
+                    render: function (ctx) {
+                        return <button className="btn btn-default btn-sm"
+                                       onClick={ctx.action}>工具栏按钮2</button>;
+                    },
+                    action: function (ctx) {
+                        console.log(ctx.data);
+                        alert('工具栏按钮2');
+                    }
+                },
+                {
+                    render: function (ctx) {
+                        return <button className="btn btn-default btn-sm"
+                                       onClick={ctx.action}>工具栏按钮1</button>;
+                    },
+                    action: function (ctx) {
+                        console.log(ctx.data);
+                        alert('工具栏按钮1');
+                    }
+                },
+                {
+                    render: function (ctx) {
+                        return <button className="btn btn-default btn-sm"
+                                       onClick={ctx.action}>工具栏按钮2</button>;
+                    },
+                    action: function (ctx) {
+                        console.log(ctx.data);
+                        alert('工具栏按钮2');
+                    }
+                },
+                {
+                    render: function (ctx) {
+                        return <input type="email" className="form-control" placeholder="Enter email"
+                                      onChange={ctx.action}/>;
+                    },
+                    action: function (ctx) {
+                        console.log(ctx.data);
+                        alert('工具栏按钮2');
+                    }
+                }
+            ],
+            'actions': [
+                {
+                    label: '自定义按钮',
+                    render: function (ctx) {
+                        return <button className="btn btn-default btn-xs"
+                                       onClick={ctx.action}>自定义按钮</button>;
+                    },
+                    action: function (ctx) {
+                        alert(JSON.stringify(ctx.data));
+                    }
+                },
+                {
+                    label: '自定义按钮',
+                    render: function (ctx) {
+                        return <button className="btn btn-default btn-xs"
+                                       onClick={ctx.action}>自定义按钮</button>;
+                    },
+                    action: function (ctx) {
+                        alert(JSON.stringify(ctx.data));
+                    }
+                }
+            ],
+            'fields': {
+                'text': {
+                    label: '文本类型',
+                    column: function (ctx) {
+                        return <div style={{backgroundColor: '#8c8c8c', color: '#fff'}}>{ctx.data}</div>;
+                    },
+                    row: function (ctx) {
+                        return <div style={{backgroundColor: '#3c8dbc', color: '#fff'}}>{ctx.data}</div>;
+                    }
+                },
+                'booleanRadios': {
+                    row: function (ctx) {
+                        const value = ctx.row[ctx.key] || '';
+                        return <div
+                            style={value == 'b' ? {backgroundColor: '#8c8c8c', color: '#fff'} : {}}>{ctx.data}</div>;
+                    }
+                }
+            },
+            'ctrls': [
+                {
+                    code: '',
+                    label: '',
+                    view: <div></div>,
+                    before: function (context) {
+                    },
+                    after: function (context) {
+                    }
+                }
+            ]
+        }
+    },
+    components: [
+        {
+            code: 'defcomponent',
+            name: 'AdminCustom',
+            path: path.join(__dirname, 'components', 'AdminCustom.react.jsx')
+        },
+        {
+            code: 'busparamList',
+            name: 'BusparamList',
+            path: path.join(__dirname, 'components', 'BusparamList.react.jsx')
+        },
+        {
+            code: 'busparamForm',
+            name: 'BusparamForm',
+            path: path.join(__dirname, 'components', 'BusparamForm.react.jsx')
+        },
+        {
+            code: 'Signin',
+            path: path.join(__dirname, 'components', 'Signin.react.jsx')
+        }
+    ]
+};

@@ -1,0 +1,13 @@
+.idea
+node_modules
+dist
+build
+logs
+*.log
+log
+*test.js
+*test.*.js
+test
+public
+
+

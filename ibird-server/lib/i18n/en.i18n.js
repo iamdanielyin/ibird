@@ -1,0 +1,45 @@
+/**
+ * 国际化配置文件：英文(简体)
+ * Created by yinfxs on 16-8-1.
+ */
+
+module.exports = {
+    name: 'ibird',
+    module_preset: 'Preset',
+    menu_preset: 'System',
+    menu_business: 'Business',
+    menu_sysmgr: 'System Management',
+    menu_user: 'System User',
+    menu_param: 'System Parameters',
+    menu_commdl: 'Test Model',
+    menu_yinfxs: 'Daniel Yin',
+    menu_defcom: 'Custom Components',
+    menu_deptlabel: 'Department of Archives',
+    menu_busparam: 'Business Parameters',
+    invalid_i18n_setting: 'Invalid i18n Settings',
+    ibird_running: 'ibird app listening on port ?,please open ? to access app!',
+    unauthorized_operation: 'Unauthorized Operation：Not set access_token to request header or access_token has expired',
+    server_error: 'Server internal error',
+    log_create_object_error: 'Create an object error<?>:?',
+    log_update_object_error: 'Update the object error<?>:?',
+    log_read_object_error: 'The query object error<?>:?',
+    log_delete_object_error: 'Delete anomalies<?>:?',
+    res_create_object_error: 'New data failure',
+    res_update_object_error: 'Update the data failure',
+    res_read_object_error: 'Query data failure',
+    res_delete_object_error: 'Delete the data failure',
+    query_param_error: 'Query parameters abnormal',
+    not_specified_id: 'Not specified ID',
+    redis_error: 'Abnormal Redis:?',
+    redis_success: 'Redis connection is successful',
+    redis_close: 'Redis connection is closed',
+    mongodb_error: 'Abnormal MongoDB:?',
+    mongodb_success: 'MongoDB connection is successful',
+    mssql_error: 'Abnormal SQLServer:?',
+    mssql_success: 'SQLServer connection is successful',
+    mysql_error: 'Abnormal MySQL:?',
+    mysql_success: 'MySQL connection is successful',
+    doc_template_error: 'Read document template has error:?',
+    doc_template_success: 'Read document template success!',
+    configs_public: 'please set \'public\' on your config file'
+};
