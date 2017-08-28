@@ -7,7 +7,7 @@
 
 const utility = require('ibird-utils');
 const schedule = require('node-schedule');
-const app = {jobs: {}};
+const app = { jobs: {} };
 
 module.exports = app;
 
@@ -16,21 +16,27 @@ module.exports = app;
  *
  * @param obj 任务描述对象
  * @param obj.name 任务ID，保证全局唯一
- * @param obj.spec 任务的corn表达式
+ * @param obj.spec 任务执行规则
+ * @param obj.once 任务是否需要立即执行一次
  * @param obj.callback 任务回调函数
  *
  */
 app.add = (obj) => {
     if (obj === null || typeof obj !== 'object') return null;
     if (Array.isArray(obj)) return batchAdd(obj);
-    const {name, spec, callback} = obj;
+    const { name, spec, callback, once } = obj;
     if (name === null || typeof name !== 'string' || !spec || (typeof callback !== 'function')) return null;
     if (app.jobs[name]) app.jobs[name].cancel();
     const job = schedule.scheduleJob(name, spec, callback);
     if (job) {
-        Object.assign(job, {spec: spec});
+        Object.assign(job, { spec: spec });
         app.jobs[name] = job;
         return job;
+    }
+    if (once) {
+        //毫秒数
+        const ms = typeof once === 'number' ? once : 1000;
+        setTimeout(callback, ms);
     }
     return null;
 };
