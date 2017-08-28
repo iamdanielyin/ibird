@@ -85,13 +85,13 @@ app.remove = async (name, conditions) => {
  * @param [callback] 针对查询对象回调处理函数
  * @param [options] 可选
  */
-app.list = async (name, conditions, callback, options) => {
+app.list = async (name, conditions, callback, projection = null, options) => {
     if ((typeof name !== 'string') || (typeof conditions !== 'object')) return Promise.reject(new Error(i18n.get('list_api_params_error')));
     const Model = config.model[name];
     if (!Model) return Promise.reject(new Error(i18n.get('api_model_nonexis', name)));
 
     try {
-        const query = Model.find(conditions, null, options);
+        const query = Model.find(conditions, projection, options);
         if (typeof callback === 'function') await callback(query);
         return query.exec();
     } catch (e) {

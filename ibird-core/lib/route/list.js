@@ -51,6 +51,7 @@ module.exports = (name, pre, post) => {
 
         _query.sort = _sort;
         _query.cond = utility.parse(_query.cond);
+        _query.project = utility.parse(_query.project);
         _query.page = !Number.isNaN(_query.page) && _query.page > 0 ? _query.page : 1;
         _query.size = !Number.isNaN(_query.size) && _query.size > 0 ? _query.size : 20;
         _query.range = [_ALL, _PAGE].indexOf(_query.range) >= 0 ? _query.range : _PAGE;
@@ -63,7 +64,7 @@ module.exports = (name, pre, post) => {
                 query.sort(_query.sort);
                 await hooks(pre, { ctx, query });
                 queryCache = query;
-            });
+            }, _query.project);
             const totalrecords = await model.count(name, queryCache._conditions);
             const totalpages = Math.ceil(totalrecords / _query.size);
             const result = Object.assign({}, response, {
