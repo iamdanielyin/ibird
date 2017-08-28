@@ -7,5 +7,4 @@ logs
 *.log
 log
 logs
-public
 package-lock.json
