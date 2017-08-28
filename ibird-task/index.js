@@ -28,17 +28,18 @@ app.add = (obj) => {
     if (name === null || typeof name !== 'string' || !spec || (typeof callback !== 'function')) return null;
     if (app.jobs[name]) app.jobs[name].cancel();
     const job = schedule.scheduleJob(name, spec, callback);
-    if (job) {
-        Object.assign(job, { spec: spec });
-        app.jobs[name] = job;
-        return job;
-    }
+    
+    if (!job) return null;
+
+    Object.assign(job, { spec: spec });
+    app.jobs[name] = job;
+
     if (once) {
         //毫秒数
         const ms = typeof once === 'number' ? once : 1000;
         setTimeout(callback, ms);
     }
-    return null;
+    return job;
 };
 
 /**
