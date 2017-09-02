@@ -37,8 +37,6 @@ exports.run = async () => {
     const bodyOpts = Object.assign(config.bodyOpts || {}, { strict: false });
     if (config.multipart) {
         config.uploadPath = config.uploadPath || path.resolve(process.cwd(), 'public/uplaod');
-        fs.ensureDirSync(config.uploadPath);
-
         Object.assign(bodyOpts, {
             multipart: true,
             formidable: Object.assign({
@@ -47,6 +45,8 @@ exports.run = async () => {
                 hash: 'sha1'
             }, config.formidable || {})
         });
+        config.uploadPath = bodyOpts.formidable.uploadDir || config.uploadPath;
+        fs.ensureDirSync(config.uploadPath);
     }
     app.use(koaBody(bodyOpts));
 

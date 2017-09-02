@@ -1,6 +1,6 @@
 {
   "name": "ibird-core",
-  "version": "0.9.48",
+  "version": "0.9.49",
   "description": "The core module of ibird.",
   "main": "lib/app.js",
   "repository": {
