@@ -9,7 +9,7 @@
 
 const config = require('./config');
 const utility = require('ibird-utils');
-const i18n = require('./config').i18n;
+const i18n = config.i18n;
 const logger = require('./log')();
 
 const app = {};
@@ -72,7 +72,7 @@ app.remove = async (name, conditions) => {
     if (!Model) return Promise.reject(new Error(i18n.get('api_model_nonexis', name)));
 
     try {
-        return Model.remove(conditions);
+        return logicallyDeletedRemove(name, conditions);
     } catch (e) {
         return Promise.reject(utility.errors(e, i18n.get('remove_api_db_error')));
     }
@@ -93,6 +93,7 @@ app.list = async (name, conditions, callback, projection = null, options) => {
     try {
         const query = Model.find(conditions, projection, options);
         if (typeof callback === 'function') await callback(query);
+        logicallyDeletedList(name, query);
         return query.exec();
     } catch (e) {
         return Promise.reject(utility.errors(e, i18n.get('list_api_db_error')));
@@ -157,3 +158,35 @@ app.id = async (name, id, callback, options) => {
         return Promise.reject(utility.errors(e, i18n.get('id_api_db_error')));
     }
 };
+
+/**
+ * 逻辑删除的查询
+ * @param name 模型名称，与模型注册时一致
+ * @param query 查询实例
+ */
+function logicallyDeletedList(name, query) {
+    const cfg = config.schema[name];
+    const logicallyDeleted = cfg.logicallyDeleted;
+    if (!logicallyDeleted) return query;
+    const filter = { $ne: true };
+    if (query._conditions.$and) {
+        query._conditions.$and.push({ [logicallyDeleted]: filter });
+    } else {
+        query._conditions[logicallyDeleted] = filter;
+    }
+}
+
+/**
+ * 逻辑删除的删除
+ * @param name 模型名称，与模型注册时一致
+ * @param conditions 删除条件
+ */
+function logicallyDeletedRemove(name, conditions) {
+    const cfg = config.schema[name];
+    const logicallyDeleted = cfg.logicallyDeleted;
+    if (!logicallyDeleted) {
+        return Model.remove(conditions);
+    } else {
+        return Model.update(conditions, { [logicallyDeleted]: true });
+    }
+}
