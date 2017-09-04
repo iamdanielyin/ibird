@@ -72,6 +72,8 @@ app.model = (obj) => {
     config.schema = (typeof config.schema === 'object') && !Array.isArray(config.model) ? config.schema : {};
 
     if (typeof name === 'string' && !schema) return config.model[name];
+    //添加逻辑处理
+    logicallyDeletedModel(obj, schema);
     config.trigger.emit('ibird_model_before', name, obj, config);
     const Model = mongoose.model(name, schema, collection, skipInit);
     config.model[name] = Model;
@@ -79,6 +81,25 @@ app.model = (obj) => {
     config.trigger.emit('ibird_model_success', name, Object.assign(obj, { Model: Model }), config);
     return Model;
 };
+
+/**
+ * 模型挂载时的逻辑删除处理
+ * @param obj 模型配置对象
+ * @param schema 数据模型对象
+ */
+function logicallyDeletedModel(obj, schema) {
+    obj.logicallyDeleted = !obj.logicallyDeleted && config.logicallyDeleted ? config.logicallyDeleted : obj.logicallyDeleted;
+    if (!obj.logicallyDeleted || typeof obj.logicallyDeleted === 'string') return;
+    //添加_dr默认字段
+    schema.add({
+        _dr: {
+            type: Boolean,
+            displayName: 'Delete Flag',
+            default: false
+        }
+    });
+    obj.logicallyDeleted = '_dr';
+}
 
 /**
  * 批量模型注册
