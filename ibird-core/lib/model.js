@@ -72,7 +72,7 @@ app.remove = async (name, conditions) => {
     if (!Model) return Promise.reject(new Error(i18n.get('api_model_nonexis', name)));
 
     try {
-        return logicallyDeletedRemove(name, conditions);
+        return logicallyDeletedRemove(name, Model, conditions);
     } catch (e) {
         return Promise.reject(utility.errors(e, i18n.get('remove_api_db_error')));
     }
@@ -179,9 +179,10 @@ function logicallyDeletedList(name, query) {
 /**
  * 逻辑删除的删除
  * @param name 模型名称，与模型注册时一致
+ * @param Model 模型对象
  * @param conditions 删除条件
  */
-function logicallyDeletedRemove(name, conditions) {
+function logicallyDeletedRemove(name, Model, conditions) {
     const cfg = config.schema[name];
     const logicallyDeleted = cfg.logicallyDeleted;
     if (!logicallyDeleted) {
