@@ -4,24 +4,24 @@ const hooks = require('../hooks');
 const common = require('../common');
 
 /**
- * 将排序字符串格式转换成对象格式
- * @param sortStr 排序字符串
+ * 将字符串格式转换成对象格式
+ * @param str 字符串
  */
-function sortStr2Obj(sortStr) {
-    if (!sortStr || !sortStr.trim()) return {};
-    const sorts = sortStr.trim().split(' ');
+function str2Obj(str) {
+    if (!str || !str.trim()) return {};
+    const split = str.indexOf(' ') >= 0 ? str.trim().split(' ') : str.trim().split(',');
     const obj = {};
-    if (sorts.length === 0) return {};
-    for (let key of sorts) {
+    if (split.length === 0) return {};
+    for (let key of split) {
         if (!key) continue;
         key = key.trim();
-        let order = 1;
+        let value = 1;
         if (key.startsWith('-')) {
             //逆序
             key = key.substr(1);
-            order = -1;
+            value = -1;
         }
-        obj[key] = order;
+        obj[key] = value;
     }
     return obj;
 }
@@ -46,12 +46,15 @@ module.exports = (name, pre, post) => {
         _query.sort = _query.sort || '_id';
 
         let _sort = utility.parse(_query.sort);
-        _sort = Object.keys(_sort).length > 0 ? _sort : sortStr2Obj(_query.sort);
-        const _range = ctx._range || {};
+        _sort = Object.keys(_sort).length > 0 ? _sort : str2Obj(_query.sort);
 
+        let _project = utility.parse(_query.project);
+        _project = Object.keys(_project).length > 0 ? _project : str2Obj(_query.project);
+
+        const _range = ctx._range || {};
         _query.sort = _sort;
+        _query.project = _project;
         _query.cond = utility.parse(_query.cond);
-        _query.project = utility.parse(_query.project);
         _query.page = !Number.isNaN(_query.page) && _query.page > 0 ? _query.page : 1;
         _query.size = !Number.isNaN(_query.size) && _query.size > 0 ? _query.size : 20;
         _query.range = [_ALL, _PAGE].indexOf(_query.range) >= 0 ? _query.range : _PAGE;
