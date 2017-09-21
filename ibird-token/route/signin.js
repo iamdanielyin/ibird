@@ -22,7 +22,7 @@ module.exports = (router) => {
                 ctx.cookies.set(token.COOKIEUSERID, _data[token.useridKey]);
             }
         } catch (e) {
-            Object.assign(_reponse, { errmsg: `登录接口异常：${e.message}`, errcode: '500' });
+            Object.assign(_reponse, { errmsg: e.message || '登录失败，请稍后再试！', errcode: '500', errstack: e });
         }
         ctx.body = _reponse;
     });
