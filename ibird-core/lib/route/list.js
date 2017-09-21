@@ -4,29 +4,6 @@ const hooks = require('../hooks');
 const common = require('../common');
 
 /**
- * 将字符串格式转换成对象格式
- * @param str 字符串
- */
-function str2Obj(str) {
-    if (!str || !str.trim()) return {};
-    const split = str.indexOf(' ') >= 0 ? str.trim().split(' ') : str.trim().split(',');
-    const obj = {};
-    if (split.length === 0) return {};
-    for (let key of split) {
-        if (!key) continue;
-        key = key.trim();
-        let value = 1;
-        if (key.startsWith('-')) {
-            //逆序
-            key = key.substr(1);
-            value = -1;
-        }
-        obj[key] = value;
-    }
-    return obj;
-}
-
-/**
  * 默认列表查询路由
  * @param name 模型名称
  * @param [pre] 前置处理函数（数组）
@@ -46,10 +23,10 @@ module.exports = (name, pre, post) => {
         _query.sort = _query.sort || '_id';
 
         let _sort = utility.parse(_query.sort);
-        _sort = Object.keys(_sort).length > 0 ? _sort : str2Obj(_query.sort);
+        _sort = Object.keys(_sort).length > 0 ? _sort : utility.str2Obj(_query.sort);
 
         let _project = utility.parse(_query.project);
-        _project = Object.keys(_project).length > 0 ? _project : str2Obj(_query.project);
+        _project = Object.keys(_project).length > 0 ? _project : utility.str2Obj(_query.project);
 
         const _range = ctx._range || {};
         _query.sort = _sort;
