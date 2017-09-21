@@ -125,13 +125,13 @@ app.count = async (name, conditions) => {
  * @param [callback] 针对查询对象回调处理函数
  * @param [options] 可选
  */
-app.one = async (name, conditions, callback, options) => {
+app.one = async (name, conditions, callback, projection = null, options) => {
     if ((typeof name !== 'string') || (typeof conditions !== 'object')) return Promise.reject(new Error(i18n.get('one_api_params_error')));
     const Model = config.model[name];
     if (!Model) return Promise.reject(new Error(i18n.get('api_model_nonexis', name)));
 
     try {
-        const query = Model.findOne(conditions, null, options);
+        const query = Model.findOne(conditions, projection, options);
         if (typeof callback === 'function') await callback(query);
         return query.exec();
     } catch (e) {

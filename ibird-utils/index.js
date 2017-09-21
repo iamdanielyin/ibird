@@ -204,3 +204,26 @@ app.recursiveDir = (dir, callback) => {
         }
     });
 };
+
+/**
+ * 将字符串格式转换成对象格式
+ * @param str 字符串
+ */
+app.str2Obj = (str, flag) => {
+    if (!str || !str.trim()) return {};
+    const split = flag ? str.trim().split(flag)
+        : (str.indexOf(' ') >= 0 ? str.trim().split(' ') : str.trim().split(','));
+    const obj = {};
+    if (split.length === 0) return {};
+    for (let key of split) {
+        if (!key) continue;
+        key = key.trim();
+        let value = 1;
+        if (key.startsWith('-')) {
+            key = key.substr(1);
+            value = -1;
+        }
+        obj[key] = value;
+    }
+    return obj;
+};
