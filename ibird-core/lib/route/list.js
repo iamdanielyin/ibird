@@ -28,7 +28,6 @@ module.exports = (name, pre, post) => {
         let _project = utility.parse(_query.project);
         _project = Object.keys(_project).length > 0 ? _project : utility.str2Obj(_query.project);
 
-        const _range = ctx._range || {};
         _query.sort = _sort;
         _query.project = _project;
         _query.cond = utility.parse(_query.cond);
@@ -36,7 +35,6 @@ module.exports = (name, pre, post) => {
         _query.size = !Number.isNaN(_query.size) && _query.size > 0 ? _query.size : 20;
         _query.range = [_ALL, _PAGE].indexOf(_query.range) >= 0 ? _query.range : _PAGE;
 
-        _query.cond = Object.keys(_range).length > 0 ? { $and: [_range, _query.cond] } : _query.cond;
         try {
             let queryCache = {};
             const list = await model.list(name, _query.cond, async (query) => {

@@ -15,8 +15,7 @@ module.exports = (name, pre, post) => {
         const response = common.response;
 
         const _query = ctx.query;
-        const _range = ctx._range || {};
-
+        _query.cond = utility.parse(_query.cond);
         let _project = utility.parse(_query.project);
         _project = Object.keys(_project).length > 0 ? _project : utility.str2Obj(_query.project);
         _query.project = _project;
