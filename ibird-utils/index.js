@@ -227,3 +227,92 @@ app.str2Obj = (str, flag) => {
     }
     return obj;
 };
+
+/**
+ * 将列表数据转换成树
+ * @param params 数据数组或对象结构
+ * @param params.list 数据数组
+ * @param params.parentKey 每条数据上父级ID的key，默认为parent
+ * @param params.childrenKey 生成的子级数据存储的key，默认为children
+ * @param params.idKey 数据ID的key，默认为_id
+ * @param params.childRender 如果你需要将数据转换一下再返回，指定这个函数，函数的传入参数为每条数据记录，默认该参数为空
+ */
+app.list2Tree = (params) => {
+    let { list, parentKey, childrenKey, idKey, childRender } = Array.isArray(params) ? { list: params } : (params || {});
+    if (!Array.isArray(list) || list.length === 0) return [];
+    parentKey = parentKey || 'parent';
+    childrenKey = childrenKey || 'children';
+    idKey = idKey || '_id';
+    const childrenMap = {}, rootElements = [];
+    for (const item of list) {
+        const pid = item[parentKey];
+        if (pid) {
+            childrenMap[pid] = childrenMap[pid] || [];
+            childrenMap[pid].push(item);
+        } else {
+            rootElements.push(item);
+        }
+    }
+    // 递归函数
+    function recurs(parent, map) {
+        const id = parent[idKey];
+        const children = childrenMap[id];
+        if (!children || children.length === 0) return parent;
+        parent[childrenKey] = parent[childrenKey] || [];
+        for (let i = 0; i < children.length; i++) {
+            children[i] = recurs(children[i], map);
+            if (typeof childRender === 'function') {
+                children[i] = childRender(children[i]);
+            }
+            parent[childrenKey].push(children[i]);
+        }
+        return parent;
+    }
+    // 从根节点开始循环
+    for (let i = 0; i < rootElements.length; i++) {
+        rootElements[i] = recurs(rootElements[i], childrenMap);
+        if (typeof childRender === 'function') {
+            rootElements[i] = childRender(rootElements[i]);
+        }
+    }
+    return rootElements;
+};
+
+/**
+ * list2Tree的反向转换
+ * @param params 树结构的数组或对象结构
+ * @param params.tree 树结构的数据对象或数组
+ * @param params.childrenKey 树结构中，子级数组的，默认为children
+ * @param params.childRender 如果你需要将数据转换一下再返回，指定这个函数，函数的传入参数为每条数据记录，默认该参数为空
+ */
+app.tree2List = (params) => {
+    let { tree, childrenKey, childRender } = Array.isArray(params) ? { tree: params } : (params || {});
+    if (!tree) return [];
+    tree = Array.isArray(tree) ? tree : [tree];
+    childrenKey = childrenKey || 'children';
+    const array = [];
+    // 递归函数
+    function recurs(parent, array) {
+        const children = parent[childrenKey];
+        if (!Array.isArray(children) || children.length === 0) return parent;
+        for (let i = 0; i < children.length; i++) {
+            recurs(children[i], array);
+            delete children[i][childrenKey];
+            if (typeof childRender === 'function') {
+                children[i] = childRender(children[i]);
+            }
+            array.push(children[i]);
+        }
+        return parent;
+    }
+    // 从根节点开始循环
+    for (let i = 0; i < tree.length; i++) {
+        recurs(tree[i], array);
+        delete tree[i][childrenKey];
+        if (typeof childRender === 'function') {
+            tree[i] = childRender(tree[i]);
+        }
+        array.push(tree[i]);
+    }
+    return array;
+}
