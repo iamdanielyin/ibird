@@ -1,6 +1,6 @@
 {
   "name": "ibird-core",
-  "version": "0.9.54",
+  "version": "0.9.56",
   "description": "The core module of ibird.",
   "main": "lib/app.js",
   "repository": {
@@ -27,19 +27,19 @@
   },
   "homepage": "https://github.com/yinfxs/ibird#readme",
   "dependencies": {
-    "fs-extra": "^3.0.1",
-    "ibird-i18n": "latest",
-    "ibird-utils": "^0.9.13",
-    "kcors": "^2.2.1",
-    "koa": "^2.3.0",
-    "koa-body": "^2.3.0",
-    "koa-mount": "^3.0.0",
-    "koa-router": "^7.2.1",
-    "koa-static": "^4.0.1",
-    "moment": "^2.18.1",
-    "mongoose": "^4.11.1",
-    "qs": "^6.5.0",
-    "uuid": "^3.1.0"
+    "fs-extra": "3.0.1",
+    "ibird-i18n": "0.9.3",
+    "ibird-utils": "0.9.13",
+    "kcors": "2.2.1",
+    "koa": "2.3.0",
+    "koa-body": "2.3.0",
+    "koa-mount": "3.0.0",
+    "koa-router": "7.2.1",
+    "koa-static": "4.0.1",
+    "moment": "2.18.1",
+    "mongoose": "4.11.13",
+    "qs": "6.5.0",
+    "uuid": "3.1.0"
   },
   "engines": {
     "node": ">= 7.6.0"
