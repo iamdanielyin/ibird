@@ -106,7 +106,7 @@ exports.run = async () => {
     }
 
     //初始化应用监听端口
-    config.port = (typeof config.port === 'number') && !Number.isNaN(config.port) ? config.port : 3000;
+    // config.port = (typeof config.port === 'number') && !Number.isNaN(config.port) ? config.port : 3000;
     app.use(router.routes()).use(router.allowedMethods());
     if (config.port) app.listen(config.port);
     config.trigger.emit('ibird_app_start_success', app);
