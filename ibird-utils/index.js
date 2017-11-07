@@ -182,9 +182,14 @@ app.value = (object, ...keys) => {
  * 递归文件夹，并对所有js文件执行回调
  * @param dir
  * @param callback
+ * @param async
  */
-app.recursiveDir = (dir, callback) => {
-    setTimeout(() => {
+app.recursiveDir = (dir, callback, async) => {
+    // 是否异步，默认false
+    async = typeof async === 'boolean' ? async : false;
+
+    // 执行函数
+    function fn() {
         try {
             const files = fs.readdirSync(dir);
             for (const file of files) {
@@ -202,7 +207,13 @@ app.recursiveDir = (dir, callback) => {
         } catch (e) {
             console.error(e);
         }
-    });
+    }
+
+    if (async) {
+        setTimeout(fn, 1);
+    } else {
+        fn();
+    }
 };
 
 /**
@@ -253,6 +264,7 @@ app.list2Tree = (params) => {
             rootElements.push(item);
         }
     }
+
     // 递归函数
     function recurs(parent, map) {
         const id = parent[idKey];
@@ -268,6 +280,7 @@ app.list2Tree = (params) => {
         }
         return parent;
     }
+
     // 从根节点开始循环
     for (let i = 0; i < rootElements.length; i++) {
         rootElements[i] = recurs(rootElements[i], childrenMap);
@@ -291,6 +304,7 @@ app.tree2List = (params) => {
     tree = Array.isArray(tree) ? tree : [tree];
     childrenKey = childrenKey || 'children';
     const array = [];
+
     // 递归函数
     function recurs(parent, array) {
         const children = parent[childrenKey];
@@ -305,6 +319,7 @@ app.tree2List = (params) => {
         }
         return parent;
     }
+
     // 从根节点开始循环
     for (let i = 0; i < tree.length; i++) {
         recurs(tree[i], array);
