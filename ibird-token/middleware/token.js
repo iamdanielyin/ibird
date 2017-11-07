@@ -44,7 +44,7 @@ module.exports = (app) => {
         const _body = ctx.request.body || {};
         const _reponse = { data: {}, errmsg: null, errcode: null };
 
-        let access_token = _cookies.get(token.COOKIETOKEN) || _query[token.TOKENKEY] || _body[token.TOKENKEY];
+        let access_token =  _query[token.TOKENKEY] || _body[token.TOKENKEY] || _cookies.get(token.COOKIETOKEN);
         if (!access_token) {
             if (ctx.get('Authorization')) {
                 const _authorization = ctx.get('Authorization');
