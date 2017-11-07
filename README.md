@@ -1,3 +1,3 @@
-# ibird Latest Documentation
+# ibird 1.0
 
-Please [click me](https://yinfxs.gitbooks.io/ibird/content/index.html)
+Sorry, documentation is not ready, please see 'examples' first. :)
