@@ -7,6 +7,12 @@ const path = require('path');
 const App = require('../../lib/index').App;
 const app = new App();
 
+// 可通过 'prefix' 配置项指定全局前缀
+/**
+    const app = new App({
+        prefix: '/api'
+    });
+**/
 
 // 快速挂载路由
 app.get('/hello', ctx => ctx.body = `Hello '${ctx.originalUrl}'`);
