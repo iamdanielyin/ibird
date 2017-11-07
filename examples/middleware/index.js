@@ -17,7 +17,7 @@ app.use((ctx, next) => {
     console.log('自定义中间件...');
     next();
 });
-// 挂载中间件目录
+// 自动挂载中间件目录
 app.useDir(path.join(__dirname, 'middleware'));
 
 

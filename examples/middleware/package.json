@@ -6,9 +6,19 @@
   "scripts": {
     "start": "node index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "ibird",
+    "node",
+    "koa",
+    "web",
+    "app",
+    "http",
+    "application",
+    "framework",
+    "examples"
+  ],
+  "author": "yinfxs",
+  "license": "Apache-2.0",
   "dependencies": {
     "koa-session": "^5.5.0"
   }
