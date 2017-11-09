@@ -1,7 +1,7 @@
 {
   "name": "routes",
   "version": "1.0.0",
-  "description": "",
+  "description": "Examples for ibird.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"

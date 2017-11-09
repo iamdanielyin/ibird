@@ -4,8 +4,7 @@
  */
 
 const path = require('path');
-const App = require('../../lib/index').App;
-const app = new App({
+const app = require('../../lib/index').newApp({
     port: 5000,
     prefix: '/api',
     statics: {

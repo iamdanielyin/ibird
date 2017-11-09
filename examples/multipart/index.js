@@ -2,11 +2,9 @@
  * Hello ibird! :)
  * @type {App}
  */
-const App = require('../../lib/index').App;
 const path = require('path');
 const dir = path.join(__dirname, 'assets');
-
-const app = new App({
+const app = require('../../lib/index').newApp({
     multipart: true,
     uploadDir: dir,
     statics: {

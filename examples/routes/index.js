@@ -4,8 +4,7 @@
  */
 
 const path = require('path');
-const App = require('../../lib/index').App;
-const app = new App();
+const app = require('../../lib/index').newApp();
 
 // 可通过 'prefix' 配置项指定全局前缀
 /**
