@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/yinfxs/ibird#readme",
   "dependencies": {
+    "debug": "*",
     "fs-extra": "4.0.2",
     "ibird-utils": "0.9.15",
     "kcors": "2.2.1",
@@ -31,7 +32,8 @@
     "koa-body": "2.5.0",
     "koa-mount": "3.0.0",
     "koa-router": "7.2.1",
-    "koa-static": "4.0.1"
+    "koa-static": "4.0.1",
+    "opn": "5.1.0"
   },
   "engines": {
     "node": ">= 7.6.0"
@@ -39,7 +41,5 @@
   "files": [
     "lib"
   ],
-  "devDependencies": {
-    "mocha": "4.0.1"
-  }
+  "devDependencies": {}
 }
