@@ -1,7 +1,7 @@
 {
   "name": "ibird",
   "version": "1.0.0-alpha.1",
-  "description": "The core module of ibird.",
+  "description": "A lightweight and flexible web development framework.",
   "main": "lib/index.js",
   "repository": {
     "type": "git",
