@@ -20,3 +20,7 @@ $ npm start
 - [multipart](https://github.com/yinfxs/ibird/tree/1.0.0/examples/multipart)
 - [config](https://github.com/yinfxs/ibird/tree/1.0.0/examples/config)
 - [multi-apps](https://github.com/yinfxs/ibird/tree/1.0.0/examples/multi-apps)
+- [templates-art-template](https://github.com/yinfxs/ibird/tree/1.0.0/examples/templates-art-template)
+- [templates-ejs](https://github.com/yinfxs/ibird/tree/1.0.0/examples/templates-ejs)
+- [templates-jade](https://github.com/yinfxs/ibird/tree/1.0.0/examples/templates-jade)
+- [templates-mustache](https://github.com/yinfxs/ibird/tree/1.0.0/examples/templates-mustache)
