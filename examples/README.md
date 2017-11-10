@@ -24,3 +24,5 @@ $ npm start
 - [templates-ejs](https://github.com/yinfxs/ibird/tree/1.0.0/examples/templates-ejs)
 - [templates-jade](https://github.com/yinfxs/ibird/tree/1.0.0/examples/templates-jade)
 - [templates-mustache](https://github.com/yinfxs/ibird/tree/1.0.0/examples/templates-mustache)
+- [context](https://github.com/yinfxs/ibird/tree/1.0.0/examples/context)
+- [callback](https://github.com/yinfxs/ibird/tree/1.0.0/examples/callback)
