@@ -1,0 +1,45 @@
+{
+  "name": "ibird",
+  "version": "1.0.0-alpha.3",
+  "description": "A lightweight and flexible web development framework.",
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yinfxs/ibird.git"
+  },
+  "keywords": [
+    "ibird",
+    "node",
+    "koa",
+    "web",
+    "app",
+    "http",
+    "application",
+    "framework"
+  ],
+  "author": "yinfxs",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/yinfxs/ibird/issues"
+  },
+  "homepage": "https://github.com/yinfxs/ibird#readme",
+  "dependencies": {
+    "debug": "*",
+    "fs-extra": "4.0.2",
+    "ibird-utils": "0.9.15",
+    "kcors": "2.2.1",
+    "koa": "2.3.0",
+    "koa-body": "2.5.0",
+    "koa-mount": "3.0.0",
+    "koa-router": "7.2.1",
+    "koa-static": "4.0.1",
+    "opn": "5.1.0"
+  },
+  "engines": {
+    "node": ">= 7.6.0"
+  },
+  "files": [
+    "lib"
+  ],
+  "devDependencies": {}
+}

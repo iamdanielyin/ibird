@@ -1,0 +1,26 @@
+{
+  "name": "templates-art-template",
+  "version": "1.0.0",
+  "description": "Examples for ibird.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "ibird",
+    "node",
+    "koa",
+    "web",
+    "app",
+    "http",
+    "application",
+    "framework",
+    "examples"
+  ],
+  "author": "yinfxs",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "art-template": "4.12.2",
+    "koa-art-template": "1.1.1"
+  }
+}

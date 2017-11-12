@@ -1,0 +1,22 @@
+{
+  "name": "callback",
+  "version": "1.0.0",
+  "description": "Examples for ibird.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "ibird",
+    "node",
+    "koa",
+    "web",
+    "app",
+    "http",
+    "application",
+    "framework",
+    "examples"
+  ],
+  "author": "yinfxs",
+  "license": "Apache-2.0"
+}
