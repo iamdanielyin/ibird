@@ -5,10 +5,12 @@
 
 const path = require('path');
 const app = require('../../lib/index').newApp();
+const logger = require('koa-logger');
 const session = require('koa-session');
 
 
 // 挂载第三方中间件
+app.use(logger());
 app.keys = ['hello_ibird'];
 app.use(session({ key: 'ibird:sess' }, app));
 // 挂载自定义中间件
