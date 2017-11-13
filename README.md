@@ -37,7 +37,7 @@ If you run this with:
 $ node index.js
 ```
 
-You should see the GraphQL response printed out:
+You should see the ibird response printed out:
 
 ```bash
 $ Home: http://localhost:3000
