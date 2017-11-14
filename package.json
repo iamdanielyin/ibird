@@ -1,6 +1,6 @@
 {
   "name": "ibird",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha.4",
   "description": "A lightweight and flexible web development framework.",
   "main": "lib/index.js",
   "repository": {
@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/yinfxs/ibird#readme",
   "dependencies": {
-    "debug": "*",
+    "debug": "2.6.9",
     "fs-extra": "4.0.2",
     "ibird-utils": "0.9.15",
     "kcors": "2.2.1",
