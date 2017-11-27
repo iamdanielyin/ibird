@@ -3,3 +3,7 @@ node_js:
   - 7
   - 8
   - 9
+notifications:
+  email:
+    recipients:
+      - yinfxs@gmail.com
