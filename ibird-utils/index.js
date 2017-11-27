@@ -35,15 +35,17 @@ app.parse = (string) => {
  */
 app.errors = (e, _default, join = '，') => {
     if (!e) return null;
-    if (typeof e.errors !== 'object') return _default || e.message;
-    const errmsg = [];
-    for (const key in e.errors) {
-        const item = e.errors[key];
-        if (!item || !item.message) return;
-        errmsg.push(item.message);
+    if (e.errors) {
+        const errmsg = [];
+        for (const key in e.errors) {
+            const item = e.errors[key];
+            if (!item || !item.message) return;
+            errmsg.push(item.message);
+        }
+        return errmsg.length > 0 ? errmsg.join(join) : null;
+    } else {
+        return _default || null;
     }
-    if (errmsg.length == 0) errmsg.push(e.message);
-    return errmsg.join(join);
 };
 
 /**
