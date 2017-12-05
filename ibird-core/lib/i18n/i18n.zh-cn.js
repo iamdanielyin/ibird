@@ -18,6 +18,8 @@ module.exports = {
     api_model_nonexis: name => `模型不存在(${name})`,
     update_api_params_error1: `参数不正确(name)`,
     update_api_params_error2: `参数不正确(conditions、doc)`,
+    update_api_params_error3: `更新条件不能为空`,
+    update_api_params_error4: `更新数据不能为空`,
     update_api_db_error: `更新数据异常`,
     remove_api_params_error: `参数不正确(name、conditions)`,
     remove_api_db_error: `删除数据异常`,
