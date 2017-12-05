@@ -5,7 +5,7 @@
 
 const path = require('path');
 const jade = require('jade');
-const app = require('../../lib/index').newApp();
+const app = require('ibird').newApp();
 
 app.get('/', async ctx => {
     ctx.body = jade.renderFile(path.join(__dirname, 'view/index.jade'), {

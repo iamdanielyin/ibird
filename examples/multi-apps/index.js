@@ -4,7 +4,7 @@
  */
 
 // app1
-const app1 = require('../../lib/index').newApp({
+const app1 = require('ibird').newApp({
     name: 'app1',
     port: 5001
 });
@@ -12,7 +12,7 @@ app1.get('/', ctx => ctx.body = 'I am app1.');
 app1.play();
 
 // app2
-const app2 = require('../../lib/index').newApp({
+const app2 = require('ibird').newApp({
     name: 'app2',
     port: 5002
 });
@@ -21,8 +21,8 @@ app2.play();
 
 
 // app3
-const App = require('../../lib/index').App;
-const app3 = require('../../lib/index').newApp({
+const App = require('ibird').App;
+const app3 = require('ibird').newApp({
     name: 'app3',
     port: 5003
 });

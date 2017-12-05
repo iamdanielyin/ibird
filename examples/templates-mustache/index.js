@@ -6,7 +6,7 @@
 const fs = require('fs');
 const path = require('path');
 const Mustache = require('mustache');
-const app = require('../../lib/index').newApp();
+const app = require('ibird').newApp();
 
 app.get('/', async ctx => {
     const template = fs.readFileSync(path.join(__dirname, 'view/index.html')).toString();

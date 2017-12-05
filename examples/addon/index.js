@@ -3,11 +3,11 @@
  * @type {App}
  */
 
-const log = require('ibird-log');
-const app = require('../../lib/index').newApp();
+const loggerAddon = require('ibird-logger');
+const app = require('ibird').newApp();
 
 // 挂载自定义插件
-app.import(log);
+app.import(loggerAddon);
 app.import({
     namespace: 'myAddon',
     onLoad: (app) => {

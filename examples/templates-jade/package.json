@@ -20,6 +20,7 @@
   "author": "yinfxs",
   "license": "Apache-2.0",
   "dependencies": {
+    "ibird": "latest",
     "jade": "^1.11.0"
   }
 }
