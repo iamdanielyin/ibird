@@ -3,7 +3,7 @@
  * @type {App}
  */
 
-const ibird = require('../../lib/index');
+const ibird = require('ibird');
 const App = ibird.App;
 const context = ibird.context;
 const ctx = ibird.ctx;

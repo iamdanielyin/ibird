@@ -5,7 +5,7 @@
 
 const path = require('path');
 const render = require('koa-ejs');
-const app = require('../../lib/index').newApp();
+const app = require('ibird').newApp();
 
 render(app, {
     root: path.join(__dirname, 'view'),

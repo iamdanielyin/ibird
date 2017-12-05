@@ -4,7 +4,7 @@
  */
 
 const path = require('path');
-const app = require('../../lib/index').newApp({
+const app = require('ibird').newApp({
     port: 5000,
     prefix: '/api',
     statics: {

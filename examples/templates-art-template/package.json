@@ -19,6 +19,9 @@
   ],
   "author": "yinfxs",
   "license": "Apache-2.0",
+  "dependencies": {
+    "ibird": "latest"
+  },
   "devDependencies": {
     "art-template": "4.12.2",
     "koa-art-template": "1.1.1"

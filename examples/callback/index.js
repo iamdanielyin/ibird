@@ -3,7 +3,7 @@
  * @type {App}
  */
 
-const app = require('../../lib/index').newApp();
+const app = require('ibird').newApp();
 app.get('/', ctx => ctx.body = `Hello ibird.`);
 
 

@@ -4,7 +4,7 @@
  */
 
 const path = require('path');
-const app = require('../../lib/index').newApp();
+const app = require('ibird').newApp();
 
 // 可通过 'prefix' 配置项指定全局前缀
 /**
