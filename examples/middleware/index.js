@@ -14,9 +14,9 @@ app.use(logger());
 app.keys = ['hello_ibird'];
 app.use(session({ key: 'ibird:sess' }, app));
 // 挂载自定义中间件
-app.use((ctx, next) => {
+app.use(async (ctx, next) => {
     console.log('自定义中间件...');
-    next();
+    await next();
 });
 // 自动挂载中间件目录
 app.useDir(path.join(__dirname, 'middleware'));
