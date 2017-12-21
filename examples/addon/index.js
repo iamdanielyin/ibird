@@ -13,7 +13,7 @@ app.import({
     onLoad: (app) => {
         console.log('myAddon:', `应用端口为${app.c().port}`);
     },
-    enable: {
+    api: {
         hello: (msg) => {
             console.log('myAddon:', msg);
         }
