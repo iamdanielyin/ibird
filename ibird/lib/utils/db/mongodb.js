@@ -18,7 +18,10 @@ mongoose.Promise = global.Promise;//指定Mongoose使用本地Promise
  */
 module.exports = function (constr) {
     //MongoDB连接初始化
-    mongoose.connect(constr, function (err) {
+    mongoose.connect(constr, {
+        useMongoClient: true,
+        reconnectTries: Number.MAX_VALUE
+    }, function (err) {
         if (err) return logger.error(i18n.value('mongodb_error', [err]));
         logger.info(utility.time() + '：' + i18n.value('mongodb_success'));
     });

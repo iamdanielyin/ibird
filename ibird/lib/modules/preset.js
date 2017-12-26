@@ -198,9 +198,7 @@ module.exports = function (ibird) {
                 "fields": {
                     _id: {
                         type: String,
-                        unique: true,
                         required: "用户标识({PATH})不能为空",
-                        index: true,
                         default: () => uuid.v1()
                     },
                     code: {
@@ -252,8 +250,6 @@ module.exports = function (ibird) {
                     _id: {
                         type: String,
                         label: "机构标识",
-                        unique: true,
-                        index: true,
                         display: {
                             table: false,
                             form: false
@@ -332,9 +328,7 @@ module.exports = function (ibird) {
                 "fields": {
                     _id: {
                         type: String,
-                        unique: true,
                         required: "资源标识({PATH})不能为空",
-                        index: true,
                         default: () => uuid.v1()
                     },
                     code: {
@@ -393,9 +387,7 @@ module.exports = function (ibird) {
                 "fields": {
                     _id: {
                         type: String,
-                        unique: true,
                         required: "角色标识({PATH})不能为空",
-                        index: true
                     },
                     code: {
                         label: "角色编码"
