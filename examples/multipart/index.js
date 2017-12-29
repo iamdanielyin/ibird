@@ -5,7 +5,6 @@
 const path = require('path');
 const dir = path.join(__dirname, 'assets');
 const app = require('ibird').newApp({
-    multipart: true,
     uploadDir: dir,
     statics: {
         '/public': dir
