@@ -186,6 +186,7 @@ module.exports = function (config_path, dist) {
         },
         module: {
             loaders: [
+                { test: require.resolve("jquery"), loader: "expose-loader?$" }, 
                 {
                     test: /\.(jsx|js)?$/,
                     loader: 'babel',
