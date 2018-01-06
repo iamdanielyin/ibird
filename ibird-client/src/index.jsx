@@ -20,9 +20,11 @@ const Admin = require('Admin');
 const NoMatch = require('NoMatch');
 const RouteCatcher = require('RouteCatcher');
 
-const $ = require('expose?$!jquery')
-const icheck = require('icheck')
-const slimscroll = require('jquery-slimscroll')
+const jQuery = require('jquery');
+window.jQuery = jQuery;
+window.$ = jQuery;
+const icheck = require('icheck');
+const slimscroll = require('jquery-slimscroll');
 
 moment.locale('zh-cn');//设置全局国际化
 
