@@ -77,7 +77,6 @@
     "whatwg-fetch": "^1.0.0",
     "yargs": "^6.3.0"
   },
-  "devDependencies": {},
   "babel": {
     "presets": [
       "es2015",
