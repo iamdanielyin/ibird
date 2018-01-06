@@ -143,9 +143,6 @@ module.exports = function (config_path, dist) {
             template: template
         }),
         new webpack.ProvidePlugin({
-            $: "jquery",
-            jQuery: "jquery",
-            "window.jQuery": "jquery",
             toastr: "toastr",
             "slimscroll": "jquery-slimscroll"
         }),
