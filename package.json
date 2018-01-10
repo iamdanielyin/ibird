@@ -1,6 +1,6 @@
 {
   "name": "ibird",
-  "version": "1.0.0-alpha.16",
+  "version": "1.0.0-alpha.17",
   "description": "A lightweight and flexible web development framework.",
   "main": "lib/index.js",
   "repository": {
