@@ -7,7 +7,7 @@
 
 const utility = require('ibird-utils');
 const schedule = require('node-schedule');
-const app = { jobs: {} };
+const app = { jobs: {}, runnings: {} };
 
 module.exports = app;
 
@@ -18,17 +18,33 @@ module.exports = app;
  * @param obj.name 任务ID，保证全局唯一
  * @param obj.spec 任务执行规则
  * @param obj.once 任务是否需要立即执行一次
+ * @param obj.runMode 任务运行模式，可选值为：S（串行模式）或P（并行模式）；默认为S，即需要等待上一次任务完成后才会触发下一次执行
  * @param obj.callback 任务回调函数
  *
  */
 app.add = (obj) => {
     if (obj === null || typeof obj !== 'object') return null;
     if (Array.isArray(obj)) return batchAdd(obj);
-    const { name, spec, callback, once } = obj;
+    let { name, spec, callback, once, runMode } = obj;
     if (name === null || typeof name !== 'string' || !spec || (typeof callback !== 'function')) return null;
     if (app.jobs[name]) app.jobs[name].cancel();
+
+    runMode = runMode || 'serial';
+    runMode = runMode.toLowerCase();
+    runMode = ['serial', 'parallel', 's', 'p'].indexOf(runMode) >= 0 ? runMode : 'serial';
+    const onTick = callback;
+    callback = async () => {
+        if (['serial', 's'].indexOf(runMode) >= 0 && app.runnings[name]) return;
+        try {
+            app.runnings[name] = true;
+            await onTick.call(this);
+        } finally {
+            delete app.runnings[name];
+        }
+    }
+
     const job = schedule.scheduleJob(name, spec, callback);
-    
+
     if (!job) return null;
 
     Object.assign(job, { spec: spec });
