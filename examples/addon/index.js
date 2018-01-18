@@ -10,7 +10,7 @@ const app = require('ibird').newApp();
 app.import(loggerAddon);
 app.import({
     namespace: 'myAddon',
-    onLoad: (app) => {
+    onload: (app) => {
         console.log('myAddon:', `应用端口为${app.c().port}`);
     },
     api: {
