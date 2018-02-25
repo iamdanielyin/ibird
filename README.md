@@ -54,6 +54,9 @@ $ Home: http://localhost:3000
 
 Congratulations - You've just created an application using ibird!
 
+### Next Steps
+
+We prepared a [wiki page](https://github.com/yinfxs/ibird/wiki). You can find tons of useful things there.
 
 ### Contributing
 
