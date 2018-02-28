@@ -1,3 +1,5 @@
+English | [简体中文](https://zhuanlan.zhihu.com/p/30961351)
+
 # ibird
 
 [![NPM version](https://img.shields.io/npm/v/ibird.svg?style=flat)](https://npmjs.org/package/ibird)
@@ -5,7 +7,7 @@
 [![NPM downloads](http://img.shields.io/npm/dm/ibird.svg?style=flat)](https://npmjs.org/package/ibird)
 [![Dependencies](https://david-dm.org/yinfxs/ibird.svg)](https://david-dm.org/yinfxs/ibird)
 
-English | [简体中文](https://zhuanlan.zhihu.com/p/30961351)
+
 
 A lightweight and flexible web development framework.
 
