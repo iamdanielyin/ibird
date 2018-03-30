@@ -100,6 +100,7 @@ app.config = (obj = {}) => {
         condition: obj.condition || false,
         ignoreURLs: obj.ignoreURLs || [/signin/, /token/],
         fakeTokens: obj.fakeTokens || [],
+        expiredMiddleware:obj.expiredMiddleware,
         client: obj.client || {},
         useridKey: obj.useridKey || '_id'
     });

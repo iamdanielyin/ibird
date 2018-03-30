@@ -1,6 +1,6 @@
 {
   "name": "ibird-token",
-  "version": "0.9.37",
+  "version": "0.9.38",
   "description": "The token manager of ibird.",
   "main": "index.js",
   "repository": {

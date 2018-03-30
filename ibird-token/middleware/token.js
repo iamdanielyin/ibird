@@ -10,6 +10,7 @@ module.exports = (app) => {
     app.use(async (ctx, next) => {
         const _ignoreURLs = token.ignoreURLs && Array.isArray(token.ignoreURLs) ? token.ignoreURLs : [];
         const _fakeTokens = token.fakeTokens && Array.isArray(token.fakeTokens) ? token.fakeTokens : [];
+        const _expiredMiddleware = token.expiredMiddleware;
         const _pathname = ctx.req._parsedUrl.pathname;
         const _method = ctx.req.method;
 
@@ -44,7 +45,7 @@ module.exports = (app) => {
         const _body = ctx.request.body || {};
         const _reponse = { data: {}, errmsg: null, errcode: null };
 
-        let access_token =  _query[token.TOKENKEY] || _body[token.TOKENKEY] || _cookies.get(token.COOKIETOKEN);
+        let access_token = _query[token.TOKENKEY] || _body[token.TOKENKEY] || _cookies.get(token.COOKIETOKEN);
         if (!access_token) {
             if (ctx.get('Authorization')) {
                 const _authorization = ctx.get('Authorization');
@@ -64,7 +65,11 @@ module.exports = (app) => {
             if (ignore) {
                 return await next();
             } else {
-                return ctx.body = Object.assign(_reponse, { errmsg: `访问令牌验证失败：${e.message}`, errcode: '555' });
+                if (typeof _expiredMiddleware === 'function') {
+                    return await _expiredMiddleware(ctx, next);
+                } else {
+                    return ctx.body = Object.assign(_reponse, { errmsg: `访问令牌验证失败：${e.message}`, errcode: '555' });
+                }
             }
         }
 
