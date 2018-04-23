@@ -55,6 +55,14 @@ module.exports = (app) => {
                 access_token = ctx.get(token.TOKENKEY);
             } else if (ctx.get(token.TOKENKEY.toUpperCase())) {
                 access_token = ctx.get(token.TOKENKEY.toUpperCase());
+            } else if (ctx.get('token')) {
+                access_token = ctx.get('token');
+            } else if (ctx.get('TOKEN')) {
+                access_token = ctx.get('TOKEN');
+            } else if (ctx.get('access-token')) {
+                access_token = ctx.get('access-token');
+            } else if (ctx.get('ACCESS-TOKEN')) {
+                access_token = ctx.get('ACCESS-TOKEN');
             }
         }
 
