@@ -10,3 +10,4 @@ logs
 public
 package-lock.json
 tests
+.history
