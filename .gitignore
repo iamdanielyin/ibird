@@ -9,3 +9,4 @@ log
 logs
 public
 package-lock.json
+.history

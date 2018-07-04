@@ -45,7 +45,7 @@ module.exports = (app) => {
         const _body = ctx.request.body || {};
         const _reponse = { data: {}, errmsg: null, errcode: null };
 
-        let access_token = _query[token.TOKENKEY] || _body[token.TOKENKEY] || _cookies.get(token.COOKIETOKEN);
+        let access_token = _query[token.TOKENKEY] || _body[token.TOKENKEY];
         if (!access_token) {
             if (ctx.get('Authorization')) {
                 const _authorization = ctx.get('Authorization');
@@ -63,9 +63,11 @@ module.exports = (app) => {
                 access_token = ctx.get('access-token');
             } else if (ctx.get('ACCESS-TOKEN')) {
                 access_token = ctx.get('ACCESS-TOKEN');
+            }else{
+                access_token = _cookies.get(token.COOKIETOKEN); // cookie优先级最低
             }
         }
-
+        
         try {
             const _token = await token.authentication(access_token);
             ctx._token = _token;
