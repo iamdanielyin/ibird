@@ -17,7 +17,7 @@ module.exports = (router) => {
             });
             if (tokenData.data && tokenData.data[token.useridKey]) {
                 ctx.cookies.set(token.COOKIEUSERID, tokenData.data[token.useridKey], {
-                    maxAge: data.expires_in
+                    maxAge: tokenData.expires_in
                 });
             }
             ctx.body = {
