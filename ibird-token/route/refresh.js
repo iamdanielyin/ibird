@@ -14,11 +14,11 @@ module.exports = (router) => {
             let tokenData = await token.authentication(access_token);
             tokenData = await token.refresh(data.refresh_token);
             ctx.cookies.set(token.COOKIETOKEN, tokenData.access_token, {
-                maxAge: tokenData.expires_in
+                maxAge: tokenData.expires_in * 1000
             });
             if (tokenData.data && tokenData.data[token.useridKey]) {
                 ctx.cookies.set(token.COOKIEUSERID, tokenData.data[token.useridKey], {
-                    maxAge: tokenData.expires_in
+                    maxAge: tokenData.expires_in * 1000
                 });
             }
             ctx.body = {

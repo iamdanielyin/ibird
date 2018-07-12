@@ -13,7 +13,9 @@ const Redis = require('./utils/redis');
 const moment = require('moment');
 moment.locale('zh-cn');
 
-const app = { mode: 1 };
+const app = {
+    mode: 1
+};
 const cache = {
     mode: 1,
     expires_in: {
@@ -76,7 +78,10 @@ app.config = (obj = {}) => {
     if (app.taskInterval) clearInterval(app.taskInterval);
     switch (cache.mode) {
         case app.MODE_MEMORY:
-            cache.token = { access_token: {}, refresh_token: {} };
+            cache.token = {
+                access_token: {},
+                refresh_token: {}
+            };
             app.taskfn();
             break;
         case app.MODE_REDIS:
@@ -100,7 +105,7 @@ app.config = (obj = {}) => {
         condition: obj.condition || false,
         ignoreURLs: obj.ignoreURLs || [/signin/, /token/],
         fakeTokens: obj.fakeTokens || [],
-        expiredMiddleware:obj.expiredMiddleware,
+        expiredMiddleware: obj.expiredMiddleware,
         client: obj.client || {},
         useridKey: obj.useridKey || '_id'
     });
@@ -257,7 +262,11 @@ app.remove = async (access_token) => {
                 break;
             case app.MODE_REDIS:
                 token = await app.redis.get(access_token);
-                if (!token) return;
+                if (token) {
+                    token = utility.parse(token);
+                } else {
+                    return;
+                }
                 await app.redis.pipeline().del(token.access_token).del(token.refresh_token).exec();
                 break;
             case app.MODE_USER:

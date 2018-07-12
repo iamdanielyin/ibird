@@ -13,11 +13,11 @@ module.exports = (router) => {
             if (!rawData) throw new Error(i18nUtils(ctx, 'login_failed'));
             const tokenData = await token.authorization(Promise.resolve(rawData));
             ctx.cookies.set(token.COOKIETOKEN, tokenData.access_token, {
-                maxAge: tokenData.expires_in
+                maxAge: tokenData.expires_in * 1000
             });
             if (tokenData.data && tokenData.data[token.useridKey]) {
                 ctx.cookies.set(token.COOKIEUSERID, tokenData.data[token.useridKey], {
-                    maxAge: tokenData.expires_in
+                    maxAge: tokenData.expires_in * 1000
                 });
             }
             ctx.body = {
