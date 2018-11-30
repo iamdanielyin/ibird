@@ -1,6 +1,7 @@
 // 令牌工具模块
 
-const token = require('../index');
+const TOKENKEY = 'access_token'
+const COOKIETOKEN = 'IBIRD_ACCESS_TOKEN'
 
 module.exports = (ctx) => {
   if (!ctx) return null;
@@ -8,16 +9,16 @@ module.exports = (ctx) => {
   const _query = ctx.query;
   const _cookies = ctx.cookies;
   const _body = ctx.request.body || {};
-  let access_token = _query[token.TOKENKEY] || _body[token.TOKENKEY];
+  let access_token = _query[TOKENKEY] || _body[TOKENKEY];
   if (!access_token) {
     if (ctx.get('Authorization')) {
       const _authorization = ctx.get('Authorization');
       const _split = _authorization.split(' ');
       if (_split.length >= 1) access_token = _split[1];
-    } else if (ctx.get(token.TOKENKEY)) {
-      access_token = ctx.get(token.TOKENKEY);
-    } else if (ctx.get(token.TOKENKEY.toUpperCase())) {
-      access_token = ctx.get(token.TOKENKEY.toUpperCase());
+    } else if (ctx.get(TOKENKEY)) {
+      access_token = ctx.get(TOKENKEY);
+    } else if (ctx.get(TOKENKEY.toUpperCase())) {
+      access_token = ctx.get(TOKENKEY.toUpperCase());
     } else if (ctx.get('token')) {
       access_token = ctx.get('token');
     } else if (ctx.get('TOKEN')) {
@@ -27,7 +28,7 @@ module.exports = (ctx) => {
     } else if (ctx.get('ACCESS-TOKEN')) {
       access_token = ctx.get('ACCESS-TOKEN');
     } else {
-      access_token = _cookies.get(token.COOKIETOKEN); // cookie优先级最低
+      access_token = _cookies.get(COOKIETOKEN); // cookie优先级最低
     }
   }
   return access_token;
