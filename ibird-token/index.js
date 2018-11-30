@@ -11,6 +11,8 @@ const utility = require('ibird-utils');
 const fs = require('fs-extra');
 const Redis = require('./utils/redis');
 const moment = require('moment');
+const tokenUtils = require('./utils/token');
+
 moment.locale('zh-cn');
 
 const app = {
@@ -277,6 +279,11 @@ app.remove = async (access_token) => {
         return;
     }
 };
+
+// 从ctx中解析token
+app.parse = (ctx) => {
+    return tokenUtils(ctx);
+}
 
 /**
  * 内存模式的自动更新任务
