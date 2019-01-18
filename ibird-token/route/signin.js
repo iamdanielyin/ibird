@@ -26,8 +26,9 @@ module.exports = (router) => {
                 data: tokenData
             }
         } catch (e) {
+            console.error(e)
             ctx.body = {
-                errmsg: i18nUtils(ctx, 'login_failed'),
+                errmsg: e.message || i18nUtils(ctx, 'login_failed'),
                 errcode: 500
             }
         }
