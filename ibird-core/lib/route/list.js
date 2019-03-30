@@ -26,7 +26,7 @@ module.exports = (name, pre, post) => {
         _sort = Object.keys(_sort).length > 0 ? _sort : utility.str2Obj(_query.sort);
 
         let _project = utility.parse(_query.project);
-        _project = Object.keys(_project).length > 0 ? _project : utility.str2Obj(_query.project);
+        _project = Object.keys(_project).length > 0 ? _project : utility.str2Obj(_query.project, ',', 0);
 
         _query.sort = _sort;
         _query.project = _project;
