@@ -1,7 +1,7 @@
 const langPack = {
   'zh': {
     login_successful: '登录成功',
-    login_failed: '登录失败：检查您的账号密码是否正确，或者您的帐号可能无权登录',
+    login_failed: '登录失败：检查您的账号密码是否正确，或者您的账号可能无权登录',
     logout_failed: '登出失败',
     logout_successful: '登出成功',
     invalid_access_token: '无效的访问令牌',
@@ -10,7 +10,7 @@ const langPack = {
   },
   'zh-TW': {
     login_successful: '登錄成功',
-    login_failed: '登錄失敗：檢查您的賬號密碼是否正確，或者您的帳號可能無權登錄',
+    login_failed: '登錄失敗：檢查您的賬號密碼是否正確，或者您的賬號可能無權登錄',
     logout_failed: '登出失敗',
     logout_successful: '登出成功',
     invalid_access_token: '無效的訪問令牌',
